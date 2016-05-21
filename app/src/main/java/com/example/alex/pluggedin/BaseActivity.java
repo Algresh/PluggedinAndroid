@@ -31,6 +31,7 @@ public class BaseActivity extends AppCompatActivity {
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(selectMenuNavigationView());
     }
 
     private  NavigationView.OnNavigationItemSelectedListener selectMenuNavigationView() {

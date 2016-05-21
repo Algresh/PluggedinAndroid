@@ -1,16 +1,20 @@
 package com.example.alex.pluggedin;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.alex.pluggedin.API.ReviewAPI;
 import com.example.alex.pluggedin.adapters.ArticleAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
@@ -19,13 +23,11 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import static  com.example.alex.pluggedin.constants.Constants.*;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private RecyclerView recyclerView;
 
     private Button buttonTryAgain;
-
-    private RestAdapter restAdapter;
 
     private ReviewAPI reviewAPI;
 
@@ -35,6 +37,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private int lastDownloadPages = FIRST_PAGE;
 
     private Toast toast;
+    private ProgressDialog pDialog;
+
+    private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +47,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         buttonTryAgain = (Button) findViewById(R.id.buttonTryAgain);
 
-        restAdapter = new RestAdapter.Builder()
+        RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(DOMAIN).build();
         reviewAPI = restAdapter.create(ReviewAPI.class);
 
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage(getResources().getString(R.string.downloadingReviews));
+
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
 
-        String title = getResources().getString(R.string.review);
+        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshRecycleView);
+        if(refreshLayout != null) {
+            refreshLayout.setOnRefreshListener(this);
+        }
 
+        String title = getResources().getString(R.string.review);
         initToolbar(title, R.id.toolbarReview);
         initNavigationView();
 
@@ -59,6 +71,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     public void connectNetwork (final int page) {
 
+        pDialog.show();
         reviewAPI.getListReviews(page, new Callback<List<Review>>() {
             @Override
             public void success(List<Review> reviews, Response response) {
@@ -74,6 +87,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         lastDownloadPages++;
                     }
                 }
+                pDialog.dismiss();
             }
 
             @Override
@@ -86,6 +100,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     pages--;
                 }
 
+                pDialog.dismiss();
                 if (toast == null) {
                     toast = Toast.makeText(MainActivity.this, "Что то не работает!", Toast.LENGTH_SHORT);
                     toast.show();
@@ -99,6 +114,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if(v.getId() == R.id.buttonTryAgain) {
             connectNetwork(FIRST_PAGE);
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        refreshLayout.setRefreshing(true);
+        ArrayList<Review> arrayList = new ArrayList<>();
+        arrayList.add(getMockReview());
+        ((ArticleAdapter) recyclerView.getAdapter()).addToTop(arrayList);
+        linearManager.scrollToPosition(0);
+        refreshLayout.setRefreshing(false);
+    }
+
+    private Review getMockReview() {
+        return new Review(111, "ggg", "safsdf", "fdsdf", "sdfsdf", "2016.05.03");
     }
 
     // метод добавляющий новые элементы когда скрол достиг последнего элемента

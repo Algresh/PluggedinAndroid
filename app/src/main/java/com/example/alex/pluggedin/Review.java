@@ -25,6 +25,14 @@ public class Review {
 
     protected String file;
 
+    public Review(int id, String title, String text, String author, String authorSrc, String datePublish) {
+        this.id = id;
+        this.title = title;
+        this.text = text;
+        this.author = author;
+        this.authorSrc = authorSrc;
+        this.datePublish = datePublish;
+    }
 
     /**
      * @TODO create class for keyword!

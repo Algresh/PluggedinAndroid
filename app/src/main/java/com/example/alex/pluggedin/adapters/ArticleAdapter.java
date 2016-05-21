@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import static  com.example.alex.pluggedin.constants.Constants.*;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -66,6 +67,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         } else {
             return false;
         }
+    }
+
+    public void addToTop(List<Review> newItems) {
+        articles.addAll(0, newItems);
+
+        notifyItemInserted(0);
     }
 
 

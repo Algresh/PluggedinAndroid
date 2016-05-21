@@ -8,4 +8,5 @@
     <string name="review"> Обзоры </string>
     <string name="article"> Статьи </string>
     <string name="tryAgain"> Попробовать еще раз </string>
+    <string name="downloadingReviews"> Загрузка обзоров. </string>
 </resources>
