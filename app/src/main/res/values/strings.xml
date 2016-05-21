@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Pluggedin</string>
+    <string name="action_settings">Settings</string>
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="open"> open </string>
+    <string name="close"> close </string>
+    <string name="review"> Обзоры </string>
+    <string name="article"> Статьи </string>
+    <string name="tryAgain"> Попробовать еще раз </string>
+</resources>
