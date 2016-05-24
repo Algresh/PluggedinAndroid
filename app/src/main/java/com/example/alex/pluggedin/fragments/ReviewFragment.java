@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.example.alex.pluggedin.API.ReviewAPI;
 import com.example.alex.pluggedin.R;
+import com.example.alex.pluggedin.adapters.ArticleAdapter;
 
 import retrofit.RestAdapter;
 
@@ -61,7 +62,13 @@ public class ReviewFragment extends BasePageFragment {
 
     @Override
     public void connectNetwork (final int page) {
-        reviewAPI.getListReviews(page, getCallbackReview(page));
+        if (page == FIRST_PAGE) {
+            reviewAPI.getFirstListReviews(getCallbackReview(page));
+        } else {
+            int lastID = ((ArticleAdapter) recyclerView.getAdapter()).getIdLastItem();
+            reviewAPI.getListReviews(lastID, getCallbackReview(page));
+        }
+
     }
 
     @Override

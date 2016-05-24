@@ -91,7 +91,7 @@ public abstract class BasePageFragment extends Fragment
             linearManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(linearManager);
             recyclerView.setAdapter(new ArticleAdapter(reviews, getContext()));
-        } else {
+        } else if (page > 0) {
             boolean success = ((ArticleAdapter) recyclerView.getAdapter()).addNewItems(reviews);
             if( success ) {
                 lastDownloadPages++;

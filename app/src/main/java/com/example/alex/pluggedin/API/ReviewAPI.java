@@ -10,6 +10,9 @@ import retrofit.http.GET;
 import retrofit.http.Path;
 
 public interface ReviewAPI {
+    @GET("/api/list/reviews")
+    void getFirstListReviews(Callback<List<Review>> response);
+
     @GET("/api/list/reviews/{page}")
     void getListReviews(@Path("page") int page, Callback<List<Review>> response);
 
