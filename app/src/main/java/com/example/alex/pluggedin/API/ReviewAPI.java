@@ -13,8 +13,11 @@ public interface ReviewAPI {
     @GET("/api/list/reviews")
     void getFirstListReviews(Callback<List<Review>> response);
 
-    @GET("/api/list/reviews/{page}")
-    void getListReviews(@Path("page") int page, Callback<List<Review>> response);
+    @GET("/api/list/reviews/{id}")
+    void getListReviews(@Path("id") int id, Callback<List<Review>> response);
+
+    @GET("/api/list/update/reviews/{id}")
+    void getListUpdateReviews(@Path("id") int id, Callback<List<Review>> response);
 
     @GET("/api/list/article/{page}/{type}")
     void getListArticles(@Path("page") int page,@Path("page") int type ,Callback<List<Review>> response);

@@ -17,8 +17,7 @@ import com.example.alex.pluggedin.adapters.ArticleAdapter;
 
 import retrofit.RestAdapter;
 
-import static com.example.alex.pluggedin.constants.Constants.DOMAIN;
-import static com.example.alex.pluggedin.constants.Constants.FIRST_PAGE;
+import static com.example.alex.pluggedin.constants.Constants.*;
 
 public class ReviewFragment extends BasePageFragment {
 
@@ -57,7 +56,7 @@ public class ReviewFragment extends BasePageFragment {
 
         connectNetwork(FIRST_PAGE);
         addNewItemsByScroll();
-       return view;
+        return view;
     }
 
     @Override
@@ -65,8 +64,15 @@ public class ReviewFragment extends BasePageFragment {
         if (page == FIRST_PAGE) {
             reviewAPI.getFirstListReviews(getCallbackReview(page));
         } else {
-            int lastID = ((ArticleAdapter) recyclerView.getAdapter()).getIdLastItem();
-            reviewAPI.getListReviews(lastID, getCallbackReview(page));
+            ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
+
+            if(page == UPDATE_PAGE) {
+                int firstID = adapter.getIdFirstItem();
+                reviewAPI.getListUpdateReviews(firstID, getCallbackReview(page));
+            } else {
+                int lastID = adapter.getIdLastItem();
+                reviewAPI.getListReviews(lastID, getCallbackReview(page));
+            }
         }
 
     }
@@ -74,10 +80,8 @@ public class ReviewFragment extends BasePageFragment {
     @Override
     public void onRefresh() {
         refreshLayout.setRefreshing(true);
-//        connectNetwork(FIRST_PAGE);
-//        pages = FIRST_PAGE;
-//        lastDownloadPages = FIRST_PAGE;
-//        linearManager.scrollToPosition(0);
+        connectNetwork(UPDATE_PAGE);
+        linearManager.scrollToPosition(0);
         refreshLayout.setRefreshing(false);
     }
 }

@@ -71,6 +71,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         return articles.get(getItemCount() - 1).getId();
     }
 
+    public int getIdFirstItem () {
+        return articles.get(0).getId();
+    }
+
     public void addToTop(List<Review> newItems) {
         articles.addAll(0, newItems);
 

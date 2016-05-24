@@ -9,7 +9,6 @@ import com.example.alex.pluggedin.adapters.TabsPagerAdapter;
 
 public class MainActivity extends BaseActivity {
 
-//    private Button buttonTryAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -9,6 +9,8 @@ public  class Constants {
 
     public static final int FIRST_PAGE = 1;
 
+    public static final int UPDATE_PAGE = -1;
+
     public static final String DATE_FORMAT = "yyyy.MM.dd";
 
     public static final String URL_IMAGES = "http://pluggedin.ru/images";

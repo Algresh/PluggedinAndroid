@@ -91,10 +91,17 @@ public abstract class BasePageFragment extends Fragment
             linearManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(linearManager);
             recyclerView.setAdapter(new ArticleAdapter(reviews, getContext()));
-        } else if (page > 0) {
-            boolean success = ((ArticleAdapter) recyclerView.getAdapter()).addNewItems(reviews);
-            if( success ) {
-                lastDownloadPages++;
+        } else {
+            ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
+            if (page == UPDATE_PAGE) {
+                if (reviews != null && reviews.size() > 0) {
+                    adapter.addToTop(reviews);
+                }
+            } else {
+                boolean success = adapter.addNewItems(reviews);
+                if( success ) {
+                    lastDownloadPages++;
+                }
             }
         }
     }
