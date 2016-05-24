@@ -1,7 +1,6 @@
 package com.example.alex.pluggedin.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,13 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.alex.pluggedin.R;
-import com.example.alex.pluggedin.Review;
+import com.example.alex.pluggedin.models.Review;
 import com.squareup.picasso.Picasso;
 
 import static  com.example.alex.pluggedin.constants.Constants.*;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 

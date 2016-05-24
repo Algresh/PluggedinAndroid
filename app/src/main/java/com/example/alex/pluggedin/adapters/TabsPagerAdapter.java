@@ -15,7 +15,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
     public TabsPagerAdapter(FragmentManager fm) {
         super(fm);
-        reviewFragment = ReviewFragment.getInstamce();
+        reviewFragment = ReviewFragment.getInstance();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.alex.pluggedin;
+package com.example.alex.pluggedin.models;
 
 
 public class Keyword {
