@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.alex.pluggedin.R;
-import com.example.alex.pluggedin.models.Review;
+import com.example.alex.pluggedin.models.Article;
 import com.squareup.picasso.Picasso;
 
 import static  com.example.alex.pluggedin.constants.Constants.*;
@@ -22,10 +22,10 @@ import java.util.List;
 
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder> {
 
-    private List<Review> articles;
+    private List<Article> articles;
     private Context context;
 
-    public ArticleAdapter(List<Review> articles, Context context) {
+    public ArticleAdapter(List<Article> articles, Context context) {
         this.articles = articles;
         this.context = context;
     }
@@ -39,14 +39,14 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     @Override
     public void onBindViewHolder(ArticleViewHolder holder, int position) {
-        Review item = articles.get(position);
+        Article item = articles.get(position);
 
         holder.datePublish.setText(convertDate(item.getDatePublish()));
         holder.textArticle.setText(item.getText());
         holder.titleArticle.setText(item.getTitle());
         holder.author.setText(item.getAuthor());
 
-        Picasso.with(context).load(URL_IMAGES + item.getFile())
+        Picasso.with(context).load(URL_IMAGES + item.getFile()).resize(320,240)
                 .into(holder.imageArticle);
 
     }
@@ -56,7 +56,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         return articles.size();
     }
 
-    public boolean addNewItems(List<Review> newItems) {
+    public boolean addNewItems(List<Article> newItems) {
         if(newItems != null && newItems.size() > 0) {
             articles.addAll(newItems);
             notifyItemInserted(articles.size() - 1);
@@ -75,7 +75,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         return articles.get(0).getId();
     }
 
-    public void addToTop(List<Review> newItems) {
+    public void addToTop(List<Article> newItems) {
         articles.addAll(0, newItems);
 
         notifyItemInserted(0);

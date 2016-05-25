@@ -1,17 +1,20 @@
 package com.example.alex.pluggedin.fragments;
 
 import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.alex.pluggedin.R;
-import com.example.alex.pluggedin.models.Review;
+import com.example.alex.pluggedin.models.Article;
 import com.example.alex.pluggedin.adapters.ArticleAdapter;
 
 import java.util.List;
@@ -43,7 +46,30 @@ public abstract class BasePageFragment extends Fragment
 
     protected SwipeRefreshLayout refreshLayout;
 
+    protected String titleProgressMsg;
+
     public abstract void connectNetwork (final int page);
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(LAYOUT, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
+        buttonTryAgain = (Button) view.findViewById(R.id.buttonTryAgain);
+
+        buttonTryAgain.setOnClickListener(this);
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshRecycleView);
+        if(refreshLayout != null) {
+            refreshLayout.setOnRefreshListener(this);
+        }
+
+        pDialog = new ProgressDialog(getContext());
+//        pDialog.setMessage(titleProgressMsg);
+
+        connectNetwork(FIRST_PAGE);
+        addNewItemsByScroll();
+        return view;
+    }
 
     protected void addNewItemsByScroll() {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -63,15 +89,15 @@ public abstract class BasePageFragment extends Fragment
         });
     }
 
-    protected Callback<List<Review>> getCallbackReview (final int page) {
+    protected Callback<List<Article>> getCallbackReview (final int page) {
 
         if (page == FIRST_PAGE) {
             pDialog.show();
         }
 
-        return new Callback<List<Review>>() {
+        return new Callback<List<Article>>() {
             @Override
-            public void success(List<Review> reviews, Response response) {
+            public void success(List<Article> reviews, Response response) {
                 successReview(page, reviews);
                 pDialog.dismiss();
             }
@@ -83,7 +109,7 @@ public abstract class BasePageFragment extends Fragment
         };
     }
 
-    protected void successReview(final int page, List<Review> reviews) {
+    protected void successReview(final int page, List<Article> reviews) {
         if (page == FIRST_PAGE) {
             buttonTryAgain.setVisibility(View.GONE);
             refreshLayout.setVisibility(View.VISIBLE);

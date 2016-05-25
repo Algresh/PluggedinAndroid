@@ -9,6 +9,10 @@
     <string name="article"> Статьи </string>
     <string name="tryAgain"> Попробовать еще раз </string>
     <string name="downloadingReviews"> Загрузка обзоров. </string>
+    <string name="downloadingNews"> Загрузка новостей. </string>
+    <string name="downloadingInteresting"> Загрузка интересного. </string>
+    <string name="downloadingMedia"> Загрузка медиа. </string>
+    <string name="downloadingArticle"> Загрузка статей. </string>
 
     <string-array name="tabs_title">
         <item> Обзоры </item>

@@ -28,9 +28,12 @@ public class MainActivity extends BaseActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         String[] tabsTitle = getResources().getStringArray(R.array.tabs_title);
-        TabsPagerAdapter adapter = new TabsPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        TabsPagerAdapter adapter = new TabsPagerAdapter(getSupportFragmentManager(), tabsTitle);
+        if(viewPager != null && tabLayout != null ) {
+            viewPager.setAdapter(adapter);
+            tabLayout.setupWithViewPager(viewPager);
+        }
+
     }
 
 
