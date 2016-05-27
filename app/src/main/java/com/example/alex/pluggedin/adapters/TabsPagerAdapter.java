@@ -59,6 +59,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return tabs.length;//!!!!!!!!!!!!!!!!!!!!
+        return tabs.length;
     }
 }

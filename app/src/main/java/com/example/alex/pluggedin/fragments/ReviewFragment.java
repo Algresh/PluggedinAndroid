@@ -35,16 +35,16 @@ public class ReviewFragment extends BasePageFragment {
     @Override
     public void connectNetwork (final int page) {
         if (page == FIRST_PAGE) {
-            reviewAPI.getFirstListReviews(getCallbackReview(page));
+            reviewAPI.getFirstListReviews(getCallbackArticle(page));
         } else {
             ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
 
             if(page == UPDATE_PAGE) {
                 int firstID = adapter.getIdFirstItem();
-                reviewAPI.getListUpdateReviews(firstID, getCallbackReview(page));
+                reviewAPI.getListUpdateReviews(firstID, getCallbackArticle(page));
             } else {
                 int lastID = adapter.getIdLastItem();
-                reviewAPI.getListReviews(lastID, getCallbackReview(page));
+                reviewAPI.getListReviews(lastID, getCallbackArticle(page));
             }
         }
 

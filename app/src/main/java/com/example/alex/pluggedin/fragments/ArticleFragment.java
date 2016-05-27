@@ -2,6 +2,7 @@ package com.example.alex.pluggedin.fragments;
 
 
 import android.os.Bundle;
+import android.util.Log;
 
 import static  com.example.alex.pluggedin.constants.Constants.*;
 import com.example.alex.pluggedin.API.ArticleAPI;
@@ -51,16 +52,16 @@ public class ArticleFragment extends BasePageFragment {
     @Override
     public void connectNetwork(int page) {
         if (page == FIRST_PAGE) {
-            articleAPI.getFirstListArticlesByType(type, getCallbackReview(page));
+            articleAPI.getFirstListArticlesByType(type, getCallbackArticle(page));
         } else {
             ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
 
             if(page == UPDATE_PAGE) {
                 int firstID = adapter.getIdFirstItem();
-                articleAPI.getListUpdateArticlesByType(firstID, type, getCallbackReview(page));
+                articleAPI.getListUpdateArticlesByType(firstID, type, getCallbackArticle(page));
             } else {
                 int lastID = adapter.getIdLastItem();
-                articleAPI.getListArticlesByType(lastID, type, getCallbackReview(page));
+                articleAPI.getListArticlesByType(type, lastID, getCallbackArticle(page));
             }
         }
     }

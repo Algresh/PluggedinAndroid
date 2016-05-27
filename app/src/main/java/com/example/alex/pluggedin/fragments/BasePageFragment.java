@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +90,7 @@ public abstract class BasePageFragment extends Fragment
         });
     }
 
-    protected Callback<List<Article>> getCallbackReview (final int page) {
+    protected Callback<List<Article>> getCallbackArticle (final int page) {
 
         if (page == FIRST_PAGE) {
             pDialog.show();
@@ -98,18 +99,18 @@ public abstract class BasePageFragment extends Fragment
         return new Callback<List<Article>>() {
             @Override
             public void success(List<Article> reviews, Response response) {
-                successReview(page, reviews);
+                successArticle(page, reviews);
                 pDialog.dismiss();
             }
 
             @Override
             public void failure(RetrofitError error) {
-                failureReview(page);
+                failureArticle(page);
             }
         };
     }
 
-    protected void successReview(final int page, List<Article> reviews) {
+    protected void successArticle(final int page, List<Article> reviews) {
         if (page == FIRST_PAGE) {
             buttonTryAgain.setVisibility(View.GONE);
             refreshLayout.setVisibility(View.VISIBLE);
@@ -132,7 +133,7 @@ public abstract class BasePageFragment extends Fragment
         }
     }
 
-    protected void failureReview(final int page) {
+    protected void failureArticle(final int page) {
         if(page == FIRST_PAGE) {
             refreshLayout.setVisibility(View.GONE);
             buttonTryAgain.setVisibility(View.VISIBLE);
