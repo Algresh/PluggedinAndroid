@@ -1,6 +1,8 @@
 package com.example.alex.pluggedin.fragments;
 
 import android.os.Bundle;
+import android.view.View;
+
 import com.example.alex.pluggedin.API.ReviewAPI;
 import com.example.alex.pluggedin.R;
 import com.example.alex.pluggedin.adapters.ArticleAdapter;
@@ -56,5 +58,12 @@ public class ReviewFragment extends BasePageFragment {
         connectNetwork(UPDATE_PAGE);
         linearManager.scrollToPosition(0);
         refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.buttonTryAgain) {
+            connectNetwork(FIRST_PAGE);
+        }
     }
 }

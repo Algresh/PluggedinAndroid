@@ -47,7 +47,6 @@ public abstract class BasePageFragment extends Fragment
 
     protected SwipeRefreshLayout refreshLayout;
 
-    protected String titleProgressMsg;
 
     public abstract void connectNetwork (final int page);
 
@@ -117,7 +116,7 @@ public abstract class BasePageFragment extends Fragment
 
             linearManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(linearManager);
-            recyclerView.setAdapter(new ArticleAdapter(reviews, getContext()));
+            recyclerView.setAdapter(new ArticleAdapter(reviews, getContext(), this));
         } else {
             ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
             if (page == UPDATE_PAGE) {
@@ -148,10 +147,4 @@ public abstract class BasePageFragment extends Fragment
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.buttonTryAgain) {
-            connectNetwork(FIRST_PAGE);
-        }
-    }
 }

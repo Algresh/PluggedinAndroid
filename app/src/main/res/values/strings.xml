@@ -21,4 +21,5 @@
         <item> Интересное </item>
         <item> Статьи </item>
     </string-array>
+    <string name="title_activity_show_article">ShowArticleActivity</string>
 </resources>

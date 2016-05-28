@@ -24,16 +24,18 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     private List<Article> articles;
     private Context context;
+    private View.OnClickListener clickListener;
 
-    public ArticleAdapter(List<Article> articles, Context context) {
+    public ArticleAdapter(List<Article> articles, Context context, View.OnClickListener clickListener) {
         this.articles = articles;
         this.context = context;
+        this.clickListener = clickListener;
     }
 
     @Override
     public ArticleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.article_item, parent , false);
-
+        view.setOnClickListener(clickListener);
         return new ArticleViewHolder(view);
     }
 

@@ -1,12 +1,15 @@
 package com.example.alex.pluggedin.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import static  com.example.alex.pluggedin.constants.Constants.*;
 import com.example.alex.pluggedin.API.ArticleAPI;
 import com.example.alex.pluggedin.R;
+import com.example.alex.pluggedin.ShowArticleActivity;
 import com.example.alex.pluggedin.adapters.ArticleAdapter;
 
 import retrofit.RestAdapter;
@@ -72,5 +75,16 @@ public class ArticleFragment extends BasePageFragment {
         connectNetwork(UPDATE_PAGE);
         linearManager.scrollToPosition(0);
         refreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.buttonTryAgain) {
+            connectNetwork(FIRST_PAGE);
+        } else {
+            Intent intent = new Intent(getContext(), ShowArticleActivity.class);
+            getContext().startActivity(intent);
+        }
+
     }
 }

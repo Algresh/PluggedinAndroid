@@ -19,4 +19,7 @@ public interface ArticleAPI {
 
     @GET("/api/list/update/articles/{id}/{type}")
     void getListUpdateArticlesByType(@Path("id") int id, @Path("type") int type, Callback<List<Article>> response);
+
+    @GET("/api/show/article/{idArticle}")
+    void getOpenArticle(@Path("idArticle") int idArticle, Callback<List<Article>> response);
 }
