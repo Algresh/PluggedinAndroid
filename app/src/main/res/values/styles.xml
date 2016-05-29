@@ -42,4 +42,19 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="openArticle">
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="openArticle.title">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="openArticle.author">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
 </resources>

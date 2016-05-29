@@ -28,5 +28,7 @@ public  class Constants {
     public static final int TYPE_ARTICLE = 4;
     public static final int TYPE_MEDIA = 2;
 
+    public static final int DISTANCE_BETWEEN_KEYWORDS = 10;
+
 
 }
