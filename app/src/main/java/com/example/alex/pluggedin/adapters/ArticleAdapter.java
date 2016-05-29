@@ -1,6 +1,7 @@
 package com.example.alex.pluggedin.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         holder.textArticle.setText(item.getText());
         holder.titleArticle.setText(item.getTitle());
         holder.author.setText(item.getAuthor());
+        holder.cardView.setTag(item.getId());
 
         Picasso.with(context).load(URL_IMAGES + item.getFile()).resize(320,240)
                 .into(holder.imageArticle);
@@ -91,6 +93,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         TextView titleArticle;
         TextView author;
         ImageView imageArticle;
+        CardView cardView;
 
         public ArticleViewHolder(View itemView) {
             super(itemView);
@@ -100,6 +103,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             titleArticle = (TextView) itemView.findViewById(R.id.titleArticle);
             author = (TextView) itemView.findViewById(R.id.author);
             imageArticle = (ImageView) itemView.findViewById(R.id.imageArticle);
+            cardView = (CardView) itemView.findViewById(R.id.cardView);
         }
     }
 

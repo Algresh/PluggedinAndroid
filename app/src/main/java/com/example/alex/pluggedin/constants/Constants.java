@@ -15,6 +15,8 @@ public  class Constants {
 
     public static final String URL_IMAGES = "http://pluggedin.ru/images";
 
+    public static final String URL_TEXT_ARTICLE = "http://pluggedin.ru/api/text/article/";
+
     public static final int TAB_REVIEW = 0;
     public static final int TAB_NEWS = 1;
     public static final int TAB_INTERESTING = 2;

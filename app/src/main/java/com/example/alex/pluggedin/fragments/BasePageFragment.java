@@ -1,6 +1,5 @@
 package com.example.alex.pluggedin.fragments;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,7 +42,7 @@ public abstract class BasePageFragment extends Fragment
 
     protected Toast toast;
 
-    protected ProgressDialog pDialog;
+//    protected ProgressDialog pDialog;
 
     protected SwipeRefreshLayout refreshLayout;
 
@@ -63,7 +62,7 @@ public abstract class BasePageFragment extends Fragment
             refreshLayout.setOnRefreshListener(this);
         }
 
-        pDialog = new ProgressDialog(getContext());
+//        pDialog = new ProgressDialog(getContext());
 //        pDialog.setMessage(titleProgressMsg);
 
         connectNetwork(FIRST_PAGE);
@@ -91,15 +90,15 @@ public abstract class BasePageFragment extends Fragment
 
     protected Callback<List<Article>> getCallbackArticle (final int page) {
 
-        if (page == FIRST_PAGE) {
-            pDialog.show();
-        }
+//        if (page == FIRST_PAGE) {
+//            pDialog.show();
+//        }
 
         return new Callback<List<Article>>() {
             @Override
             public void success(List<Article> reviews, Response response) {
                 successArticle(page, reviews);
-                pDialog.dismiss();
+//                pDialog.dismiss();
             }
 
             @Override
@@ -140,7 +139,7 @@ public abstract class BasePageFragment extends Fragment
             pages--;
         }
 
-        pDialog.dismiss();
+//        pDialog.dismiss();
         if (toast == null) {
             toast = Toast.makeText(getContext(), "Что то не работает!", Toast.LENGTH_SHORT);
             toast.show();

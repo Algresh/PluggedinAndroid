@@ -17,9 +17,9 @@
     <string-array name="tabs_title">
         <item> Обзоры </item>
         <item> Новости </item>
-        <item> Медиа </item>
         <item> Интересное </item>
         <item> Статьи </item>
+        <item> Медиа </item>
     </string-array>
     <string name="title_activity_show_article">ShowArticleActivity</string>
 </resources>

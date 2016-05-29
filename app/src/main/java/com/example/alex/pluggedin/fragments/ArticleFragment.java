@@ -83,6 +83,8 @@ public class ArticleFragment extends BasePageFragment {
             connectNetwork(FIRST_PAGE);
         } else {
             Intent intent = new Intent(getContext(), ShowArticleActivity.class);
+            int idArticle = (Integer) v.findViewById(R.id.cardView).getTag();
+            intent.putExtra("id", idArticle);
             getContext().startActivity(intent);
         }
 
