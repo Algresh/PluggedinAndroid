@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
@@ -34,6 +36,7 @@ public class ShowArticleActivity extends AppCompatActivity {
 
     protected TextView titleTv;
     protected TextView authorTv;
+    protected TextView dateTv;
     protected Article article;
     protected WebView textWV;
     protected FlowLayout layoutKeywords;
@@ -51,6 +54,7 @@ public class ShowArticleActivity extends AppCompatActivity {
         titleTv = (TextView) findViewById(R.id.showArticleTitle);
         authorTv = (TextView) findViewById(R.id.openArticleAuthor);
         textWV = (WebView) findViewById(R.id.webViewTextOpen);
+        dateTv = (TextView) findViewById(R.id.openArticleDate);
         layoutKeywords = (FlowLayout) findViewById(R.id.layoutKeywords);
 
         idArticle = getIntent().getIntExtra("id", -1);
@@ -79,20 +83,15 @@ public class ShowArticleActivity extends AppCompatActivity {
         authorTv.setText(article.getAuthor());
         textWV.getSettings().setJavaScriptEnabled(true);
         textWV.loadUrl(URL_TEXT_ARTICLE + idArticle);
-        int wrapContent = ViewGroup.LayoutParams.WRAP_CONTENT;
-        int matchParent = ViewGroup.LayoutParams.MATCH_PARENT;
-        /**
-         * @TODO problem with margin !!!
-         */
-        ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(wrapContent, wrapContent);
-        params.rightMargin = DISTANCE_BETWEEN_KEYWORDS;
-//        params.setGravity(Gravity.FILL_HORIZONTAL);
+        dateTv.setText(article.getDatePublish());
+
+        LayoutInflater layoutInflater = getLayoutInflater();
 
         for(Keyword word: article.getKeywords()) {
-            TextView keyWord = new TextView(this);
-
+            View view = layoutInflater.inflate(R.layout.keyword, layoutKeywords, false);
+            TextView keyWord = (TextView) view.findViewById(R.id.keywordTV);
             keyWord.setText(word.getTitle());
-            layoutKeywords.addView(keyWord, params);
+            layoutKeywords.addView(view);
         }
     }
 
