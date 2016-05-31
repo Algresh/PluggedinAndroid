@@ -141,7 +141,7 @@ public abstract class BasePageFragment extends Fragment
 
 //        pDialog.dismiss();
         if (toast == null) {
-            toast = Toast.makeText(getContext(), "Что то не работает!", Toast.LENGTH_SHORT);
+            toast = Toast.makeText(getContext(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT);
             toast.show();
         }
     }

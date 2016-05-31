@@ -1,20 +1,17 @@
 package com.example.alex.pluggedin;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alex.pluggedin.API.ArticleAPI;
 import com.example.alex.pluggedin.models.Article;
@@ -33,7 +30,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.mime.TypedByteArray;
 
 import static  com.example.alex.pluggedin.constants.Constants.*;
 
@@ -54,7 +50,11 @@ public class ShowArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_article);
-        idArticle = getIntent().getIntExtra("id", -1);
+        idArticle = getIntent().getIntExtra(ID, -1);
+
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
+        articleAPI = adapter.create(ArticleAPI.class);
+
         initToolbar();
         initViewsForArticle();
 
@@ -72,8 +72,6 @@ public class ShowArticleActivity extends AppCompatActivity {
     }
 
     protected void getArticleById (int idArticle) {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
-        articleAPI = adapter.create(ArticleAPI.class);
         articleAPI.getOpenArticle(idArticle, new Callback<List<Article>>() {
             @Override
             public void success(List<Article> articles, Response response) {
@@ -118,44 +116,37 @@ public class ShowArticleActivity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {//!!!!!!!!!!!!!!!!!!!!!!!!
 
                 if (url.contains(DOMAIN)) {
-                    Log.d(MY_TAG, "AA: " + url );
                     showArticleByURL(url);
                     return true;
                 } else  {
-                    Log.d(MY_TAG, "BB");
-                    return false;
+                    Uri address = Uri.parse(url);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, address);
+                    startActivity(intent);
+                    return true;
                 }
 
             }
         });
     }
 
-    /**
-     *
-     * @TODO:  create function for convert hex digit to String (or char)
-     */
+
     protected void showArticleByURL(String url) {
         String[] arrUrl = url.split("/");
         String latinTitle = arrUrl[arrUrl.length - 1];
-        latinTitle = latinTitle.replace("%C2%AB", "«");//!
-        latinTitle = latinTitle.replace("%C2%BB", "»");//!
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();//!
-        articleAPI = adapter.create(ArticleAPI.class);//!
-        Log.d(MY_TAG, latinTitle);
+        latinTitle = convertHexSubStringsToNormalString(latinTitle);
 
         articleAPI.getArticleIdByLatinTitle(latinTitle, new Callback<Response>() {
             @Override
-            public void success(Response integers, Response response) {//!(integer)
-                Log.d(MY_TAG,"id: " + integers);//!
+            public void success(Response response, Response another) {
                 InputStream inputStream;
                 int idArticle;
                 try {
-                    inputStream = integers.getBody().in();
-                    idArticle = convertbytesArray(inputStream);
+                    inputStream = response.getBody().in();
+                    idArticle = convertBytesArray(inputStream);
 
                     if(idArticle > 0) {
                         Intent intent = new Intent(ShowArticleActivity.this, ShowArticleActivity.class);
-                        intent.putExtra("id", idArticle);
+                        intent.putExtra(ID, idArticle);
                         startActivity(intent);
                     }
 
@@ -166,7 +157,7 @@ public class ShowArticleActivity extends AppCompatActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Log.d(MY_TAG,error.toString());//!
+                Toast.makeText(ShowArticleActivity.this, SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -178,11 +169,11 @@ public class ShowArticleActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
-    protected int convertbytesArray(InputStream inputStream) throws IOException {
+    protected int convertBytesArray(InputStream inputStream) throws IOException {
         int idArticle = 0;
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            int read = 0;
+            int read;
             while ((read = inputStream.read()) != -1) {
                 bos.write(read);
             }
@@ -190,7 +181,7 @@ public class ShowArticleActivity extends AppCompatActivity {
             bos.close();
             String data = new String(result);
             JSONObject jsonObj = new JSONObject(data);
-            idArticle = jsonObj.getInt("idArticle");
+            idArticle = jsonObj.getInt(ID_ARTICLE);
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         } finally {
@@ -202,7 +193,16 @@ public class ShowArticleActivity extends AppCompatActivity {
         return idArticle;
     }
 
+    protected String convertHexSubStringsToNormalString(String latinTitle) {
+        /**
+         * @TODO:  create function for convert hex digit to String (or char)
+         */
+        latinTitle = latinTitle.replace("%C2%AB", "«");//!
+        latinTitle = latinTitle.replace("%C2%BB", "»");//!
+        latinTitle = latinTitle.replace("%22", "\"");//!
+        latinTitle = latinTitle.replace("%27", "\'");//!
+        latinTitle = latinTitle.replace("%E2%80%94", "—");//!
+        return latinTitle;
 
-
-
+    }
 }

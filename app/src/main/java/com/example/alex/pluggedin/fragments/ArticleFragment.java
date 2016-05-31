@@ -84,7 +84,7 @@ public class ArticleFragment extends BasePageFragment {
         } else {
             Intent intent = new Intent(getContext(), ShowArticleActivity.class);
             int idArticle = (Integer) v.findViewById(R.id.cardView).getTag();
-            intent.putExtra("id", idArticle);
+            intent.putExtra(ID, idArticle);
             getContext().startActivity(intent);
         }
 

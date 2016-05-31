@@ -28,9 +28,10 @@ public  class Constants {
     public static final int TYPE_ARTICLE = 4;
     public static final int TYPE_MEDIA = 2;
 
-    public static void convertHexStringToInt(String hexStr) {
-        System.out.println(Integer.decode(hexStr));
-    }
+    public static final String ID = "id";
+    public static final String ID_ARTICLE = "idArticle";
+
+    public static final String SOMETHING_DOESNT_WORK = "Что то не работает!";
 
 
 }
