@@ -7,6 +7,7 @@
     <string name="close"> close </string>
     <string name="review"> Обзоры </string>
     <string name="article"> Статьи </string>
+    <string name="categories"> Категории </string>
     <string name="tryAgain"> Попробовать еще раз </string>
     <string name="downloadingReviews"> Загрузка обзоров. </string>
     <string name="downloadingNews"> Загрузка новостей. </string>

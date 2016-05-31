@@ -5,11 +5,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,17 +38,19 @@ import retrofit.client.Response;
 import static  com.example.alex.pluggedin.constants.Constants.*;
 
 
-public class ShowArticleActivity extends AppCompatActivity {
+public class ShowArticleActivity extends AppCompatActivity implements View.OnClickListener {
 
     protected ArticleAPI articleAPI;
     protected int idArticle;
+    protected Article article;
 
     protected TextView titleTv;
     protected TextView authorTv;
     protected TextView dateTv;
-    protected Article article;
     protected WebView textWV;
     protected FlowLayout layoutKeywords;
+    protected Button tryAgainBtn;
+    protected Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,11 @@ public class ShowArticleActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onClick(View v) {
+        getArticleById(idArticle);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
@@ -77,19 +88,23 @@ public class ShowArticleActivity extends AppCompatActivity {
             public void success(List<Article> articles, Response response) {
                 article = articles.get(0);
                 initFields();
+                showAllElementHideBtn();
             }
 
             @Override
             public void failure(RetrofitError error) {
+                hideAllElementsShowBtn();
+                Toast.makeText(ShowArticleActivity.this, SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     protected void initFields() {
+        textWV.loadUrl(URL_TEXT_ARTICLE + idArticle);
         titleTv.setText(article.getTitle());
         authorTv.setText(article.getAuthor());
-
         dateTv.setText(article.getDatePublish());
+        toolbar.setTitle(article.getTitle());
 
         LayoutInflater layoutInflater = getLayoutInflater();
 
@@ -107,26 +122,34 @@ public class ShowArticleActivity extends AppCompatActivity {
         textWV = (WebView) findViewById(R.id.webViewTextOpen);
         dateTv = (TextView) findViewById(R.id.openArticleDate);
         layoutKeywords = (FlowLayout) findViewById(R.id.layoutKeywords);
+        tryAgainBtn = (Button) findViewById(R.id.openArticleTryAgainBtn);
+        if (tryAgainBtn != null) {
+            tryAgainBtn.setOnClickListener(this);
+        }
 
         textWV.getSettings().setJavaScriptEnabled(true);
-        textWV.loadUrl(URL_TEXT_ARTICLE + idArticle);
+        textWV.addJavascriptInterface(new MyJavaInterface(), "test");
 
         textWV.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {//!!!!!!!!!!!!!!!!!!!!!!!!
-
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url.contains(DOMAIN)) {
                     showArticleByURL(url);
-                    return true;
                 } else  {
                     Uri address = Uri.parse(url);
                     Intent intent = new Intent(Intent.ACTION_VIEW, address);
                     startActivity(intent);
-                    return true;
                 }
+                return true;
+            }
 
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                hideAllElementsShowBtn();
+                Toast.makeText(ShowArticleActivity.this, SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 
@@ -163,7 +186,7 @@ public class ShowArticleActivity extends AppCompatActivity {
     }
 
     protected void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarShowArticle);
+        toolbar = (Toolbar) findViewById(R.id.toolbarShowArticle);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -205,4 +228,35 @@ public class ShowArticleActivity extends AppCompatActivity {
         return latinTitle;
 
     }
+
+    protected void hideAllElementsShowBtn() {
+        showOrHideElements(View.GONE);
+    }
+
+    protected void showAllElementHideBtn() {
+        showOrHideElements(View.VISIBLE);
+    }
+
+    protected void showOrHideElements(int visibility) {
+         titleTv.setVisibility(visibility);
+         authorTv.setVisibility(visibility);
+         dateTv.setVisibility(visibility);
+         textWV.setVisibility(visibility);
+         layoutKeywords.setVisibility(visibility);
+         int oppositeVisibility = visibility == View.GONE ? View.VISIBLE : View.GONE;
+         tryAgainBtn.setVisibility(oppositeVisibility);
+    }
+
+    private class MyJavaInterface {
+        @android.webkit.JavascriptInterface
+        public String getGreeting(String str) {
+            /**
+             * @TODO тут скачать картинку и открыть ее в полный размер
+             */
+            Log.d(MY_TAG, "Inter: " + str);
+            return "Hello JavaScript!";
+        }
+    }
+
+
 }

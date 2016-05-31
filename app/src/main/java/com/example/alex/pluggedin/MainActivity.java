@@ -15,7 +15,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String title = getResources().getString(R.string.review);
+        String title = getResources().getString(R.string.categories);
         initToolbar(title, R.id.toolbarReview);
         initNavigationView();
         initTabs();

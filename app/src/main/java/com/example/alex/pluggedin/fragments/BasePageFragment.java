@@ -42,8 +42,6 @@ public abstract class BasePageFragment extends Fragment
 
     protected Toast toast;
 
-//    protected ProgressDialog pDialog;
-
     protected SwipeRefreshLayout refreshLayout;
 
 
@@ -61,9 +59,6 @@ public abstract class BasePageFragment extends Fragment
         if(refreshLayout != null) {
             refreshLayout.setOnRefreshListener(this);
         }
-
-//        pDialog = new ProgressDialog(getContext());
-//        pDialog.setMessage(titleProgressMsg);
 
         connectNetwork(FIRST_PAGE);
         addNewItemsByScroll();
@@ -90,15 +85,10 @@ public abstract class BasePageFragment extends Fragment
 
     protected Callback<List<Article>> getCallbackArticle (final int page) {
 
-//        if (page == FIRST_PAGE) {
-//            pDialog.show();
-//        }
-
         return new Callback<List<Article>>() {
             @Override
             public void success(List<Article> reviews, Response response) {
                 successArticle(page, reviews);
-//                pDialog.dismiss();
             }
 
             @Override
@@ -139,7 +129,6 @@ public abstract class BasePageFragment extends Fragment
             pages--;
         }
 
-//        pDialog.dismiss();
         if (toast == null) {
             toast = Toast.makeText(getContext(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT);
             toast.show();
