@@ -64,7 +64,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         if(newItems != null && newItems.size() > 0) {
             articles.addAll(newItems);
             notifyItemInserted(articles.size() - 1);
-            Log.d(MY_TAG, newItems.size() + "");
             return true;
         } else {
             return false;
@@ -81,7 +80,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     public void addToTop(List<Article> newItems) {
         articles.addAll(0, newItems);
-
         notifyItemInserted(0);
     }
 

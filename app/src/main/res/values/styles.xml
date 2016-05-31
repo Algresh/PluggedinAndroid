@@ -59,7 +59,7 @@
 
     <style name="openArticle.keyword">
         <item name="android:layout_marginTop">5dp</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -68,7 +68,7 @@
     </style>
 
     <style name="openArticle.date">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 

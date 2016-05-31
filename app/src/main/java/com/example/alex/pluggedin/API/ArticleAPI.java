@@ -5,6 +5,7 @@ import com.example.alex.pluggedin.models.Article;
 import java.util.List;
 
 import retrofit.Callback;
+import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
@@ -22,4 +23,7 @@ public interface ArticleAPI {
 
     @GET("/api/show/article/{idArticle}")
     void getOpenArticle(@Path("idArticle") int idArticle, Callback<List<Article>> response);
+
+    @GET("/api/latin/title/article/{latinTitle}")
+    void getArticleIdByLatinTitle(@Path("latinTitle") String latinTitle, Callback<Response> idArticle);
 }

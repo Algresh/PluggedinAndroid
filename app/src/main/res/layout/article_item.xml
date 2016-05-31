@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
+            android:ellipsize="end"
             android:id="@+id/textArticle"
             style="@style/itemArticle.miniText" />
 

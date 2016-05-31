@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/scrollArticle"
+        android:scrollbars="none"
         >
 
         <LinearLayout
@@ -28,6 +29,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/showArticleTitle"
                 style="@style/openArticle.title"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/openArticleDate"
+                style="@style/openArticle.date"
                 />
             <WebView
                 android:layout_width="match_parent"
@@ -42,12 +49,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/openArticleAuthor"
                 style="@style/openArticle.author"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/openArticleDate"
-                style="@style/openArticle.date"
                 />
             <org.apmem.tools.layouts.FlowLayout
                 android:layout_width="match_parent"
