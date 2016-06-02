@@ -14,6 +14,12 @@
     <string name="downloadingInteresting"> Загрузка интересного. </string>
     <string name="downloadingMedia"> Загрузка медиа. </string>
     <string name="downloadingArticle"> Загрузка статей. </string>
+    <string name="savedToBuffer"> Сохранено в буфере </string>
+    <string name="share"> Поделится </string>
+
+    <string name="copyLink"> Копировать ссылку </string>
+    <string name="shareLink"> Поделится </string>
+    <string name="openInBrowser"> Открыть в браузере </string>
 
     <string-array name="tabs_title">
         <item> Обзоры </item>

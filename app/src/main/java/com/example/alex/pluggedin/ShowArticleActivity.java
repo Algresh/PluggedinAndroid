@@ -1,12 +1,16 @@
 package com.example.alex.pluggedin;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebResourceError;
@@ -75,12 +79,68 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.copyLinkItem:
+                copyLink();
+                break;
+            case R.id.shareItem:
+                shareLink();
+                break;
+            case R.id.openInBrowserItem:
+                openArticleInBrowser();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    protected void copyLink() {
+        String title = article.getLatinTitle();
+        if (title != null) {
+            ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            final String successSaved = getResources().getString(R.string.savedToBuffer);
+            clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
+                @Override
+                public void onPrimaryClipChanged() {
+                    Toast.makeText(ShowArticleActivity.this, successSaved, Toast.LENGTH_SHORT).show();
+                }
+            });
+            clipboardManager.setPrimaryClip(ClipData.newPlainText(CLIP_LABEL, URL_OPEN_ARTICLE + title));
+        }
+    }
+
+    protected void openArticleInBrowser() {
+        String title = article.getLatinTitle();
+        if (title != null) {
+            Uri uri = Uri.parse(URL_OPEN_ARTICLE + title);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
+    }
+
+    protected void shareLink () {
+        String title = article.getLatinTitle();
+        if (title != null) {
+            Intent intentShare = new Intent(Intent.ACTION_SEND);
+            intentShare.setType(TEXT_PLAIN);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                intentShare.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+            } else {
+                intentShare.setFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            }
+
+            String share = getResources().getString(R.string.share);
+            intentShare.putExtra(Intent.EXTRA_TEXT, URL_OPEN_ARTICLE + title);
+            startActivity(Intent.createChooser(intentShare, share));
+
+        }
+    }
+
+
 
     protected void getArticleById (int idArticle) {
         articleAPI.getOpenArticle(idArticle, new Callback<List<Article>>() {
@@ -192,6 +252,12 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar_show_article, menu);
+        return true;
+    }
+
     protected int convertBytesArray(InputStream inputStream) throws IOException {
         int idArticle = 0;
         try {
@@ -249,13 +315,10 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
 
     private class MyJavaInterface {
         @android.webkit.JavascriptInterface
-        public String getGreeting(String str) {
-
+        public void getGreeting(String str) {
             Intent intent = new Intent(ShowArticleActivity.this, ShowImageActivity.class);
             intent.putExtra(SRC_OF_IMAGE, str);
             startActivity(intent);
-            Log.d(MY_TAG, "Inter: " + str);
-            return "Hello JavaScript!";
         }
     }
 

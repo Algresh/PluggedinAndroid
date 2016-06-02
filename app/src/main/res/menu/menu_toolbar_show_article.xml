@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.alex.pluggedin.MainActivity">
+
+    <item
+        android:title="@string/copyLink"
+        android:id="@+id/copyLinkItem"/>
+
+    <item
+        android:title="@string/shareLink"
+        android:id="@+id/shareItem"/>
+
+    <item
+        android:title="@string/openInBrowser"
+        android:id="@+id/openInBrowserItem"/>
+
+</menu>

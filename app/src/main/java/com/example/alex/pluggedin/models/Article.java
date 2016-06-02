@@ -17,6 +17,8 @@ public class Article {
 
     protected String file;
 
+    protected String latinTitle;
+
     private int type;
 
     protected ArrayList<Keyword> keywords;
@@ -114,5 +116,11 @@ public class Article {
         return this.keywords.size();
     }
 
+    public String getLatinTitle() {
+        return latinTitle;
+    }
 
+    public void setLatinTitle(String latinTitle) {
+        this.latinTitle = latinTitle;
+    }
 }

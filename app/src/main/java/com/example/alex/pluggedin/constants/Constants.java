@@ -14,8 +14,8 @@ public  class Constants {
     public static final String DATE_FORMAT = "yyyy.MM.dd";
 
     public static final String URL_IMAGES = "http://pluggedin.ru/images";
-
     public static final String URL_TEXT_ARTICLE = "http://pluggedin.ru/api/text/article/";
+    public static final String URL_OPEN_ARTICLE = "http://pluggedin.ru/open/";
 
     public static final int TAB_REVIEW = 0;
     public static final int TAB_NEWS = 1;
@@ -34,6 +34,10 @@ public  class Constants {
     public static final String SRC_OF_IMAGE = "src";
 
     public static final String SOMETHING_DOESNT_WORK = "Что то не работает!";
+
+    public static final String CLIP_LABEL = "clipLabel";
+
+    public static final String TEXT_PLAIN = "text/plain";
 
 
 }
