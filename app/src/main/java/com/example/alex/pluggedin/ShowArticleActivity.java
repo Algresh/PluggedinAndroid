@@ -250,9 +250,10 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
     private class MyJavaInterface {
         @android.webkit.JavascriptInterface
         public String getGreeting(String str) {
-            /**
-             * @TODO тут скачать картинку и открыть ее в полный размер
-             */
+
+            Intent intent = new Intent(ShowArticleActivity.this, ShowImageActivity.class);
+            intent.putExtra(SRC_OF_IMAGE, str);
+            startActivity(intent);
             Log.d(MY_TAG, "Inter: " + str);
             return "Hello JavaScript!";
         }

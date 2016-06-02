@@ -24,7 +24,11 @@
         <activity
             android:name=".ShowArticleActivity"
             android:label="@string/title_activity_show_article"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ShowImageActivity"
+            android:theme="@style/Theme.AllBlack">
+
+        </activity>
     </application>
 
 </manifest>

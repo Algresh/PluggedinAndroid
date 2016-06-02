@@ -31,6 +31,8 @@ public  class Constants {
     public static final String ID = "id";
     public static final String ID_ARTICLE = "idArticle";
 
+    public static final String SRC_OF_IMAGE = "src";
+
     public static final String SOMETHING_DOESNT_WORK = "Что то не работает!";
 
 

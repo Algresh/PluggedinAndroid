@@ -72,5 +72,9 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="Theme.AllBlack" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
 
 </resources>
