@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
-    android:background="@color/colorPrimary"
+    android:layout_height="180dp"
+    android:background="@drawable/header_nv"
     >
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/instagram"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="26dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/groupUserNavigationHeader"
-            android:textSize="30sp"
-            android:layout_marginLeft="16dp"
-            android:layout_gravity="center_vertical" />
-    </LinearLayout>
-</LinearLayout>
+    <ImageView
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:id="@+id/imageButton"
+        android:src="@drawable/youtube"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageView"
+        android:layout_marginRight="16dp" />
+
+    <ImageView
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/vk"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp" />
+
+</RelativeLayout>
