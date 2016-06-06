@@ -3,7 +3,25 @@
     <item
         android:title="MainPage"
         android:orderInCategory="1"
-        android:id="@+id/listOfGroups"
+        android:id="@+id/listOfArticles"
         />
 
+
+    <item android:title="@string/socialNetworks"
+        android:orderInCategory="2"
+        >
+        <menu>
+            <item
+                android:title="@string/socialNetworksVk"
+                android:id="@+id/socialNetworksVk"/>
+
+            <item
+                android:title="@string/socialNetworksYoutube"
+                android:id="@+id/socialNetworksYoutube"/>
+
+            <item
+                android:title="@string/socialNetworksInstagram"
+                android:id="@+id/socialNetworksInstagram"/>
+        </menu>
+    </item>
 </menu>

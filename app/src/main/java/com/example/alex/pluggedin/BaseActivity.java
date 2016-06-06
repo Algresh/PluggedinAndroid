@@ -1,13 +1,17 @@
 package com.example.alex.pluggedin;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import static com.example.alex.pluggedin.constants.Constants.*;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -22,6 +26,19 @@ public class BaseActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 drawerLayout.closeDrawers();
 
+                switch (item.getItemId()){
+                    case R.id.listOfArticles:
+                        break;
+                    case R.id.socialNetworksVk:
+                        openSocialNetworks(URL_VK_GROUP);
+                        break;
+                    case R.id.socialNetworksInstagram:
+                        openSocialNetworks(URL_INSTAGRAM_ACCOUNT);
+                        break;
+                    case R.id.socialNetworksYoutube:
+                        openSocialNetworks(URL_YOUTUBE_CHANEL);
+                        break;
+                }
                 return true;
             }
         };
@@ -59,6 +76,12 @@ public class BaseActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    private void openSocialNetworks(String srcUri) {
+        Uri uri = Uri.parse(srcUri);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 
 

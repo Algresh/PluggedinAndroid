@@ -21,6 +21,12 @@
     <string name="shareLink"> Поделится </string>
     <string name="openInBrowser"> Открыть в браузере </string>
 
+    <string name="listOfArticles"> Статьи </string>
+    <string name="socialNetworks"> Социальные сети </string>
+    <string name="socialNetworksInstagram"> Мы в Инстаграме </string>
+    <string name="socialNetworksVk">  Мы Вконтакте </string>
+    <string name="socialNetworksYoutube"> Мы на Youtube </string>
+
     <string-array name="tabs_title">
         <item> Обзоры </item>
         <item> Новости </item>
