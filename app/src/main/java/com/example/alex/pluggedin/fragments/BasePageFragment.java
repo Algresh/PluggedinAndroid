@@ -51,6 +51,7 @@ public abstract class BasePageFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(LAYOUT, container, false);
+        initAPI();
         recyclerView = (RecyclerView) view.findViewById(R.id.recycleView);
         buttonTryAgain = (Button) view.findViewById(R.id.buttonTryAgain);
 
@@ -134,5 +135,7 @@ public abstract class BasePageFragment extends Fragment
             toast.show();
         }
     }
+
+    protected abstract void initAPI();
 
 }

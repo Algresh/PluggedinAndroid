@@ -42,5 +42,9 @@ public  class Constants {
 
     public static final String TEXT_PLAIN = "text/plain";
 
+    public static final String DEFAULT_THREAD = "defaultThread";
+
+    public static final String TYPE = "type";
+
 
 }

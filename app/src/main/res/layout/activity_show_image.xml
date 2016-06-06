@@ -37,7 +37,7 @@
             android:id="@+id/ShowImageIV"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             />
     </RelativeLayout>
 

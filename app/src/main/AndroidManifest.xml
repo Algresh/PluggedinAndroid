@@ -29,6 +29,9 @@
             android:theme="@style/Theme.AllBlack">
 
         </activity>
+
+
+        <service android:name="com.example.alex.pluggedin.services.SaveArticle" />
     </application>
 
 </manifest>

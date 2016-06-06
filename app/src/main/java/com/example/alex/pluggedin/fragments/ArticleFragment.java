@@ -3,8 +3,11 @@ package com.example.alex.pluggedin.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import static  com.example.alex.pluggedin.constants.Constants.*;
 import com.example.alex.pluggedin.API.ArticleAPI;
@@ -19,37 +22,32 @@ public class ArticleFragment extends BasePageFragment {
     ArticleAPI articleAPI;
     private int type;
 
-    public ArticleFragment() {
-    }
-
     public static ArticleFragment getInstance(int type) {
-        ArticleFragment fragment = new ArticleFragment(type);
+        ArticleFragment fragment = new ArticleFragment();
+        fragment.setType(type);
         fragment.setArguments(new Bundle());
 
         return fragment;
     }
 
-    public ArticleFragment(int type) {
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            type = savedInstanceState.getInt(TYPE);
+        }
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    @Override
+    protected void initAPI() {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
         articleAPI = adapter.create(ArticleAPI.class);
-        this.type = type;
-//        switch (type) {
-//            case TYPE_NEWS:
-//                titleProgressMsg = getResources().getString(R.string.downloadingNews);
-//                break;
-//            case TYPE_INTERESTING:
-//                titleProgressMsg = getResources().getString(R.string.downloadingInteresting);
-//                break;
-//            case TYPE_MEDIA:
-//                titleProgressMsg = getResources().getString(R.string.downloadingMedia);
-//                break;
-//            case TYPE_ARTICLE:
-//                titleProgressMsg = getResources().getString(R.string.downloadingArticle);
-//                break;
-//            default:
-//                titleProgressMsg = "";
-//        }
-
     }
 
     @Override
@@ -88,5 +86,11 @@ public class ArticleFragment extends BasePageFragment {
             getContext().startActivity(intent);
         }
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(TYPE, type);
     }
 }

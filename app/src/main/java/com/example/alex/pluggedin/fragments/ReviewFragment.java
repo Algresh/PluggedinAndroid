@@ -3,6 +3,7 @@ package com.example.alex.pluggedin.fragments;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.alex.pluggedin.API.ArticleAPI;
 import com.example.alex.pluggedin.API.ReviewAPI;
 import com.example.alex.pluggedin.R;
 import com.example.alex.pluggedin.adapters.ArticleAdapter;
@@ -24,12 +25,11 @@ public class ReviewFragment extends BasePageFragment {
         return fragment;
     }
 
-    public ReviewFragment() {
+    @Override
+    protected void initAPI() {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(DOMAIN).build();
         reviewAPI = restAdapter.create(ReviewAPI.class);
-
-//        titleProgressMsg = getResources().getString(R.string.downloadingReviews);
     }
 
 
