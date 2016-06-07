@@ -1,8 +1,11 @@
 package com.example.alex.pluggedin;
 
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -28,7 +31,10 @@ public class ShowImageActivity extends AppCompatActivity {
         String src = getIntent().getStringExtra(SRC_OF_IMAGE);
 
         image = (ImageView) findViewById(R.id.ShowImageIV);
+
+        int maxHeight = (int) ( getHeightScreen() * 0.7);
         Picasso.with(this).load(src).into(image);
+        image.setMaxHeight(maxHeight);
     }
 
     @Override
@@ -39,4 +45,13 @@ public class ShowImageActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private int getHeightScreen() {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        return size.y;
+    }
+
 }
