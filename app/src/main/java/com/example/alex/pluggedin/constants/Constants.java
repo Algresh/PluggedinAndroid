@@ -46,5 +46,7 @@ public  class Constants {
 
     public static final String TYPE = "type";
 
+    public static final String SEARCH_QUERY = "query";
+
 
 }

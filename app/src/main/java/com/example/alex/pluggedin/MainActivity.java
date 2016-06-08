@@ -1,6 +1,7 @@
 package com.example.alex.pluggedin;
 
 import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import static com.example.alex.pluggedin.constants.Constants.*;
 
 import com.example.alex.pluggedin.adapters.TabsPagerAdapter;
 
@@ -50,7 +52,9 @@ public class MainActivity extends BaseActivity {
         return new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
+                intent.putExtra(SEARCH_QUERY, query);
+                startActivity(intent);
                 return false;
             }
 

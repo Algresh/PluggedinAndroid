@@ -26,4 +26,7 @@ public interface ArticleAPI {
 
     @GET("/api/latin/title/article/{latinTitle}")
     void getArticleIdByLatinTitle(@Path("latinTitle") String latinTitle, Callback<Response> idArticle);
+
+    @GET("/api/search/articles/{title}")
+    void getListArticlesBySearch(@Path("title") String title, Callback<List<Article>> response);
 }

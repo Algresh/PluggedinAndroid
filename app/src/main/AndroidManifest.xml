@@ -25,13 +25,17 @@
             android:name=".ShowArticleActivity"
             android:label="@string/title_activity_show_article"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ShowImageActivity"
+        <activity
+            android:name=".ShowImageActivity"
             android:theme="@style/Theme.AllBlack">
 
         </activity>
+        <activity android:name=".SearchResultsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
+        </activity>
 
-        <service android:name="com.example.alex.pluggedin.services.SaveArticle" />
+        <service android:name=".services.SaveArticle" />
     </application>
 
 </manifest>

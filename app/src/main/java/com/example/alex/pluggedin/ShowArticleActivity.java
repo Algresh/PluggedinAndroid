@@ -283,9 +283,6 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
     }
 
     protected String convertHexSubStringsToNormalString(String latinTitle) {
-        /**
-         * @TODO:  create function for convert hex digit to String (or char)
-         */
         latinTitle = latinTitle.replace("%C2%AB", "«");//!
         latinTitle = latinTitle.replace("%C2%BB", "»");//!
         latinTitle = latinTitle.replace("%22", "\"");//!
