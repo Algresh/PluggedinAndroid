@@ -16,6 +16,7 @@
     <string name="downloadingArticle"> Загрузка статей. </string>
     <string name="savedToBuffer"> Сохранено в буфере </string>
     <string name="share"> Поделится </string>
+    <string name="search_hint"> Поиск </string>
 
     <string name="copyLink"> Копировать ссылку </string>
     <string name="shareLink"> Поделится </string>

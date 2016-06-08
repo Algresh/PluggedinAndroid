@@ -1,8 +1,13 @@
 package com.example.alex.pluggedin;
 
+import android.app.SearchManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.alex.pluggedin.adapters.TabsPagerAdapter;
 
@@ -21,7 +26,40 @@ public class MainActivity extends BaseActivity {
         initTabs();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
 
+        MenuItem searchItem =  menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setQueryHint(getResources().getString(R.string.search_hint));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        if(searchManager != null){
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        }
+
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(getOnQueryTextListener());
+
+        return true;
+    }
+
+    private SearchView.OnQueryTextListener getOnQueryTextListener() {
+        return new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        };
+    }
 
     private void initTabs() {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
