@@ -41,8 +41,6 @@ public class MainActivity extends BaseActivity {
         if(searchManager != null){
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         }
-
-        searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(getOnQueryTextListener());
 
         return true;
@@ -52,9 +50,11 @@ public class MainActivity extends BaseActivity {
         return new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
-                intent.putExtra(SEARCH_QUERY, query);
-                startActivity(intent);
+                if(query.length() > 1) {
+                    Intent intent = new Intent(MainActivity.this, SearchResultsActivity.class);
+                    intent.putExtra(SEARCH_QUERY, query);
+                    startActivity(intent);
+                }
                 return false;
             }
 

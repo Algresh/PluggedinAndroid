@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -42,7 +41,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         /**
-         * check review or article
+         * @TODO check review or article
          */
         Intent intent = new Intent(this, ShowArticleActivity.class);
         int idArticle = (Integer) v.findViewById(R.id.cardView).getTag();
@@ -72,13 +71,13 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
                 if(articles != null) {
                     successSearch(articles);
                 } else {
-                    successFail();
+                    failSearch();
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
-                successFail();
+                failSearch();
             }
         };
     }
@@ -101,7 +100,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void successFail(){
+    private void failSearch(){
         TextView searchEmpty = (TextView) findViewById(R.id.search_empty);
         if (searchEmpty != null) {
             searchEmpty.setVisibility(View.VISIBLE);
