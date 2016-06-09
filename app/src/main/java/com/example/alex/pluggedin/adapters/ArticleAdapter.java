@@ -48,7 +48,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         holder.textArticle.setText(item.getText());
         holder.titleArticle.setText(item.getTitle());
         holder.author.setText(item.getAuthor());
-        holder.cardView.setTag(item.getId());
+        if(item.getType() == 0) {//если это обзор то в тег записываем отрицательное id чтобы в дальнейшем их различать
+            holder.cardView.setTag(item.getId() * (-1));
+        } else {
+            holder.cardView.setTag(item.getId());
+        }
+
 
         Picasso.with(context).load(URL_IMAGES + item.getFile()).resize(320,240)
                 .into(holder.imageArticle);

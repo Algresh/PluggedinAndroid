@@ -40,13 +40,12 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        /**
-         * @TODO check review or article
-         */
-        Intent intent = new Intent(this, ShowArticleActivity.class);
         int idArticle = (Integer) v.findViewById(R.id.cardView).getTag();
-        intent.putExtra(ID, idArticle);
-        startActivity(intent);
+        if (idArticle > 0) {// если id отрицательное значит это обзор
+            Intent intent = new Intent(this, ShowArticleActivity.class);
+            intent.putExtra(ID, idArticle);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -64,7 +63,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         articleAPI.getListArticlesBySearch(query, getCallable());
     }
 
-    private Callback<List<Article>> getCallable(){
+    private Callback<List<Article>> getCallable() {
         return new Callback<List<Article>>() {
             @Override
             public void success(List<Article> articles, Response response) {
