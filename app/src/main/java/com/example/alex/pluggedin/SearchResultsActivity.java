@@ -25,8 +25,11 @@ import static com.example.alex.pluggedin.constants.Constants.*;
 
 public class SearchResultsActivity extends AppCompatActivity implements View.OnClickListener{
 
-    ArticleAPI articleAPI;
-    String query;
+    protected ArticleAPI articleAPI;
+    protected String query;
+    protected RecyclerView recyclerView;
+    protected int pages = FIRST_PAGE;
+    protected int lastDownloadPages = FIRST_PAGE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_search_results);
         query = getIntent().getStringExtra(SEARCH_QUERY);
         initToolbar();
-        connectNetwork();
+        connectNetwork(FIRST_PAGE);
 
     }
 
@@ -57,10 +60,10 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         return super.onOptionsItemSelected(item);
     }
 
-    private void connectNetwork() {
+    private void connectNetwork(int pages) {
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
         articleAPI = restAdapter.create(ArticleAPI.class);
-        articleAPI.getListArticlesBySearch(query, getCallable());
+        articleAPI.getListArticlesBySearch(query, pages, getCallable());
     }
 
     private Callback<List<Article>> getCallable() {
@@ -92,11 +95,30 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     }
 
     private void successSearch(List<Article> articles){
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycleViewSearch);
+        recyclerView = (RecyclerView) findViewById(R.id.recycleViewSearch);
         if (recyclerView != null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(new ArticleAdapter(articles, this, this));
         }
+    }
+
+    private void addNewItemsByScroll(){
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if(dy > 0) {
+                    LinearLayoutManager linearManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                    int visibleItemCount = linearManager.getChildCount();
+                    int totalItemCount   = linearManager.getItemCount();
+                    int pastVisibleItems = linearManager.findFirstVisibleItemPosition();
+
+                    if ((visibleItemCount + pastVisibleItems) >= totalItemCount && pages == lastDownloadPages){
+                        pages++;
+                        connectNetwork(pages);
+                    }
+                }
+            }
+        });
     }
 
     private void failSearch(){
