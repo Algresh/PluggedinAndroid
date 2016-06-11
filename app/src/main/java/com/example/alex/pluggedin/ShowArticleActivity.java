@@ -74,7 +74,20 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        getArticleById(idArticle);
+        switch (v.getId()) {
+            case R.id.openArticleTryAgainBtn:
+                getArticleById(idArticle);
+                break;
+            default:
+                TextView textView = (TextView) v.findViewById(R.id.keywordTV);
+                if(textView != null) {
+                    String keyword = textView.getText().toString();
+                    Intent intent = new Intent(this, SearchResultsActivity.class);
+                    intent.putExtra(KEYWORD_QUERY, keyword);
+                    startActivity(intent);
+                }
+        }
+
     }
 
     @Override
@@ -170,6 +183,7 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
 
         for(Keyword word: article.getKeywords()) {
             View view = layoutInflater.inflate(R.layout.keyword, layoutKeywords, false);
+            view.setOnClickListener(this);
             TextView keyWord = (TextView) view.findViewById(R.id.keywordTV);
             keyWord.setText(word.getTitle());
             layoutKeywords.addView(view);

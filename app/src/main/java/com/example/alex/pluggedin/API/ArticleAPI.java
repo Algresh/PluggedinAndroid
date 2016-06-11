@@ -28,5 +28,8 @@ public interface ArticleAPI {
     void getArticleIdByLatinTitle(@Path("latinTitle") String latinTitle, Callback<Response> idArticle);
 
     @GET("/api/search/articles/{title}/{page}")
-    void getListArticlesBySearch(@Path("title") String title,@Path("page") int page, Callback<List<Article>> response);
+    void getListArticlesBySearch(@Path("title") String title, @Path("page") int page, Callback<List<Article>> response);
+
+    @GET("/api/search/keywords/{keyword}/{page}")
+    void getListArticlesByKeyword(@Path("keyword") String keyword, @Path("page") int page, Callback<List<Article>> response);
 }

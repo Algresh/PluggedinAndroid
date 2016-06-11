@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -28,17 +29,19 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     protected ArticleAPI articleAPI;
     protected String query;
     protected RecyclerView recyclerView;
-    protected int pages = FIRST_PAGE;
-    protected int lastDownloadPages = FIRST_PAGE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
         query = getIntent().getStringExtra(SEARCH_QUERY);
+        if(query != null) {
+            connectNetworkSearch(FIRST_PAGE);
+        } else {
+            query = getIntent().getStringExtra(KEYWORD_QUERY);
+            connectNetworkKeyword(FIRST_PAGE);
+        }
         initToolbar();
-        connectNetwork(FIRST_PAGE);
-
     }
 
     @Override
@@ -60,7 +63,13 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         return super.onOptionsItemSelected(item);
     }
 
-    private void connectNetwork(int pages) {
+    private void connectNetworkKeyword(int pages) {
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
+        articleAPI = restAdapter.create(ArticleAPI.class);
+        articleAPI.getListArticlesByKeyword(query, pages, getCallable());
+    }
+
+    private void connectNetworkSearch(int pages) {
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
         articleAPI = restAdapter.create(ArticleAPI.class);
         articleAPI.getListArticlesBySearch(query, pages, getCallable());
@@ -102,24 +111,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void addNewItemsByScroll(){
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if(dy > 0) {
-                    LinearLayoutManager linearManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                    int visibleItemCount = linearManager.getChildCount();
-                    int totalItemCount   = linearManager.getItemCount();
-                    int pastVisibleItems = linearManager.findFirstVisibleItemPosition();
 
-                    if ((visibleItemCount + pastVisibleItems) >= totalItemCount && pages == lastDownloadPages){
-                        pages++;
-                        connectNetwork(pages);
-                    }
-                }
-            }
-        });
-    }
 
     private void failSearch(){
         TextView searchEmpty = (TextView) findViewById(R.id.search_empty);
