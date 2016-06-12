@@ -4,6 +4,7 @@ import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.BoundedMatcher;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerViewAccessibilityDelegate;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
@@ -29,7 +30,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.core.AllOf.allOf;
+//import static org.hamcrest.core.AllOf.allOf;
+//import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.instanceOf;
 import static com.android.support.test.deps.guava.base.Preconditions.checkNotNull;
@@ -41,27 +44,18 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         super(MainActivity.class);
     }
 
+    final int NUMBER_TABS = 5;
+
     @Override
     public void setUp() throws Exception {
         super.setUp();
         getActivity();
     }
 
-    public void testSelectArticle() throws Exception {
-//        ViewInteraction fragmentText = onView(withId(R.id.));
-
-//        onView(allOf(withId(R.id.button), isDescendantOfA(firstChildOf(withId(R.id.viewpager)))))
-//                .perform(click());
-
-//        ViewInteraction interaction = onView(allOf(withId(R.id.cardView), isDescendantOfA(firstChildOf(withId(R.id.viewPager)))));
-//
-//        ViewInteraction viewPager = onView(withId(R.id.viewPager));
-//        onView(withId(R.id.viewPager)).perform(swipeLeft());
-        onView(allOf(withId(R.id.cardView), isDisplayed())).perform(click());
-
-
-//        onView(withId(R.id.recycleView))
-//                .perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
+    public void testSearchFindSomething() throws Exception {
+        onView(withId(R.id.action_search)).perform(click());
+        onView(isAssignableFrom(EditText.class)).perform(typeText("Injustice"), pressImeActionButton());
+        onView(withId(R.id.recycleViewSearch)).check(matches(isDisplayed()));
     }
 
     public void testSearchFindNothing() throws Exception {
@@ -69,12 +63,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         onView(isAssignableFrom(EditText.class)).perform(typeText("No such article"), pressImeActionButton());
         String str = getActivity().getResources().getString(R.string.find_nothing);
         onView(withId(R.id.search_empty)).check(matches(withText(str)));
-    }
-
-    public void testSearchFindSomething() throws Exception {
-        onView(withId(R.id.action_search)).perform(click());
-        onView(isAssignableFrom(EditText.class)).perform(typeText("Injustice"), pressImeActionButton());
-        onView(withId(R.id.recycleViewSearch)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
     }
 
     public void testSearchWithEmptyString() throws Exception {
@@ -91,7 +79,44 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         try {onView(withId(R.id.search_empty)).check(matches(withText(str)));} catch (NoMatchingViewException e) {}
     }
 
-//    public static Matcher<Object> withItemContent(String expectedText) {
+    public void testAllTabDisplayedOnSwipe() throws Exception {
+        for(int i = 0; i < NUMBER_TABS - 1; i++) {
+            onView(withId(R.id.viewPager)).perform(swipeLeft());
+        }
+    }
+
+//    public void testTestSelectArticle() throws Exception {
+////        onView(withId(R.id.viewPager)).perform(swipeLeft());
+//
+////        onView(allOf(withId(R.id.recycleView), isDisplayed())).perform(click());
+////        onData(allOf(withId(R.id.recycleView), isDescendantOfA(withId(R.id.viewPager))));
+////        onData(allOf(is(instanceOf(CardView.class)))).atPosition(1).;
+////        onData(allOf(withId(R.id.recycleView)))
+//        onView(allOf(withId(R.id.cardView), isDescendantOfA(withId(R.id.viewPager))))
+//                .perform(click());
+//    }
+
+//    public static Matcher<View> firstChildOf(final Matcher<View> parentMatcher) {
+//        return new TypeSafeMatcher<View>() {
+//            @Override
+//            public void describeTo(Description description) {
+//                description.appendText("with first child view of type parentMatcher");
+//            }
+//
+//            @Override
+//            public boolean matchesSafely(View view) {
+//
+//                if (!(view.getParent() instanceof ViewGroup)) {
+//                    return parentMatcher.matches(view.getParent());
+//                }
+//                ViewGroup group = (ViewGroup) view.getParent();
+//                return parentMatcher.matches(view.getParent()) && group.getChildAt(0).equals(view);
+//
+//            }
+//        };
+//    }
+
+    //    public static Matcher<Object> withItemContent(String expectedText) {
 //        checkNotNull(expectedText);
 //        return withItemContent(equalTo(expectedText));
 //    }
