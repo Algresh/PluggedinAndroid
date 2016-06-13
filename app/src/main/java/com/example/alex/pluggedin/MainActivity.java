@@ -15,6 +15,8 @@ import static com.example.alex.pluggedin.constants.Constants.*;
 
 import com.example.alex.pluggedin.API.FcmAPI;
 import com.example.alex.pluggedin.adapters.TabsPagerAdapter;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import retrofit.Callback;
@@ -94,8 +96,12 @@ public class MainActivity extends BaseActivity {
         boolean isSend = mSettings.getBoolean(APP_PREFERENCES_TOCEN_IS_SEND, false);
 
         if (!isSend) {
-            String token =  FirebaseInstanceId.getInstance().getToken();
-            Log.d(MY_TAG, "token is: " + token);
+            String token = null;
+
+            if (checkPlayService()) {
+                token =  FirebaseInstanceId.getInstance().getToken();
+                Log.d(MY_TAG, "token is: " + token);
+            }
 
             SharedPreferences.Editor editor = mSettings.edit();
             if( mSettings.getBoolean(APP_PREFERENCES_SENT_NOTIFY_PERMISSION, true) ){
@@ -128,6 +134,20 @@ public class MainActivity extends BaseActivity {
                 editor.apply();
             }
         });
+    }
+
+    private boolean checkPlayService() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int result = apiAvailability.isGooglePlayServicesAvailable(this);
+
+        if (result != ConnectionResult.SUCCESS) {
+            String noGPS = getResources().getString(R.string.googlePlayServicesNotInstall);
+            Log.d(MY_TAG, noGPS);
+            Toast.makeText(this, noGPS, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 
 

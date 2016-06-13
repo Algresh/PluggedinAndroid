@@ -18,6 +18,7 @@
     <string name="share"> Поделится </string>
     <string name="search_hint"> Поиск </string>
     <string name="find_nothing"> По вашему запросу ничего небыло найдено. </string>
+    <string name="googlePlayServicesNotInstall"> Google Play Services не установлены </string>
 
     <string name="copyLink"> Копировать ссылку </string>
     <string name="shareLink"> Поделится </string>
