@@ -2,16 +2,25 @@ package com.example.alex.pluggedin;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 import static com.example.alex.pluggedin.constants.Constants.*;
 
+import com.example.alex.pluggedin.API.FcmAPI;
 import com.example.alex.pluggedin.adapters.TabsPagerAdapter;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class MainActivity extends BaseActivity {
@@ -26,6 +35,7 @@ public class MainActivity extends BaseActivity {
         initToolbar(title, R.id.toolbarReview);
         initNavigationView();
         initTabs();
+        initSettings();
     }
 
     @Override
@@ -76,6 +86,48 @@ public class MainActivity extends BaseActivity {
             tabLayout.setupWithViewPager(viewPager);
         }
 
+    }
+
+    private void initSettings() {
+        SharedPreferences mSettings;
+        mSettings = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        boolean isSend = mSettings.getBoolean(APP_PREFERENCES_TOCEN_IS_SEND, false);
+
+        if (!isSend) {
+            String token =  FirebaseInstanceId.getInstance().getToken();
+            Log.d(MY_TAG, "token is: " + token);
+
+            SharedPreferences.Editor editor = mSettings.edit();
+            if( mSettings.getBoolean(APP_PREFERENCES_SENT_NOTIFY_PERMISSION, true) ){
+                editor.putBoolean(APP_PREFERENCES_SENT_NOTIFY_PERMISSION, true);
+            }
+            if (token != null) {
+                editor.putString(APP_PREFERENCES_FCM_TOKEN, token);
+                sendRegistrationToServer(token, editor);
+            } else {
+                editor.apply();
+            }
+        }
+    }
+
+    private void sendRegistrationToServer(String token, final SharedPreferences.Editor editor) {
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
+        FcmAPI api = restAdapter.create(FcmAPI.class);
+        api.registrId(token, new Callback<Response>() {
+            @Override
+            public void success(Response response, Response response2) {
+                Log.d(MY_TAG, "new token was send!!!: ");
+                editor.putBoolean(APP_PREFERENCES_TOCEN_IS_SEND, true);
+                editor.apply();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d(MY_TAG, "fail token");
+                editor.putBoolean(APP_PREFERENCES_TOCEN_IS_SEND, false);
+                editor.apply();
+            }
+        });
     }
 
 
