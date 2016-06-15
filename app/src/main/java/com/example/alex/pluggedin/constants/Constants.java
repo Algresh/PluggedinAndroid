@@ -55,6 +55,11 @@ public  class Constants {
     public static final String APP_PREFERENCES_TOCEN_IS_SEND = "tokenIsSend";
     public static final String APP_PREFERENCES_SENT_NOTIFY_PERMISSION = "sentNotifyPermission";
     public static final String APP_PREFERENCES_SOUND_NOTIFY_PERMISSION = "soundNotifyPermission";
+    public static final String APP_PREFERENCES_FONT_SIZE = "fontSize";
+
+    public static final float FONT_SIZE_SMALL = 0.85F;
+    public static final float FONT_SIZE_NORMAL = 1F;
+    public static final float FONT_SIZE_LARGE = 1.3F;
 
 
 }

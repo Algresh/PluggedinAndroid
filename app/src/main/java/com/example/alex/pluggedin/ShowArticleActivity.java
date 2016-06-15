@@ -3,6 +3,7 @@ package com.example.alex.pluggedin;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -56,11 +57,16 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
     protected Button tryAgainBtn;
     protected Toolbar toolbar;
 
+    protected float fontSize = FONT_SIZE_NORMAL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_article);
         idArticle = getIntent().getIntExtra(ID, -1);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        fontSize = sharedPreferences.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
         articleAPI = adapter.create(ArticleAPI.class);
@@ -173,7 +179,7 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
     }
 
     protected void initFields() {
-        textWV.loadUrl(URL_TEXT_ARTICLE + idArticle);
+        textWV.loadUrl(URL_TEXT_ARTICLE + idArticle + "/" + fontSize);
         titleTv.setText(article.getTitle());
         authorTv.setText(article.getAuthor());
         dateTv.setText(article.getDatePublish());
