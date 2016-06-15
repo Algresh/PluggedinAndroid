@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.util.Log;
 
 import com.example.alex.pluggedin.MainActivity;
@@ -26,15 +28,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(MY_TAG, "DATA: " + remoteMessage.getData().toString());
 
         SharedPreferences sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
-        boolean permission = sharedPreferences
+        boolean permissionSend = sharedPreferences
                 .getBoolean(APP_PREFERENCES_SENT_NOTIFY_PERMISSION, true);
 
-        if (permission) {
-            sendNotification(remoteMessage.getData());
+        if (permissionSend) {
+            boolean permissionSound = sharedPreferences
+                    .getBoolean(APP_PREFERENCES_SOUND_NOTIFY_PERMISSION, false);
+
+            sendNotification(remoteMessage.getData(), permissionSound);
         }
     }
 
-    private void sendNotification(Map data) {
+    private void sendNotification(Map data, boolean permissionSound) {
         String message = (String) data.get("message");
         Integer type = Integer.parseInt((String) data.get("type"));
         Integer id = Integer.parseInt((String) data.get("id"));
@@ -64,6 +69,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentTitle(arrStrings[type])
                 .setContentText(message)
                 .setContentIntent(pendingIntent);
+
+        if (permissionSound) {
+            Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            notificationBuilder.setSound(defaultSoundUri);
+        }
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

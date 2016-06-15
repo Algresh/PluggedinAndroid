@@ -54,6 +54,7 @@ public  class Constants {
     public static final String APP_PREFERENCES_FCM_TOKEN = "FCMToken";
     public static final String APP_PREFERENCES_TOCEN_IS_SEND = "tokenIsSend";
     public static final String APP_PREFERENCES_SENT_NOTIFY_PERMISSION = "sentNotifyPermission";
+    public static final String APP_PREFERENCES_SOUND_NOTIFY_PERMISSION = "soundNotifyPermission";
 
 
 }

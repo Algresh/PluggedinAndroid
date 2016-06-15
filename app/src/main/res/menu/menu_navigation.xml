@@ -3,8 +3,15 @@
     <item
         android:title="@string/categories"
         android:orderInCategory="1"
-        android:id="@+id/listOfArticles"
+        android:id="@+id/listOfArticlesItem"
         android:icon="@drawable/newspaper"
+        />
+
+    <item
+        android:title="@string/settings"
+        android:orderInCategory="2"
+        android:id="@+id/settingsItem"
+        android:icon="@drawable/settings"
         />
 
 

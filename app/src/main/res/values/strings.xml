@@ -8,6 +8,13 @@
     <string name="review"> Обзоры </string>
     <string name="article"> Статьи </string>
     <string name="categories"> Категории </string>
+    <string name="settings"> Настройки </string>
+    <string name="offOnNotification"> Получать уведомления </string>
+    <string name="offNotification"> Уведомления отключены </string>
+    <string name="onNotification"> Уведомления включены </string>
+    <string name="offOnSound"> Звук уведомления </string>
+    <string name="offSound"> Звук отключен </string>
+    <string name="onSound"> Звук включен </string>
     <string name="tryAgain"> Попробовать еще раз </string>
     <string name="downloadingReviews"> Загрузка обзоров. </string>
     <string name="downloadingNews"> Загрузка новостей. </string>

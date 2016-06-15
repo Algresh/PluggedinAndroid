@@ -104,9 +104,15 @@ public class MainActivity extends BaseActivity {
             }
 
             SharedPreferences.Editor editor = mSettings.edit();
+            //разрешение на уведомления
             if( mSettings.getBoolean(APP_PREFERENCES_SENT_NOTIFY_PERMISSION, true) ){
                 editor.putBoolean(APP_PREFERENCES_SENT_NOTIFY_PERMISSION, true);
             }
+            //разрешение на звук уведомления
+            if( mSettings.getBoolean(APP_PREFERENCES_SOUND_NOTIFY_PERMISSION, false) ){
+                editor.putBoolean(APP_PREFERENCES_SOUND_NOTIFY_PERMISSION, false);
+            }
+
             if (token != null) {
                 editor.putString(APP_PREFERENCES_FCM_TOKEN, token);
                 sendRegistrationToServer(token, editor);

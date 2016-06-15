@@ -25,9 +25,16 @@ public class BaseActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 drawerLayout.closeDrawers();
+                Intent intent;
 
                 switch (item.getItemId()){
-                    case R.id.listOfArticles:
+                    case R.id.listOfArticlesItem:
+                        intent = new Intent(BaseActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.settingsItem:
+                        intent = new Intent(BaseActivity.this, SettingActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.socialNetworksVk:
                         openSocialNetworks(URL_VK_GROUP);

@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -27,34 +28,38 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ShowImageActivity"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.AllBlack">
 
         </activity>
-        <activity android:name=".SearchResultsActivity"
+        <activity
+            android:name=".SearchResultsActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
         <service android:name=".services.SaveArticle" />
 
-
         <!-- [START firebase_service] -->
-        <service
-            android:name=".services.MyFirebaseMessagingService">
+        <service android:name=".services.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <!-- [END firebase_service] -->
         <!-- [START firebase_iid_service] -->
-        <service
-            android:name=".services.MyFirebaseInstanceIDService">
+        <service android:name=".services.MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <!-- [END firebase_iid_service] -->
 
+        <activity android:name=".SettingActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
