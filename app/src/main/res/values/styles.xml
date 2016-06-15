@@ -80,4 +80,8 @@
         <item name="android:padding">16dp</item>
     </style>
 
+    <style name="settingLabels">
+        <item name="android:textSize"> 18sp </item>
+    </style>
+
 </resources>

@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            style="@style/settingLabels"
             android:text="@string/offOnNotification"/>
 
         <android.support.v7.widget.SwitchCompat
@@ -36,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            style="@style/settingLabels"
             android:text="@string/offOnSound"/>
 
         <android.support.v7.widget.SwitchCompat
@@ -46,6 +48,20 @@
             android:text=""
             android:checked="false"
             app:showText="false" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/paddingLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:id="@+id/fontSize"
+            style="@style/settingLabels"
+            android:text="@string/fontSize"/>
     </FrameLayout>
 
 

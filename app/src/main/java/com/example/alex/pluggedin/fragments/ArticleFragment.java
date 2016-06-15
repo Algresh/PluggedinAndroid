@@ -1,7 +1,9 @@
 package com.example.alex.pluggedin.fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -66,6 +68,15 @@ public class ArticleFragment extends BasePageFragment {
             }
         }
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        SharedPreferences pref = getActivity()
+//                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+//        ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
+//        adapter.setFontSize(pref.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL));
+//    }
 
     @Override
     public void onRefresh() {

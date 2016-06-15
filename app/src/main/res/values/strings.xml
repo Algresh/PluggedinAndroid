@@ -15,6 +15,8 @@
     <string name="offOnSound"> Звук уведомления </string>
     <string name="offSound"> Звук отключен </string>
     <string name="onSound"> Звук включен </string>
+    <string name="fontSize"> Размер шрифта контента </string>
+    <string name="choiceFontSize"> Выберите размер шрифта </string>
     <string name="tryAgain"> Попробовать еще раз </string>
     <string name="downloadingReviews"> Загрузка обзоров. </string>
     <string name="downloadingNews"> Загрузка новостей. </string>
@@ -26,6 +28,9 @@
     <string name="search_hint"> Поиск </string>
     <string name="find_nothing"> По вашему запросу ничего небыло найдено. </string>
     <string name="googlePlayServicesNotInstall"> Google Play Services не установлены </string>
+    <string name="cancel"> Отмена </string>
+
+    <string name="fontSizeSetUp"> Новый размер шрифта контента установлен </string>
 
     <string name="copyLink"> Копировать ссылку </string>
     <string name="shareLink"> Поделится </string>
@@ -52,5 +57,12 @@
         <item> Новость </item>
         <item> Статья </item>
     </string-array>
+
+    <string-array name="typesFontSize">
+        <item> Маленький </item>
+        <item> Средний </item>
+        <item> Большой </item>
+    </string-array>
+
     <string name="title_activity_show_article">ShowArticleActivity</string>
 </resources>

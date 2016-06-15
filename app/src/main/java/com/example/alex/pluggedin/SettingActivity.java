@@ -1,13 +1,20 @@
 package com.example.alex.pluggedin;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SwitchCompat;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.alex.pluggedin.fragments.ChoiceFontDialogFragment;
+
 import static com.example.alex.pluggedin.constants.Constants.*;
-public class SettingActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
+public class SettingActivity extends BaseActivity
+        implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     SwitchCompat switchNotifyPermission;
     SharedPreferences sharedPreferences;
@@ -26,10 +33,15 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
 
 
         switchNotifyPermission = (SwitchCompat) findViewById(R.id.switchNotifyPermission);
-        switchNotifyPermission.setOnCheckedChangeListener(this);
-
+        if (switchNotifyPermission != null) {
+            switchNotifyPermission.setOnCheckedChangeListener(this);
+        }
         switchSoundPermission = (SwitchCompat) findViewById(R.id.switchSoundPermission);
-        switchSoundPermission.setOnCheckedChangeListener(this);
+        if (switchSoundPermission != null) {
+            switchSoundPermission.setOnCheckedChangeListener(this);
+        }
+
+        findViewById(R.id.fontSize).setOnClickListener(this);
 
     }
 
@@ -42,6 +54,15 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
             case R.id.switchSoundPermission:
                 setPermissionSound(isChecked);
                 break;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.fontSize) {
+            FragmentManager manager = getSupportFragmentManager();
+            ChoiceFontDialogFragment dialog = new ChoiceFontDialogFragment();
+            dialog.show(manager, "dialog");
         }
     }
 

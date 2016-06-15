@@ -26,11 +26,16 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     private List<Article> articles;
     private Context context;
     private View.OnClickListener clickListener;
+    private float fontSize = FONT_SIZE_NORMAL;
 
     public ArticleAdapter(List<Article> articles, Context context, View.OnClickListener clickListener) {
         this.articles = articles;
         this.context = context;
         this.clickListener = clickListener;
+    }
+
+    public void setFontSize(float fontSize) {
+        this.fontSize = fontSize;
     }
 
     @Override
@@ -54,6 +59,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             holder.cardView.setTag(item.getId());
         }
 
+        changeFontSize(holder);
 
         Picasso.with(context).load(URL_IMAGES + item.getFile()).resize(320,240)
                 .into(holder.imageArticle);
@@ -88,6 +94,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         notifyItemInserted(0);
     }
 
+    private void changeFontSize(ArticleViewHolder holder) {
+        holder.datePublish.setTextSize(holder.datePublish.getTextSize() * fontSize);
+        holder.textArticle.setTextSize(holder.textArticle.getTextSize() * fontSize);
+        holder.titleArticle.setTextSize(holder.titleArticle.getTextSize() * fontSize);
+        holder.author.setTextSize(holder.author.getTextSize() * fontSize);
+    }
 
     public static class ArticleViewHolder extends RecyclerView.ViewHolder {
 
