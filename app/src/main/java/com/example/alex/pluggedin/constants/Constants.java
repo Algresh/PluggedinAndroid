@@ -30,6 +30,7 @@ public  class Constants {
     public static final int TYPE_INTERESTING = 1;
     public static final int TYPE_ARTICLE = 4;
     public static final int TYPE_MEDIA = 2;
+    public static final int TYPE_REVIEW = 0;
 
     public static final String ID = "id";
     public static final String ID_ARTICLE = "idArticle";

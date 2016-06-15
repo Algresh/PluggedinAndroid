@@ -37,5 +37,13 @@
         <item> Статьи </item>
         <item> Медиа </item>
     </string-array>
+
+    <string-array name="type_titles">
+        <item> Обзор </item>
+        <item> Интересное </item>
+        <item> Медиа </item>
+        <item> Новость </item>
+        <item> Статья </item>
+    </string-array>
     <string name="title_activity_show_article">ShowArticleActivity</string>
 </resources>
