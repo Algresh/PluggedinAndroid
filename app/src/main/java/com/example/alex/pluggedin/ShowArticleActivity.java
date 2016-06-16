@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
@@ -185,7 +186,9 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
         dateTv.setText(article.getDatePublish());
         toolbar.setTitle(article.getTitle());
 
+
         LayoutInflater layoutInflater = getLayoutInflater();
+        List<TextView> list = new ArrayList<>(article.getKeywords().size());
 
         for(Keyword word: article.getKeywords()) {
             View view = layoutInflater.inflate(R.layout.keyword, layoutKeywords, false);
@@ -193,7 +196,9 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
             TextView keyWord = (TextView) view.findViewById(R.id.keywordTV);
             keyWord.setText(word.getTitle());
             layoutKeywords.addView(view);
+            list.add(keyWord);
         }
+        changeFontSize(list);
     }
 
     protected void initViewsForArticle() {
@@ -321,13 +326,27 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
     }
 
     protected void showOrHideElements(int visibility) {
-         titleTv.setVisibility(visibility);
-         authorTv.setVisibility(visibility);
-         dateTv.setVisibility(visibility);
-         textWV.setVisibility(visibility);
-         layoutKeywords.setVisibility(visibility);
-         int oppositeVisibility = visibility == View.GONE ? View.VISIBLE : View.GONE;
-         tryAgainBtn.setVisibility(oppositeVisibility);
+        titleTv.setVisibility(visibility);
+        authorTv.setVisibility(visibility);
+        dateTv.setVisibility(visibility);
+        textWV.setVisibility(visibility);
+        layoutKeywords.setVisibility(visibility);
+        int oppositeVisibility = visibility == View.GONE ? View.VISIBLE : View.GONE;
+        tryAgainBtn.setVisibility(oppositeVisibility);
+    }
+
+    protected void changeFontSize(List<TextView> keywords) {
+        try {
+            if(fontSize != FONT_SIZE_NORMAL) {
+                titleTv.setTextSize((titleTv.getTextSize() * fontSize) / 2);
+                authorTv.setTextSize((authorTv.getTextSize() * fontSize) / 2);
+                dateTv.setTextSize((dateTv.getTextSize() * fontSize) / 2);
+
+                for(TextView tv: keywords) {
+                    tv.setTextSize((tv.getTextSize() * fontSize) / 2 );
+                }
+            }
+        } catch (Exception e) {}
     }
 
     private class MyJavaInterface {

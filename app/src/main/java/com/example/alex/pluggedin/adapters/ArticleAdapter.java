@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.alex.pluggedin.R;
+import com.example.alex.pluggedin.adapters.fontsizes.ChangeableFontSize;
 import com.example.alex.pluggedin.models.Article;
 import com.squareup.picasso.Picasso;
 
@@ -21,12 +22,13 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder> {
+public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>
+        implements ChangeableFontSize {
 
     private List<Article> articles;
     private Context context;
     private View.OnClickListener clickListener;
-    private float fontSize = FONT_SIZE_NORMAL;
+    private ChangeableFontSize changeableFontSize;
 
     public ArticleAdapter(List<Article> articles, Context context, View.OnClickListener clickListener) {
         this.articles = articles;
@@ -34,8 +36,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         this.clickListener = clickListener;
     }
 
-    public void setFontSize(float fontSize) {
-        this.fontSize = fontSize;
+    public void setFontSizeParameter(ChangeableFontSize changeableFontSize) {
+        this.changeableFontSize = changeableFontSize;
+    }
+
+    @Override
+    public void changeFontSize(ArticleViewHolder holder) {
+        changeableFontSize.changeFontSize(holder);
     }
 
     @Override
@@ -94,12 +101,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         notifyItemInserted(0);
     }
 
-    private void changeFontSize(ArticleViewHolder holder) {
-        holder.datePublish.setTextSize(holder.datePublish.getTextSize() * fontSize);
-        holder.textArticle.setTextSize(holder.textArticle.getTextSize() * fontSize);
-        holder.titleArticle.setTextSize(holder.titleArticle.getTextSize() * fontSize);
-        holder.author.setTextSize(holder.author.getTextSize() * fontSize);
-    }
 
     public static class ArticleViewHolder extends RecyclerView.ViewHolder {
 
@@ -119,6 +120,22 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             author = (TextView) itemView.findViewById(R.id.author);
             imageArticle = (ImageView) itemView.findViewById(R.id.imageArticle);
             cardView = (CardView) itemView.findViewById(R.id.cardView);
+        }
+
+        public TextView getDatePublish() {
+            return datePublish;
+        }
+
+        public TextView getTextArticle() {
+            return textArticle;
+        }
+
+        public TextView getTitleArticle() {
+            return titleArticle;
+        }
+
+        public TextView getAuthor() {
+            return author;
         }
     }
 

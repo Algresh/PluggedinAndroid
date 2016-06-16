@@ -1,5 +1,7 @@
 package com.example.alex.pluggedin.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.alex.pluggedin.R;
+import com.example.alex.pluggedin.adapters.fontsizes.ChangeableFontSize;
+import com.example.alex.pluggedin.adapters.fontsizes.FontSizesParameter;
 import com.example.alex.pluggedin.models.Article;
 import com.example.alex.pluggedin.adapters.ArticleAdapter;
 
@@ -66,6 +70,15 @@ public abstract class BasePageFragment extends Fragment
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.setFontSizeParameter(getFontSizeParameter());
+        }
+    }
+
     protected void addNewItemsByScroll() {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -106,7 +119,9 @@ public abstract class BasePageFragment extends Fragment
 
             linearManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(linearManager);
-            recyclerView.setAdapter(new ArticleAdapter(reviews, getContext(), this));
+            ArticleAdapter adapter = new ArticleAdapter(reviews, getContext(), this);
+            adapter.setFontSizeParameter(getFontSizeParameter());
+            recyclerView.setAdapter(adapter);
         } else {
             ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
             if (page == UPDATE_PAGE) {
@@ -134,6 +149,16 @@ public abstract class BasePageFragment extends Fragment
             toast = Toast.makeText(getContext(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT);
             toast.show();
         }
+    }
+
+
+
+    protected ChangeableFontSize getFontSizeParameter() {
+        SharedPreferences pref =
+                getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+        float fontSize = pref.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
+        return new FontSizesParameter(fontSize);
     }
 
     protected abstract void initAPI();

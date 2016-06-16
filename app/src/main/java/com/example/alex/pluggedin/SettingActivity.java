@@ -1,13 +1,11 @@
 package com.example.alex.pluggedin;
 
-import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alex.pluggedin.fragments.ChoiceFontDialogFragment;
@@ -30,14 +28,20 @@ public class SettingActivity extends BaseActivity
         initNavigationView();
 
         sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
+        boolean permissionNotify =
+                sharedPreferences.getBoolean(APP_PREFERENCES_SENT_NOTIFY_PERMISSION, true);
 
+        boolean permissionSound =
+                sharedPreferences.getBoolean(APP_PREFERENCES_SOUND_NOTIFY_PERMISSION, false);
 
         switchNotifyPermission = (SwitchCompat) findViewById(R.id.switchNotifyPermission);
         if (switchNotifyPermission != null) {
+            switchNotifyPermission.setChecked(permissionNotify);
             switchNotifyPermission.setOnCheckedChangeListener(this);
         }
         switchSoundPermission = (SwitchCompat) findViewById(R.id.switchSoundPermission);
         if (switchSoundPermission != null) {
+            switchSoundPermission.setChecked(permissionSound);
             switchSoundPermission.setOnCheckedChangeListener(this);
         }
 
