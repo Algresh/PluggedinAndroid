@@ -119,6 +119,11 @@ public class MainActivity extends BaseActivity {
                 editor.putBoolean(APP_PREFERENCES_SOUND_NOTIFY_PERMISSION, false);
             }
 
+            //разрешение chrome tabs
+            if( mSettings.getBoolean(APP_PREFERENCES_CHROME_TABS, false) ){
+                editor.putBoolean(APP_PREFERENCES_CHROME_TABS, false);
+            }
+
             //размер шрифта
             if( mSettings.getFloat(APP_PREFERENCES_FONT_SIZE,  FONT_SIZE_NORMAL) == FONT_SIZE_NORMAL ){
                 editor.putFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);

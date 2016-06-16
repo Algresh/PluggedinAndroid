@@ -17,6 +17,7 @@ public class SettingActivity extends BaseActivity
     SwitchCompat switchNotifyPermission;
     SharedPreferences sharedPreferences;
     SwitchCompat switchSoundPermission;
+    SwitchCompat switchChromeTabsPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,9 @@ public class SettingActivity extends BaseActivity
         boolean permissionSound =
                 sharedPreferences.getBoolean(APP_PREFERENCES_SOUND_NOTIFY_PERMISSION, false);
 
+        boolean permissionChromeCustomTabs =
+                sharedPreferences.getBoolean(APP_PREFERENCES_CHROME_TABS, false);
+
         switchNotifyPermission = (SwitchCompat) findViewById(R.id.switchNotifyPermission);
         if (switchNotifyPermission != null) {
             switchNotifyPermission.setChecked(permissionNotify);
@@ -43,6 +47,11 @@ public class SettingActivity extends BaseActivity
         if (switchSoundPermission != null) {
             switchSoundPermission.setChecked(permissionSound);
             switchSoundPermission.setOnCheckedChangeListener(this);
+        }
+        switchChromeTabsPermission = (SwitchCompat) findViewById(R.id.switchChromeTabs);
+        if (switchChromeTabsPermission != null) {
+            switchChromeTabsPermission.setChecked(permissionChromeCustomTabs);
+            switchChromeTabsPermission.setOnCheckedChangeListener(this);
         }
 
         findViewById(R.id.fontSize).setOnClickListener(this);
@@ -57,6 +66,9 @@ public class SettingActivity extends BaseActivity
                 break;
             case R.id.switchSoundPermission:
                 setPermissionSound(isChecked);
+                break;
+            case R.id.switchChromeTabs:
+                setPermissionChromeTabs(isChecked);
                 break;
         }
     }
@@ -92,6 +104,19 @@ public class SettingActivity extends BaseActivity
             str = getResources().getString(R.string.onSound);
         } else {
             str = getResources().getString(R.string.offSound);
+        }
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setPermissionChromeTabs(boolean permission) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(APP_PREFERENCES_CHROME_TABS, permission);
+        editor.apply();
+        String str;
+        if (permission) {
+            str = getResources().getString(R.string.chromeTabsOn);
+        } else {
+            str = getResources().getString(R.string.chromeTabsOff);
         }
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }

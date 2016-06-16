@@ -56,6 +56,7 @@ public  class Constants {
     public static final String APP_PREFERENCES_SENT_NOTIFY_PERMISSION = "sentNotifyPermission";
     public static final String APP_PREFERENCES_SOUND_NOTIFY_PERMISSION = "soundNotifyPermission";
     public static final String APP_PREFERENCES_FONT_SIZE = "fontSize";
+    public static final String APP_PREFERENCES_CHROME_TABS = "chromeTabs";
 
     public static final float FONT_SIZE_SMALL = 0.85F;
     public static final float FONT_SIZE_NORMAL = 1F;
@@ -64,18 +65,17 @@ public  class Constants {
 
     public static final float LARGE_DATE = 18;
     public static final float LARGE_TITLE = 24;
-    public static final float LARGE_AUTHOR = 13;
+    public static final float LARGE_AUTHOR = 18;
     public static final float LARGE_TEXT = 18;
-    public static final float LARGE_KEYWORD = 18;
 
     public static final float NORMAL_DATE = 14;
     public static final float NORMAL_TITLE = 18;
-    public static final float NORMAL_AUTHOR = 10;
+    public static final float NORMAL_AUTHOR = 14;
     public static final float NORMAL_TEXT = 14;
 
     public static final float SMALL_DATE = 12;
     public static final float SMALL_TITLE = 16;
-    public static final float SMALL_AUTHOR = 9;
+    public static final float SMALL_AUTHOR = 12;
     public static final float SMALL_TEXT = 12;
 
 }

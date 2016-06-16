@@ -52,6 +52,35 @@
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:layout_height="120dp"
+        style="@style/paddingLayout">
+
+        <TextView
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            style="@style/settingLabels"
+            android:text="@string/chromeTabs"/>
+
+        <TextView
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            style="@style/settingLabelsChromeTabs"
+            android:text="@string/workWithChrome"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:layout_gravity="top|right"
+            android:id="@+id/switchChromeTabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:checked="false"
+            app:showText="false" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/paddingLayout">
 

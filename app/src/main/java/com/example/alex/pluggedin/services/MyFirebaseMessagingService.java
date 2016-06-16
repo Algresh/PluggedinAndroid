@@ -21,6 +21,8 @@ import static com.example.alex.pluggedin.constants.Constants.*;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+    protected static int NOTIFY_ID = 0;
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
@@ -78,6 +80,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0, notificationBuilder.build());
+        NOTIFY_ID = NOTIFY_ID < 3 ? NOTIFY_ID + 1 : 0;
+        notificationManager.notify(NOTIFY_ID, notificationBuilder.build());
     }
 }

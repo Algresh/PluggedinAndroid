@@ -16,6 +16,10 @@
     <string name="offSound"> Звук отключен </string>
     <string name="onSound"> Звук включен </string>
     <string name="fontSize"> Размер шрифта контента </string>
+    <string name="chromeTabs"> Открывать ссылки в Chrome Custom Tabs </string>
+    <string name="workWithChrome"> (Работает только если установлен Chrome Browser) </string>
+    <string name="chromeTabsOn">  Chrome Custom Tabs включен </string>
+    <string name="chromeTabsOff"> Chrome Custom Tabs отключен </string>
     <string name="choiceFontSize"> Выберите размер шрифта </string>
     <string name="tryAgain"> Попробовать еще раз </string>
     <string name="downloadingReviews"> Загрузка обзоров. </string>

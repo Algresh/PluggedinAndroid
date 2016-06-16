@@ -1,5 +1,6 @@
 package com.example.alex.pluggedin;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alex.pluggedin.API.ArticleAPI;
+import com.example.alex.pluggedin.chrome.CustomTabActivityHelper;
 import com.example.alex.pluggedin.models.Article;
 import com.example.alex.pluggedin.models.Keyword;
 
@@ -59,6 +62,7 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
     protected Toolbar toolbar;
 
     protected float fontSize = FONT_SIZE_NORMAL;
+    protected boolean chromeTabsFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,8 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
 
         SharedPreferences sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         fontSize = sharedPreferences.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
+        chromeTabsFlag = sharedPreferences.getBoolean(APP_PREFERENCES_CHROME_TABS, false);
+        Log.d(MY_TAG, "aa" + chromeTabsFlag);
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
         articleAPI = adapter.create(ArticleAPI.class);
@@ -222,8 +228,20 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
                     showArticleByURL(url);
                 } else  {
                     Uri address = Uri.parse(url);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, address);
-                    startActivity(intent);
+
+                    if (!chromeTabsFlag) { //открыть ссылку в браузере
+                        openLinkInBrowser(address);
+                    } else {//открыть ссылку в Chrome Custom Tabs
+                        CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder().build();
+                        CustomTabActivityHelper.openCustomTab(ShowArticleActivity.this, customTabsIntent, address,
+                                new CustomTabActivityHelper.CustomTabFallback() {
+                                    @Override
+                                    public void openUri(Activity activity, Uri uri) {
+                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                        startActivity(intent);
+                                    }
+                                });
+                    }
                 }
                 return true;
             }
@@ -235,6 +253,11 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
+    }
+
+    private void openLinkInBrowser(Uri address) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, address);
+        startActivity(intent);
     }
 
 
