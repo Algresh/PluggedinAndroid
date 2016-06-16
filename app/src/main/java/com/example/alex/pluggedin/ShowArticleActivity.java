@@ -361,12 +361,12 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
     protected void changeFontSize(List<TextView> keywords) {
         try {
             if(fontSize != FONT_SIZE_NORMAL) {
-                titleTv.setTextSize((titleTv.getTextSize() * fontSize) / 2);
-                authorTv.setTextSize((authorTv.getTextSize() * fontSize) / 2);
-                dateTv.setTextSize((dateTv.getTextSize() * fontSize) / 2);
+                titleTv.setTextSize(titleTv.getTextSize() * fontSize) ;
+                authorTv.setTextSize(authorTv.getTextSize() * fontSize);
+                dateTv.setTextSize(dateTv.getTextSize() * fontSize);
 
                 for(TextView tv: keywords) {
-                    tv.setTextSize((tv.getTextSize() * fontSize) / 2 );
+                    tv.setTextSize(tv.getTextSize() * fontSize);
                 }
             }
         } catch (Exception e) {}
