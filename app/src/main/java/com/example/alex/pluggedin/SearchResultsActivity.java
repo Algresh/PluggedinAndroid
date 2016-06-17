@@ -1,6 +1,8 @@
 package com.example.alex.pluggedin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 
 import com.example.alex.pluggedin.API.ArticleAPI;
 import com.example.alex.pluggedin.adapters.ArticleAdapter;
+import com.example.alex.pluggedin.adapters.fontsizes.ChangeableFontSize;
+import com.example.alex.pluggedin.adapters.fontsizes.FontSizesParameter;
 import com.example.alex.pluggedin.models.Article;
 
 import java.util.List;
@@ -107,7 +111,9 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         recyclerView = (RecyclerView) findViewById(R.id.recycleViewSearch);
         if (recyclerView != null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(new ArticleAdapter(articles, this, this));
+            ArticleAdapter adapter = new ArticleAdapter(articles, this, this);
+            adapter.setFontSizeParameter(getFontSizeParameter());
+            recyclerView.setAdapter(adapter);
         }
     }
 
@@ -118,5 +124,12 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         if (searchEmpty != null) {
             searchEmpty.setVisibility(View.VISIBLE);
         }
+    }
+
+    protected ChangeableFontSize getFontSizeParameter() {
+        SharedPreferences pref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+        float fontSize = pref.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
+        return new FontSizesParameter(fontSize);
     }
 }
