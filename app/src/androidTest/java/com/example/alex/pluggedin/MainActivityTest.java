@@ -1,22 +1,10 @@
 package com.example.alex.pluggedin;
 
 import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.espresso.ViewInteraction;
-import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.support.test.espresso.matcher.BoundedMatcher;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerViewAccessibilityDelegate;
+
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
-import org.junit.Test;
-
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
@@ -25,18 +13,12 @@ import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFro
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 //import static org.hamcrest.core.AllOf.allOf;
 //import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.instanceOf;
-import static com.android.support.test.deps.guava.base.Preconditions.checkNotNull;
-import static org.hamcrest.Matchers.equalTo;
 
 
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
