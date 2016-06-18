@@ -73,7 +73,6 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
         SharedPreferences sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         fontSize = sharedPreferences.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
         chromeTabsFlag = sharedPreferences.getBoolean(APP_PREFERENCES_CHROME_TABS, false);
-        Log.d(MY_TAG, "aa" + chromeTabsFlag);
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
         articleAPI = adapter.create(ArticleAPI.class);

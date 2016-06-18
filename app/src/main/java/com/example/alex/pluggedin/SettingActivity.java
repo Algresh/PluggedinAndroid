@@ -1,6 +1,8 @@
 package com.example.alex.pluggedin;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SwitchCompat;
@@ -55,6 +57,7 @@ public class SettingActivity extends BaseActivity
         }
 
         findViewById(R.id.fontSize).setOnClickListener(this);
+        findViewById(R.id.emailDevelopers).setOnClickListener(this);
 
     }
 
@@ -79,6 +82,11 @@ public class SettingActivity extends BaseActivity
             FragmentManager manager = getSupportFragmentManager();
             ChoiceFontDialogFragment dialog = new ChoiceFontDialogFragment();
             dialog.show(manager, "dialog");
+        } else {
+            if (v.getId() == R.id.emailDevelopers) {
+                String email = getResources().getString(R.string.emailDevelopers);
+                sendEmailToDevelopers(email);
+            }
         }
     }
 
@@ -119,5 +127,20 @@ public class SettingActivity extends BaseActivity
             str = getResources().getString(R.string.chromeTabsOff);
         }
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+    }
+
+    private void sendEmailToDevelopers(String email) {
+        Intent sendEmail = new Intent(Intent.ACTION_SEND);
+        sendEmail.setType("message/rfc822");
+        sendEmail.putExtra(Intent.EXTRA_EMAIL, email);
+        sendEmail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            startActivity(sendEmail);
+        }catch (android.content.ActivityNotFoundException e) {
+            String noApp =  getResources().getString(R.string.noEmailApps);
+            Toast.makeText(this, noApp, Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }

@@ -16,6 +16,8 @@
     <string name="offSound"> Звук отключен </string>
     <string name="onSound"> Звук включен </string>
     <string name="fontSize"> Размер шрифта контента </string>
+    <string name="linkToDevelopers"> Связаться с разработчиками </string>
+    <string name="emailDevelopers">to.pluggedin@gmail.com</string>
     <string name="chromeTabs"> Открывать ссылки в Chrome Custom Tabs </string>
     <string name="workWithChrome"> (Работает только если установлен Chrome Browser) </string>
     <string name="chromeTabsOn">  Chrome Custom Tabs включен </string>
@@ -33,6 +35,7 @@
     <string name="find_nothing"> По вашему запросу ничего небыло найдено. </string>
     <string name="googlePlayServicesNotInstall"> Google Play Services не установлены </string>
     <string name="cancel"> Отмена </string>
+    <string name="noEmailApps"> Нет приложений для отправки Email </string>
 
     <string name="fontSizeSetUp"> Новый размер шрифта контента установлен </string>
 
