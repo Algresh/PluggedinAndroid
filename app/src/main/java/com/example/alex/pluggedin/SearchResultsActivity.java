@@ -3,12 +3,14 @@ package com.example.alex.pluggedin;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -113,6 +115,7 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             ArticleAdapter adapter = new ArticleAdapter(articles, this, this);
             adapter.setFontSizeParameter(getFontSizeParameter());
+            adapter.setWidthScreen(getWidthScreen());
             recyclerView.setAdapter(adapter);
         }
     }
@@ -131,5 +134,13 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
 
         float fontSize = pref.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
         return new FontSizesParameter(fontSize);
+    }
+
+    private int getWidthScreen() {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        return size.x;
     }
 }

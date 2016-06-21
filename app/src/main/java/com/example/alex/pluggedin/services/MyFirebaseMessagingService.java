@@ -80,8 +80,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        NOTIFY_ID = NOTIFY_ID < 2 ? NOTIFY_ID + 1 : 0;
-        Log.d(MY_TAG, NOTIFY_ID + "");
+        NOTIFY_ID = NOTIFY_ID < 1 ? NOTIFY_ID + 1 : 0;
         notificationManager.notify(NOTIFY_ID, notificationBuilder.build());
     }
 }

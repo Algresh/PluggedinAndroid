@@ -2,6 +2,7 @@ package com.example.alex.pluggedin.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,6 +123,7 @@ public abstract class BasePageFragment extends Fragment
             recyclerView.setLayoutManager(linearManager);
             ArticleAdapter adapter = new ArticleAdapter(reviews, getContext(), this);
             adapter.setFontSizeParameter(getFontSizeParameter());
+            adapter.setWidthScreen(getWidthScreen());
             recyclerView.setAdapter(adapter);
         } else {
             ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
@@ -162,5 +165,13 @@ public abstract class BasePageFragment extends Fragment
     }
 
     protected abstract void initAPI();
+
+    private int getWidthScreen() {
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        return size.x;
+    }
 
 }

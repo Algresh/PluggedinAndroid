@@ -29,6 +29,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     private Context context;
     private View.OnClickListener clickListener;
     private ChangeableFontSize changeableFontSize;
+    private int widthScreen;
 
     public ArticleAdapter(List<Article> articles, Context context, View.OnClickListener clickListener) {
         this.articles = articles;
@@ -38,6 +39,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     public void setFontSizeParameter(ChangeableFontSize changeableFontSize) {
         this.changeableFontSize = changeableFontSize;
+    }
+
+    public void setWidthScreen(int widthScreen) {
+        this.widthScreen = widthScreen;
     }
 
     @Override
@@ -68,8 +73,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
         changeFontSize(holder);
 
-        Picasso.with(context).load(URL_IMAGES + item.getFile()).resize(320,240)
-                .into(holder.imageArticle);
+        Picasso.with(context).load(URL_IMAGES + item.getFile())
+                .resize(widthScreen, (widthScreen / 4) * 3).into(holder.imageArticle);
 
     }
 
