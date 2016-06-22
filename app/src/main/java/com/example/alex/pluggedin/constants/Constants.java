@@ -15,6 +15,7 @@ public  class Constants {
 
     public static final String URL_IMAGES = "http://pluggedin.ru/images";
     public static final String URL_TEXT_ARTICLE = "http://pluggedin.ru/api/text/article/";
+    public static final String URL_TEXT_REVIEW = "http://pluggedin.ru/api/text/review/";
     public static final String URL_OPEN_ARTICLE = "http://pluggedin.ru/open/";
     public static final String URL_VK_GROUP = "http://vk.com/pluggedin";
     public static final String URL_YOUTUBE_CHANEL = "http://www.youtube.com/channel/UCRB3IP42wfISIWnZQfz7TIQ/feed";
@@ -34,6 +35,7 @@ public  class Constants {
 
     public static final String ID = "id";
     public static final String ID_ARTICLE = "idArticle";
+    public static final String ID_REVIEW = "idReview";
 
     public static final String SRC_OF_IMAGE = "src";
 

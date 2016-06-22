@@ -29,14 +29,10 @@
         <activity
             android:name=".ShowImageActivity"
             android:launchMode="singleTop"
-            android:theme="@style/Theme.AllBlack">
-
-        </activity>
+            android:theme="@style/Theme.AllBlack"/>
         <activity
             android:name=".SearchResultsActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <service android:name=".services.SaveArticle" />
 
@@ -55,11 +51,12 @@
         </service>
         <!-- [END firebase_iid_service] -->
 
-        <activity android:name=".SettingActivity"
+        <activity
+            android:name=".SettingActivity"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ShowReviewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

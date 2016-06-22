@@ -1,11 +1,14 @@
 package com.example.alex.pluggedin.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.alex.pluggedin.API.ArticleAPI;
 import com.example.alex.pluggedin.API.ReviewAPI;
 import com.example.alex.pluggedin.R;
+import com.example.alex.pluggedin.ShowReviewActivity;
 import com.example.alex.pluggedin.adapters.ArticleAdapter;
 
 import retrofit.RestAdapter;
@@ -64,6 +67,13 @@ public class ReviewFragment extends BasePageFragment {
     public void onClick(View v) {
         if(v.getId() == R.id.buttonTryAgain) {
             connectNetwork(FIRST_PAGE);
+        }else {
+            Intent intent = new Intent(getContext(), ShowReviewActivity.class);
+            int idReview = (Integer) v.findViewById(R.id.cardView).getTag();
+
+            intent.putExtra(ID_REVIEW, idReview * (-1));
+            Log.d(MY_TAG, (idReview * (-1)) + "");
+            getContext().startActivity(intent);
         }
     }
 }

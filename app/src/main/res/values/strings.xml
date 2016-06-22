@@ -36,6 +36,7 @@
     <string name="googlePlayServicesNotInstall"> Google Play Services не установлены </string>
     <string name="cancel"> Отмена </string>
     <string name="noEmailApps"> Нет приложений для отправки Email </string>
+    <string name="markOfAuthor"> Оценка автора: </string>
 
     <string name="fontSizeSetUp"> Новый размер шрифта контента установлен </string>
 
