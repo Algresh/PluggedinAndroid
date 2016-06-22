@@ -1,7 +1,7 @@
 package com.example.alex.pluggedin.fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,7 +54,6 @@ public class ShowReviewFragment extends ShowBaseFragment{
 
         Bundle args = new Bundle();
         args.putInt(ID_REVIEW, idReview);
-        Log.d(MY_TAG, idReview + " newInstance");
         fragment.setArguments(args);
 
         return fragment;
@@ -66,7 +65,6 @@ public class ShowReviewFragment extends ShowBaseFragment{
         View view = inflater.inflate(R.layout.show_review_fragment, null);
 
         idArticle = getArguments().getInt(ID_REVIEW, 0);
-        Log.d(MY_TAG, idArticle + " onCreateView");
 
         SharedPreferences pref = getActivity()
                 .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -84,7 +82,6 @@ public class ShowReviewFragment extends ShowBaseFragment{
 
     @Override
     protected void getArticleById (int idArticle) {
-        Log.d(MY_TAG, "id article: " + idArticle);
         reviewAPI.getOpenReview(idArticle, new Callback<List<Review>>() {
             @Override
             public void success(List<Review> reviews, Response response) {
@@ -109,8 +106,10 @@ public class ShowReviewFragment extends ShowBaseFragment{
         titleTv.setText(review.getTitle());
         authorTv.setText(review.getAuthor());
         dateTv.setText(review.getDatePublish());
-        plusMinus.loadData(review.getPlusesMinuses(), "text/html", "UTF-8");
-        conclusion.loadData(review.getConclusion(), "text/html", "UTF-8");
+        markOfAuthor.setText(String.valueOf(review.getMark()));
+        plusMinus.loadDataWithBaseURL(null, review.getPlusesMinuses(), "text/html", "UTF-8", null);
+        conclusion.loadDataWithBaseURL(null, review.getConclusion(), "text/html", "UTF-8", null);
+        changeableTitle.changeTitleInToolbar(review.getTitle());
 
 
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
@@ -148,8 +147,7 @@ public class ShowReviewFragment extends ShowBaseFragment{
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url.contains(DOMAIN)) {
-//                    showArticleByURL(url);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    // open link to site Pluggedin
+                    showArticleByURL(url);
                 } else  {
                     Uri address = Uri.parse(url);
 
@@ -180,38 +178,13 @@ public class ShowReviewFragment extends ShowBaseFragment{
     }
 
 
+    protected void showArticleByURL(String url) {
+        String[] arrUrl = url.split("/");
+        String latinTitle = arrUrl[arrUrl.length - 1];
+        latinTitle = convertHexSubStringsToNormalString(latinTitle);
 
-//    protected void showArticleByURL(String url) {
-//        String[] arrUrl = url.split("/");
-//        String latinTitle = arrUrl[arrUrl.length - 1];
-//        latinTitle = convertHexSubStringsToNormalString(latinTitle);
-//
-//        reviewAPI.getArticleIdByLatinTitle(latinTitle, new Callback<Response>() {
-//            @Override
-//            public void success(Response response, Response another) {
-//                InputStream inputStream;
-//                int idArticle;
-//                try {
-//                    inputStream = response.getBody().in();
-//                    idArticle = convertBytesArray(inputStream);
-//
-//                    if(idArticle > 0) {
-//                        Intent intent = new Intent(ShowArticleActivity.this, ShowArticleActivity.class);
-//                        intent.putExtra(ID, idArticle);
-//                        startActivity(intent);
-//                    }
-//
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//                Toast.makeText(ShowArticleActivity.this, SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+        reviewAPI.getArticleIdByLatinTitle(latinTitle, getCallbackRedirectLinkToApp());
+    }
 
     @Override
     protected void changeFontSize(List<TextView> keywords) {

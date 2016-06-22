@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.alex.pluggedin.API.ArticleAPI;
 import com.example.alex.pluggedin.API.ReviewAPI;
 import com.example.alex.pluggedin.R;
 import com.example.alex.pluggedin.ShowReviewActivity;
@@ -72,7 +71,6 @@ public class ReviewFragment extends BasePageFragment {
             int idReview = (Integer) v.findViewById(R.id.cardView).getTag();
 
             intent.putExtra(ID_REVIEW, idReview * (-1));
-            Log.d(MY_TAG, (idReview * (-1)) + "");
             getContext().startActivity(intent);
         }
     }

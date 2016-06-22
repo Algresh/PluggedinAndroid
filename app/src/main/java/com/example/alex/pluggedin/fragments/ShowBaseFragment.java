@@ -1,5 +1,6 @@
 package com.example.alex.pluggedin.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,9 +8,11 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alex.pluggedin.R;
 import com.example.alex.pluggedin.SearchResultsActivity;
+import com.example.alex.pluggedin.ShowArticleActivity;
 import com.example.alex.pluggedin.ShowImageActivity;
 
 import org.apmem.tools.layouts.FlowLayout;
@@ -21,9 +24,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 import static com.example.alex.pluggedin.constants.Constants.FONT_SIZE_NORMAL;
+import static com.example.alex.pluggedin.constants.Constants.ID;
 import static com.example.alex.pluggedin.constants.Constants.ID_ARTICLE;
 import static com.example.alex.pluggedin.constants.Constants.KEYWORD_QUERY;
+import static com.example.alex.pluggedin.constants.Constants.MY_TAG;
+import static com.example.alex.pluggedin.constants.Constants.SOMETHING_DOESNT_WORK;
 import static com.example.alex.pluggedin.constants.Constants.SRC_OF_IMAGE;
 
 public abstract class ShowBaseFragment extends Fragment implements View.OnClickListener {
@@ -39,6 +49,8 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
     protected float fontSize = FONT_SIZE_NORMAL;
     protected boolean chromeTabsFlag = false;
 
+    protected ChangeableTitle changeableTitle;
+
     protected class MyJavaInterface {
         @android.webkit.JavascriptInterface
         public void getGreeting(String str) {
@@ -46,6 +58,10 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
             intent.putExtra(SRC_OF_IMAGE, str);
             startActivity(intent);
         }
+    }
+
+    public interface ChangeableTitle {
+        void changeTitleInToolbar(String title);
     }
 
     protected void showOrHideElements(int visibility) {
@@ -123,8 +139,43 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
         startActivity(intent);
     }
 
+    protected Callback<Response> getCallbackRedirectLinkToApp() {
+        return new Callback<Response>() {
+            @Override
+            public void success(Response response, Response another) {
+                InputStream inputStream;
+                int idArticle;
+                try {
+                    inputStream = response.getBody().in();
+                    idArticle = convertBytesArray(inputStream);
+
+                    if(idArticle > 0) {
+                        /**
+                         * @TODO откывать обзоры и статьи!!!
+                         */
+                        Intent intent = new Intent(getActivity(), ShowArticleActivity.class);
+                        intent.putExtra(ID, idArticle);
+                        startActivity(intent);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getActivity(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
     protected abstract void getArticleById (int idArticle);
     protected abstract void changeFontSize(List<TextView> keywords);
 
-
+    @Override
+    public void onAttach(Activity context) {
+        super.onAttach(context);
+        changeableTitle = (ChangeableTitle) context;
+    }
 }

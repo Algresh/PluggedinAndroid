@@ -7,6 +7,7 @@ import com.example.alex.pluggedin.models.Review;
 import java.util.List;
 
 import retrofit.Callback;
+import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
@@ -22,4 +23,7 @@ public interface ReviewAPI {
 
     @GET("/api/show/review/{idReview}")
     void getOpenReview(@Path("idReview") int idReview, Callback<List<Review>> response);
+
+    @GET("/api/latin/title/article/{latinTitle}")
+    void getArticleIdByLatinTitle(@Path("latinTitle") String latinTitle, Callback<Response> idArticle);
 }
