@@ -7,19 +7,36 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/launcher_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <data
+                    android:scheme="http"
+                    android:host="www.pluggedin.ru" />
+
+                <data
+                    android:scheme="http"
+                    android:host="pluggedin.ru" />
+
+                <data
+                    android:scheme="https"
+                    android:host="www.pluggedin.ru" />
+
+                <data
+                    android:scheme="https"
+                    android:host="pluggedin.ru" />
             </intent-filter>
         </activity>
         <activity

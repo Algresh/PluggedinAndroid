@@ -36,7 +36,6 @@ public class ShowBaseActivity extends AppCompatActivity
     protected void copyLink(String title, String urlOpen) {
         if (title != null) {
             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-            final String successSaved = getResources().getString(R.string.savedToBuffer);
             clipboardManager.setPrimaryClip(ClipData.newPlainText(CLIP_LABEL, urlOpen + title));
         }
     }
