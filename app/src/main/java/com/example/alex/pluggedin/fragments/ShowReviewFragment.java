@@ -95,14 +95,18 @@ public class ShowReviewFragment extends ShowBaseFragment{
                     showAllElementHideBtn();
                 } catch (NullPointerException e) {
                     hideAllElementsShowBtn();
-                    Toast.makeText(getActivity(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+                    String str = getActivity().getResources()
+                            .getString(R.string.something_doesnt_work);
+                    Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
                 hideAllElementsShowBtn();
-                Toast.makeText(getActivity(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+                String str = getActivity().getResources()
+                        .getString(R.string.something_doesnt_work);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -179,7 +183,9 @@ public class ShowReviewFragment extends ShowBaseFragment{
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 hideAllElementsShowBtn();
-                Toast.makeText(getActivity(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+                String str = getActivity().getResources()
+                        .getString(R.string.something_doesnt_work);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
             }
         });
 

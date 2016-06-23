@@ -40,8 +40,6 @@ public  class Constants {
 
     public static final String SRC_OF_IMAGE = "src";
 
-    public static final String SOMETHING_DOESNT_WORK = "Что то не работает!";
-
     public static final String CLIP_LABEL = "clipLabel";
 
     public static final String TEXT_PLAIN = "text/plain";

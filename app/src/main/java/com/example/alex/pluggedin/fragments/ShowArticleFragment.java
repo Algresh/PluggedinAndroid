@@ -129,7 +129,9 @@ public class ShowArticleFragment extends Fragment implements View.OnClickListene
             @Override
             public void failure(RetrofitError error) {
                 hideAllElementsShowBtn();
-                Toast.makeText(getActivity(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+                String str = getActivity().getResources()
+                        .getString(R.string.something_doesnt_work);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -198,7 +200,9 @@ public class ShowArticleFragment extends Fragment implements View.OnClickListene
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 hideAllElementsShowBtn();
-                Toast.makeText(getActivity(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+                String str = getActivity().getResources()
+                        .getString(R.string.something_doesnt_work);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -237,7 +241,9 @@ public class ShowArticleFragment extends Fragment implements View.OnClickListene
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+                String str = getActivity().getResources()
+                        .getString(R.string.something_doesnt_work);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
             }
         });
     }

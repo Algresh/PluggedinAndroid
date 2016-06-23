@@ -37,6 +37,8 @@
     <string name="cancel"> Отмена </string>
     <string name="noEmailApps"> Нет приложений для отправки Email </string>
     <string name="markOfAuthor"> Оценка автора: </string>
+    <string name="something_doesnt_work"> Что то не работает! </string>
+    <string name="something_doesnt_work_again"> Опять что то не работает): </string>
 
     <string name="fontSizeSetUp"> Новый размер шрифта контента установлен </string>
 

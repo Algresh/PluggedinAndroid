@@ -37,12 +37,6 @@ public class ShowBaseActivity extends AppCompatActivity
         if (title != null) {
             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             final String successSaved = getResources().getString(R.string.savedToBuffer);
-            clipboardManager.addPrimaryClipChangedListener(new ClipboardManager.OnPrimaryClipChangedListener() {
-                @Override
-                public void onPrimaryClipChanged() {
-                    Toast.makeText(ShowBaseActivity.this, successSaved, Toast.LENGTH_SHORT).show();
-                }
-            });
             clipboardManager.setPrimaryClip(ClipData.newPlainText(CLIP_LABEL, urlOpen + title));
         }
     }

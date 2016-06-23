@@ -36,6 +36,7 @@ import static com.example.alex.pluggedin.constants.Constants.FIRST_PAGE;
 public abstract class BasePageFragment extends Fragment
         implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     public static final int LAYOUT = R.layout.fragment_page;
+    public static int countToast = 0;
 
     protected Button buttonTryAgain;
 
@@ -46,7 +47,6 @@ public abstract class BasePageFragment extends Fragment
     protected int pages = FIRST_PAGE;
     protected int lastDownloadPages = FIRST_PAGE;
 
-    protected Toast toast;
 
     protected SwipeRefreshLayout refreshLayout;
 
@@ -115,6 +115,7 @@ public abstract class BasePageFragment extends Fragment
     }
 
     protected void successArticle(final int page, List<Article> reviews) {
+        countToast = 0;
         if (page == FIRST_PAGE) {
             buttonTryAgain.setVisibility(View.GONE);
             refreshLayout.setVisibility(View.VISIBLE);
@@ -148,10 +149,21 @@ public abstract class BasePageFragment extends Fragment
             pages--;
         }
 
-        if (toast == null) {
-            toast = Toast.makeText(getContext(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT);
-            toast.show();
+        String str;
+        if (countToast == 0) {
+            str = getActivity().getResources().getString(R.string.something_doesnt_work);
+            countToast++;
+            Toast.makeText(getContext(), str, Toast.LENGTH_SHORT).show();
+        } else if(countToast > 1){
+            str = getActivity().getResources()
+                    .getString(R.string.something_doesnt_work_again);
+            countToast++;
+            Toast.makeText(getContext(), str, Toast.LENGTH_SHORT).show();
+        } else {
+            countToast++;
         }
+
+
     }
 
 

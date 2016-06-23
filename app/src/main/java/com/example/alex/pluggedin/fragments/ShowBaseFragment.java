@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.example.alex.pluggedin.R;
 import com.example.alex.pluggedin.SearchResultsActivity;
 import com.example.alex.pluggedin.ShowArticleActivity;
 import com.example.alex.pluggedin.ShowImageActivity;
+import com.example.alex.pluggedin.ShowReviewActivity;
 
 import org.apmem.tools.layouts.FlowLayout;
 import org.json.JSONException;
@@ -22,7 +24,9 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -31,10 +35,12 @@ import retrofit.client.Response;
 import static com.example.alex.pluggedin.constants.Constants.FONT_SIZE_NORMAL;
 import static com.example.alex.pluggedin.constants.Constants.ID;
 import static com.example.alex.pluggedin.constants.Constants.ID_ARTICLE;
+import static com.example.alex.pluggedin.constants.Constants.ID_REVIEW;
 import static com.example.alex.pluggedin.constants.Constants.KEYWORD_QUERY;
 import static com.example.alex.pluggedin.constants.Constants.MY_TAG;
-import static com.example.alex.pluggedin.constants.Constants.SOMETHING_DOESNT_WORK;
 import static com.example.alex.pluggedin.constants.Constants.SRC_OF_IMAGE;
+import static com.example.alex.pluggedin.constants.Constants.TYPE;
+import static com.example.alex.pluggedin.constants.Constants.TYPE_REVIEW;
 
 public abstract class ShowBaseFragment extends Fragment implements View.OnClickListener {
 
@@ -94,8 +100,8 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
 
     }
 
-    protected int convertBytesArray(InputStream inputStream) throws IOException {
-        int idArticle = 0;
+    protected Map<String, Integer> convertBytesArray(InputStream inputStream) throws IOException {
+        Map<String, Integer> map = null;
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             int read;
@@ -106,7 +112,9 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
             bos.close();
             String data = new String(result);
             JSONObject jsonObj = new JSONObject(data);
-            idArticle = jsonObj.getInt(ID_ARTICLE);
+            map = new HashMap<>();
+            map.put(ID_ARTICLE, jsonObj.getInt(ID_ARTICLE));
+            map.put(TYPE, jsonObj.getInt(TYPE));
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         } finally {
@@ -115,13 +123,16 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
             }
         }
 
-        return idArticle;
+        return map;
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.openArticleTryAgainBtn:
+                getArticleById(idArticle);
+                break;
+            case R.id.openReviewTryAgainBtn:
                 getArticleById(idArticle);
                 break;
             default:
@@ -147,16 +158,23 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
             public void success(Response response, Response another) {
                 InputStream inputStream;
                 int idArticle;
+                int type;
                 try {
                     inputStream = response.getBody().in();
-                    idArticle = convertBytesArray(inputStream);
+                    Map<String, Integer> map = convertBytesArray(inputStream);
+                    idArticle = map.get(ID_ARTICLE);
+                    type = map.get(TYPE);
 
                     if(idArticle > 0) {
-                        /**
-                         * @TODO откывать обзоры и статьи!!!
-                         */
-                        Intent intent = new Intent(getActivity(), ShowArticleActivity.class);
-                        intent.putExtra(ID, idArticle);
+                        Intent intent;
+                        if (type != TYPE_REVIEW) {
+                            intent = new Intent(getActivity(), ShowArticleActivity.class);
+                            intent.putExtra(ID, idArticle);
+                        } else {
+                            intent = new Intent(getActivity(), ShowReviewActivity.class);
+                            intent.putExtra(ID_REVIEW, idArticle);
+                        }
+
                         startActivity(intent);
                     }
 
@@ -167,7 +185,9 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+                String str = getActivity().getResources()
+                        .getString(R.string.something_doesnt_work);
+                Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
             }
         };
     }

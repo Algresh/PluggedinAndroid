@@ -37,7 +37,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -179,7 +181,9 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void failure(RetrofitError error) {
                 hideAllElementsShowBtn();
-                Toast.makeText(ShowArticleActivity.this, SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+                String str = getResources()
+                        .getString(R.string.something_doesnt_work);
+                Toast.makeText(ShowArticleActivity.this, str, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -248,7 +252,9 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 hideAllElementsShowBtn();
-                Toast.makeText(ShowArticleActivity.this, SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+                String str = getResources()
+                        .getString(R.string.something_doesnt_work);
+                Toast.makeText(ShowArticleActivity.this, str, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -270,13 +276,23 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
             public void success(Response response, Response another) {
                 InputStream inputStream;
                 int idArticle;
+                int type;
                 try {
                     inputStream = response.getBody().in();
-                    idArticle = convertBytesArray(inputStream);
+                    Map<String, Integer> map = convertBytesArray(inputStream);
+                    idArticle = map.get(ID_ARTICLE);
+                    type = map.get(TYPE);
 
                     if(idArticle > 0) {
-                        Intent intent = new Intent(ShowArticleActivity.this, ShowArticleActivity.class);
-                        intent.putExtra(ID, idArticle);
+                        Intent intent;
+                        if (type != TYPE_REVIEW) {
+                            intent = new Intent(ShowArticleActivity.this, ShowArticleActivity.class);
+                            intent.putExtra(ID, idArticle);
+                        } else {
+                            intent = new Intent(ShowArticleActivity.this, ShowReviewActivity.class);
+                            intent.putExtra(ID_REVIEW, idArticle);
+                        }
+
                         startActivity(intent);
                     }
 
@@ -287,7 +303,9 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(ShowArticleActivity.this, SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
+                String str = getResources()
+                        .getString(R.string.something_doesnt_work);
+                Toast.makeText(ShowArticleActivity.this, str, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -305,8 +323,8 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
         return true;
     }
 
-    protected int convertBytesArray(InputStream inputStream) throws IOException {
-        int idArticle = 0;
+    protected Map<String, Integer> convertBytesArray(InputStream inputStream) throws IOException {
+        Map<String, Integer> map = null;
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             int read;
@@ -317,7 +335,9 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
             bos.close();
             String data = new String(result);
             JSONObject jsonObj = new JSONObject(data);
-            idArticle = jsonObj.getInt(ID_ARTICLE);
+            map = new HashMap<>();
+            map.put(ID_ARTICLE, jsonObj.getInt(ID_ARTICLE));
+            map.put(TYPE, jsonObj.getInt(TYPE));
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         } finally {
@@ -326,7 +346,7 @@ public class ShowArticleActivity extends AppCompatActivity implements View.OnCli
             }
         }
 
-        return idArticle;
+        return map;
     }
 
     protected String convertHexSubStringsToNormalString(String latinTitle) {
