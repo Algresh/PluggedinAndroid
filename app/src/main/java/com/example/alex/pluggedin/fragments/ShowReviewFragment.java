@@ -18,6 +18,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class ShowReviewFragment extends ShowBaseFragment{
     private TextView markOfAuthor;
     private WebView plusMinus;
     private WebView conclusion;
+    private RelativeLayout markLayout;
 
     public static ShowReviewFragment newInstance (int idReview) {
         ShowReviewFragment fragment = new ShowReviewFragment();
@@ -85,12 +87,16 @@ public class ShowReviewFragment extends ShowBaseFragment{
         reviewAPI.getOpenReview(idArticle, new Callback<List<Review>>() {
             @Override
             public void success(List<Review> reviews, Response response) {
-                review = reviews.get(0);
-                if (review != null) {
-                    initFields();
+                try {
+                    review = reviews.get(0);
+                    if (review != null) {
+                        initFields();
+                    }
+                    showAllElementHideBtn();
+                } catch (NullPointerException e) {
+                    hideAllElementsShowBtn();
+                    Toast.makeText(getActivity(), SOMETHING_DOESNT_WORK, Toast.LENGTH_SHORT).show();
                 }
-
-                showAllElementHideBtn();
             }
 
             @Override
@@ -110,6 +116,7 @@ public class ShowReviewFragment extends ShowBaseFragment{
         plusMinus.loadDataWithBaseURL(null, review.getPlusesMinuses(), "text/html", "UTF-8", null);
         conclusion.loadDataWithBaseURL(null, review.getConclusion(), "text/html", "UTF-8", null);
         changeableTitle.changeTitleInToolbar(review.getTitle());
+        changeableTitle.setLatinTitle(review.getLatinTitle());
 
 
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
@@ -136,6 +143,7 @@ public class ShowReviewFragment extends ShowBaseFragment{
         markOfAuthor = (TextView) v.findViewById(R.id.markOfAuthorDigit);
         plusMinus = (WebView) v.findViewById(R.id.webViewPlusMinus);
         conclusion = (WebView) v.findViewById(R.id.webConclusion);
+        markLayout = (RelativeLayout) v.findViewById(R.id.markOfAuthor);
         if (tryAgainBtn != null) {
             tryAgainBtn.setOnClickListener(this);
         }
@@ -200,6 +208,16 @@ public class ShowReviewFragment extends ShowBaseFragment{
                 }
             }
         } catch (Exception e) {}
+    }
+
+
+    @Override
+    protected void showOrHideElements(int visibility) {
+        markLayout.setVisibility(visibility);
+        super.showOrHideElements(visibility);
+        plusMinus.setVisibility(visibility);
+        conclusion.setVisibility(visibility);
+
     }
 
 }

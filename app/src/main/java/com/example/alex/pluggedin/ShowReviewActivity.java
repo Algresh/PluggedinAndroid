@@ -1,19 +1,13 @@
 package com.example.alex.pluggedin;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.alex.pluggedin.fragments.ShowBaseFragment;
 import com.example.alex.pluggedin.fragments.ShowReviewFragment;
 import static com.example.alex.pluggedin.constants.Constants.*;
 
-public class ShowReviewActivity extends AppCompatActivity
-        implements ShowBaseFragment.ChangeableTitle {
+public class ShowReviewActivity extends ShowBaseActivity {
 
-    private Toolbar toolbar;
     private int idReview;
 
     @Override
@@ -25,20 +19,13 @@ public class ShowReviewActivity extends AppCompatActivity
             finish();
         }
 
-        initToolBar();
+        initToolBar(R.id.toolbarShowReview);
         initFragment();
     }
 
     private void initFragment() {
         ShowReviewFragment fragment = ShowReviewFragment.newInstance(idReview);
         getFragmentManager().beginTransaction().add(R.id.showReviewFragmentContainer, fragment).commit();
-    }
-
-    private void initToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbarShowReview);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override
@@ -49,20 +36,16 @@ public class ShowReviewActivity extends AppCompatActivity
                 onBackPressed();
                 break;
             case R.id.copyLinkItem:
-//                copyLink();
+                copyLink(latinTitle, URL_OPEN_REVIEW);
                 break;
             case R.id.shareItem:
-//                shareLink();
+                shareLink(latinTitle, URL_OPEN_REVIEW);
                 break;
             case R.id.openInBrowserItem:
-//                openArticleInBrowser();
+                openArticleInBrowser(latinTitle, URL_OPEN_REVIEW);
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void changeTitleInToolbar(String title) {
-        toolbar.setTitle(title);
-    }
 }

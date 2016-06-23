@@ -57,6 +57,10 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
             Intent intent = new Intent(this, ShowArticleActivity.class);
             intent.putExtra(ID, idArticle);
             startActivity(intent);
+        } else if (idArticle < 0) {
+            Intent intent = new Intent(this, ShowReviewActivity.class);
+            intent.putExtra(ID_REVIEW, idArticle * (-1));
+            startActivity(intent);
         }
     }
 

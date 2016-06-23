@@ -62,6 +62,8 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
 
     public interface ChangeableTitle {
         void changeTitleInToolbar(String title);
+
+        void setLatinTitle(String latinTitle);
     }
 
     protected void showOrHideElements(int visibility) {

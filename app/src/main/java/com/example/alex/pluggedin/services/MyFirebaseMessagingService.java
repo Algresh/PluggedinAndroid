@@ -12,6 +12,7 @@ import android.util.Log;
 import com.example.alex.pluggedin.MainActivity;
 import com.example.alex.pluggedin.R;
 import com.example.alex.pluggedin.ShowArticleActivity;
+import com.example.alex.pluggedin.ShowReviewActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -52,10 +53,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             intent= new Intent(this, ShowArticleActivity.class);
             intent.putExtra(ID, id);
         } else {
-            /**
-             * @TODO change to showReview
-             */
-            intent= new Intent(this, MainActivity.class);
+            intent= new Intent(this, ShowReviewActivity.class);
+            intent.putExtra(ID_REVIEW, id);
         }
 
         String[] arrStrings = getResources().getStringArray(R.array.type_titles);
