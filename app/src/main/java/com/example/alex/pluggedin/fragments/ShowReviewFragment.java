@@ -18,6 +18,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -208,6 +210,17 @@ public class ShowReviewFragment extends ShowBaseFragment{
                 authorTv.setTextSize(authorTv.getTextSize() * fontSize);
                 dateTv.setTextSize(dateTv.getTextSize() * fontSize);
                 markOfAuthor.setTextSize(markOfAuthor.getTextSize() * fontSize);
+                FrameLayout.LayoutParams params = new FrameLayout
+                        .LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+
+                // Изменение margin для оценки при изменение размера шрифта
+                if (fontSize == FONT_SIZE_LARGE) {
+                    params.setMargins(10, 10, 0 , 0);// вместо 12dp слева и сверху ставим 10dp
+                } else {
+                    params.setMargins(14, 14, 0 , 0);// вместо 12dp слева и сверху ставим 14dp
+                }
+
+                markOfAuthor.setLayoutParams(params);
 
                 for(TextView tv: keywords) {
                     tv.setTextSize(tv.getTextSize() * fontSize);
