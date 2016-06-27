@@ -103,8 +103,14 @@ public class ShowArticleFragment extends ShowBaseFragment{
             @Override
             public void failure(RetrofitError error) {
                 hideAllElementsShowBtn();
-                String str = getActivity().getResources()
-                        .getString(R.string.something_doesnt_work);
+                String str;
+                if (checkConnection()) {
+                    str = getActivity().getResources()
+                            .getString(R.string.something_doesnt_work);
+                } else {
+                    str = getActivity().getResources()
+                            .getString(R.string.no_internet);
+                }
                 Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
             }
         });

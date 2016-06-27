@@ -2,7 +2,10 @@ package com.example.alex.pluggedin.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
@@ -185,8 +188,14 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
 
             @Override
             public void failure(RetrofitError error) {
-                String str = getActivity().getResources()
-                        .getString(R.string.something_doesnt_work);
+                String str;
+                if (checkConnection()) {
+                    str = getActivity().getResources()
+                            .getString(R.string.something_doesnt_work);
+                } else {
+                    str = getActivity().getResources()
+                            .getString(R.string.no_internet);
+                }
                 Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
             }
         };
@@ -199,5 +208,19 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
     public void onAttach(Activity context) {
         super.onAttach(context);
         changeableTitle = (ChangeableTitle) context;
+    }
+
+    protected boolean checkConnection() {
+        ConnectivityManager connectChecker = (ConnectivityManager) getActivity()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiInfo = connectChecker.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (wifiInfo != null && wifiInfo.isConnected()) {
+            return true;
+        }
+        wifiInfo = connectChecker.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifiInfo != null && wifiInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 }

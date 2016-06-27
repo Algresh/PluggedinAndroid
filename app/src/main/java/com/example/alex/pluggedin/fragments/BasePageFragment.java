@@ -3,6 +3,8 @@ package com.example.alex.pluggedin.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -151,14 +153,25 @@ public abstract class BasePageFragment extends Fragment
 
         String str;
         if (countToast == 0) {
-            str = getActivity().getResources().getString(R.string.something_doesnt_work);
             countToast++;
-            Toast.makeText(getContext(), str, Toast.LENGTH_SHORT).show();
+            if (checkConnection()) {
+                str = getActivity().getResources()
+                        .getString(R.string.something_doesnt_work);
+            } else {
+                str = getActivity().getResources()
+                        .getString(R.string.no_internet);
+            }
+            Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
         } else if(countToast > 1){
-            str = getActivity().getResources()
-                    .getString(R.string.something_doesnt_work_again);
             countToast++;
-            Toast.makeText(getContext(), str, Toast.LENGTH_SHORT).show();
+            if (checkConnection()) {
+                str = getActivity().getResources()
+                        .getString(R.string.something_doesnt_work);
+            } else {
+                str = getActivity().getResources()
+                        .getString(R.string.no_internet);
+            }
+            Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
         } else {
             countToast++;
         }
@@ -184,6 +197,20 @@ public abstract class BasePageFragment extends Fragment
         display.getSize(size);
 
         return size.x;
+    }
+
+    protected boolean checkConnection() {
+        ConnectivityManager connectChecker = (ConnectivityManager) getActivity()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiInfo = connectChecker.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (wifiInfo != null && wifiInfo.isConnected()) {
+            return true;
+        }
+        wifiInfo = connectChecker.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifiInfo != null && wifiInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 
 }
