@@ -74,7 +74,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         changeFontSize(holder);
 
         Picasso.with(context).load(URL_IMAGES + item.getFile())
-                .resize(widthScreen, (widthScreen / 4) * 3).into(holder.imageArticle);
+                .resize(widthScreen, (widthScreen / 3) * 2).into(holder.imageArticle);
 
     }
 
