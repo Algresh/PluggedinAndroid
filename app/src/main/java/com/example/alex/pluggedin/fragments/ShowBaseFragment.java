@@ -103,6 +103,12 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        textWV.onPause();
+    }
+
     protected Map<String, Integer> convertBytesArray(InputStream inputStream) throws IOException {
         Map<String, Integer> map = null;
         try {
