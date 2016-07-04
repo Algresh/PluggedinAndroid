@@ -1,6 +1,7 @@
 package com.example.alex.pluggedin;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.MenuItem;
@@ -46,6 +47,10 @@ public class ShowArticleActivity extends ShowBaseActivity {
             case R.id.openInBrowserItem:
                 openArticleInBrowser(latinTitle, URL_OPEN_ARTICLE);
                 break;
+            case R.id.commentItem:
+                addComment();
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

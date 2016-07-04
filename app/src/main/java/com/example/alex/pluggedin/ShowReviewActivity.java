@@ -1,5 +1,6 @@
 package com.example.alex.pluggedin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -43,6 +44,9 @@ public class ShowReviewActivity extends ShowBaseActivity {
                 break;
             case R.id.openInBrowserItem:
                 openArticleInBrowser(latinTitle, URL_OPEN_REVIEW);
+                break;
+            case R.id.commentItem:
+                addComment();
                 break;
         }
         return super.onOptionsItemSelected(item);

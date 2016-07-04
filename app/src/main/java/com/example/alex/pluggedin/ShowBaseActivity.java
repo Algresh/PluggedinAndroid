@@ -15,6 +15,7 @@ import com.example.alex.pluggedin.fragments.ShowBaseFragment;
 import com.example.alex.pluggedin.models.Article;
 
 import static com.example.alex.pluggedin.constants.Constants.CLIP_LABEL;
+import static com.example.alex.pluggedin.constants.Constants.LATIN_TITLE;
 import static com.example.alex.pluggedin.constants.Constants.TEXT_PLAIN;
 import static com.example.alex.pluggedin.constants.Constants.URL_OPEN_ARTICLE;
 
@@ -71,6 +72,12 @@ public class ShowBaseActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    protected void addComment () {
+        Intent intent = new Intent(this, CommentActivity.class);
+        intent.putExtra(LATIN_TITLE, latinTitle);
+        startActivity(intent);
     }
 
     @Override

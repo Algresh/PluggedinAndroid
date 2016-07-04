@@ -18,6 +18,7 @@ public  class Constants {
     public static final String URL_TEXT_REVIEW = "http://pluggedin.ru/api/text/review/";
     public static final String URL_OPEN_ARTICLE = "http://pluggedin.ru/open/";
     public static final String URL_OPEN_REVIEW = "http://pluggedin.ru/openreview/";
+    public static final String URL_COMMENT = "http://pluggedin.ru/api/comments/disqus/";
     public static final String URL_VK_GROUP = "http://vk.com/pluggedin";
     public static final String URL_YOUTUBE_CHANEL = "http://www.youtube.com/channel/UCRB3IP42wfISIWnZQfz7TIQ/feed";
     public static final String URL_INSTAGRAM_ACCOUNT = "https://instagram.com/plugg.in/";
@@ -41,6 +42,8 @@ public  class Constants {
     public static final String SRC_OF_IMAGE = "src";
 
     public static final String CLIP_LABEL = "clipLabel";
+
+    public static final String LATIN_TITLE = "latinTitle";
 
     public static final String TEXT_PLAIN = "text/plain";
 
