@@ -16,4 +16,10 @@
         android:title="@string/openInBrowser"
         android:id="@+id/openInBrowserItem"/>
 
+    <item
+        android:icon="@drawable/comment_text_outline"
+        android:title="@string/addComment"
+        android:id="@+id/commentItem"
+        app:showAsAction="always"/>
+
 </menu>
