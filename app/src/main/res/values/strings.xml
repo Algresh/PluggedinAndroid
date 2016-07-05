@@ -55,8 +55,8 @@
     <string name="socialNetworksYoutube"> Мы на Youtube </string>
 
     <string-array name="tabs_title">
-        <item> Обзоры </item>
         <item> Новости </item>
+        <item> Обзоры </item>
         <item> Интересное </item>
         <item> Статьи </item>
         <item> Медиа </item>

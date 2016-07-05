@@ -23,8 +23,8 @@ public  class Constants {
     public static final String URL_YOUTUBE_CHANEL = "http://www.youtube.com/channel/UCRB3IP42wfISIWnZQfz7TIQ/feed";
     public static final String URL_INSTAGRAM_ACCOUNT = "https://instagram.com/plugg.in/";
 
-    public static final int TAB_REVIEW = 0;
-    public static final int TAB_NEWS = 1;
+    public static final int TAB_NEWS = 0;
+    public static final int TAB_REVIEW = 1;
     public static final int TAB_INTERESTING = 2;
     public static final int TAB_ARTICLE = 3;
     public static final int TAB_MEDIA = 4;

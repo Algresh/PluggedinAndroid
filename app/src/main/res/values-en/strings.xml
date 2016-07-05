@@ -55,8 +55,8 @@
     <string name="socialNetworksYoutube"> In Youtube </string>
 
     <string-array name="tabs_title">
-        <item> Review </item>
         <item> News </item>
+        <item> Review </item>
         <item> Interesting </item>
         <item> Article </item>
         <item> Media </item>
