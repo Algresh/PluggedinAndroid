@@ -23,12 +23,14 @@ public class ShowArticleActivity extends ShowBaseActivity {
         }
 
         initToolBar(R.id.toolbarShowArticle);
-        initFragment();
+        initFragment(savedInstanceState);
     }
 
-    private void initFragment() {
-        ShowArticleFragment fragment = ShowArticleFragment.newInstance(idArticle);
-        getFragmentManager().beginTransaction().add(R.id.showArticleFragmentContainer, fragment).commit();
+    private void initFragment(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            ShowArticleFragment fragment = ShowArticleFragment.newInstance(idArticle);
+            getFragmentManager().beginTransaction().add(R.id.showArticleFragmentContainer, fragment).commit();
+        }
     }
 
     @Override

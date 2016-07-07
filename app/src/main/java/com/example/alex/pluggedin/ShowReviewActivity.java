@@ -21,12 +21,14 @@ public class ShowReviewActivity extends ShowBaseActivity {
         }
 
         initToolBar(R.id.toolbarShowReview);
-        initFragment();
+        initFragment(savedInstanceState);
     }
 
-    private void initFragment() {
-        ShowReviewFragment fragment = ShowReviewFragment.newInstance(idReview);
-        getFragmentManager().beginTransaction().add(R.id.showReviewFragmentContainer, fragment).commit();
+    private void initFragment(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            ShowReviewFragment fragment = ShowReviewFragment.newInstance(idReview);
+            getFragmentManager().beginTransaction().add(R.id.showReviewFragmentContainer, fragment).commit();
+        }
     }
 
     @Override
