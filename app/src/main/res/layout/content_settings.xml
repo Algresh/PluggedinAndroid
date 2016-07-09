@@ -6,121 +6,133 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/paddingLayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            style="@style/settingLabels"
-            android:text="@string/offOnNotification"/>
-
-        <android.support.v7.widget.SwitchCompat
-            android:layout_gravity="top|right"
-            android:id="@+id/switchNotifyPermission"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:checked="true"
-            app:showText="false" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/paddingLayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            style="@style/settingLabels"
-            android:text="@string/offOnSound"/>
-
-        <android.support.v7.widget.SwitchCompat
-            android:layout_gravity="top|right"
-            android:id="@+id/switchSoundPermission"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:checked="false"
-            app:showText="false" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        style="@style/paddingLayout">
-
-        <TextView
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            style="@style/settingLabels"
-            android:text="@string/chromeTabs"/>
-
-        <TextView
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
-            style="@style/settingLabelsChromeTabs"
-            android:text="@string/workWithChrome"/>
-
-        <android.support.v7.widget.SwitchCompat
-            android:layout_gravity="top|right"
-            android:id="@+id/switchChromeTabs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:checked="false"
-            app:showText="false" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/paddingLayout">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:id="@+id/fontSize"
-            style="@style/settingLabels"
-            android:text="@string/fontSize"/>
-    </FrameLayout>
-
-
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/paddingLayout"
-        android:paddingTop="4dp">
-
-        <View
+        android:scrollbars="none">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            style="@style/divider"/>
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/linkToDevelopers"
-            style="@style/settingLabels"
-            android:text="@string/linkToDevelopers"/>
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/paddingLayout">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/emailDevelopers"
-            style="@style/emailDeveloper"
-            android:text="@string/emailDevelopers" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    style="@style/settingLabels"
+                    android:text="@string/offOnNotification"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_gravity="top|right"
+                    android:id="@+id/switchNotifyPermission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:checked="true"
+                    app:showText="false" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/paddingLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    style="@style/settingLabels"
+                    android:text="@string/offOnSound"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_gravity="top|right"
+                    android:id="@+id/switchSoundPermission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:checked="false"
+                    app:showText="false" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                style="@style/paddingLayout">
+
+                <TextView
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    style="@style/settingLabels"
+                    android:text="@string/chromeTabs"/>
+
+                <TextView
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    style="@style/settingLabelsChromeTabs"
+                    android:text="@string/workWithChrome"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_gravity="top|right"
+                    android:id="@+id/switchChromeTabs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:checked="false"
+                    app:showText="false" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/paddingLayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:id="@+id/fontSize"
+                    style="@style/settingLabels"
+                    android:text="@string/fontSize"/>
+            </FrameLayout>
+
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/paddingLayout"
+                android:paddingTop="4dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    style="@style/divider"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linkToDevelopers"
+                    style="@style/settingLabels"
+                    android:text="@string/linkToDevelopers"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/emailDevelopers"
+                    style="@style/emailDeveloper"
+                    android:text="@string/emailDevelopers" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
 
 
 </LinearLayout>

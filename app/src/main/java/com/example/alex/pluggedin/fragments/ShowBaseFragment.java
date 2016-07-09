@@ -224,9 +224,6 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
             return true;
         }
         wifiInfo = connectChecker.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        if (wifiInfo != null && wifiInfo.isConnected()) {
-            return true;
-        }
-        return false;
+        return wifiInfo != null && wifiInfo.isConnected();
     }
 }
