@@ -36,6 +36,37 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520677099310:android:efa07e91960b6489",
+        "android_client_info": {
+          "package_name": "ru.tulupov.alex.pluggedin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520677099310-8n8fkdq9u58bhu4br8qo1klgq71teo96.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOyDdN3po0W7vreFY39ObVtYUh0brzpwY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

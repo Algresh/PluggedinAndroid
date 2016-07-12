@@ -9,9 +9,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.alex.pluggedin.ShowImageActivity">
+    tools:context="ru.tulupov.alex.pluggedin.ShowImageActivity">
 
-    <com.example.alex.pluggedin.view.TouchImageView
+    <ru.tulupov.alex.pluggedin.view.TouchImageView
         android:id="@+id/ShowImageIV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.alex.pluggedin.ShowReviewActivity">
+    tools:context="ru.tulupov.alex.pluggedin.ShowReviewActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent">-->
         <!--&lt;!&ndash;<fragment&ndash;&gt;-->
-            <!--&lt;!&ndash;android:name="com.example.alex.pluggedin.fragments.ShowReviewFragment"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:name="ShowReviewFragment"&ndash;&gt;-->
             <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
             <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
             <!--&lt;!&ndash;android:layout_weight="1">&ndash;&gt;-->
