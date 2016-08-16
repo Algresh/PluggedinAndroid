@@ -1,4 +1,4 @@
-package ru.tulupov.alex.pluggedin;
+package ru.tulupov.alex.pluggedin.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

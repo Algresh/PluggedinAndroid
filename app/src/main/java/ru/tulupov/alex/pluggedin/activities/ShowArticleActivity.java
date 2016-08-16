@@ -1,4 +1,4 @@
-package ru.tulupov.alex.pluggedin;
+package ru.tulupov.alex.pluggedin.activities;
 
 
 import android.os.Bundle;

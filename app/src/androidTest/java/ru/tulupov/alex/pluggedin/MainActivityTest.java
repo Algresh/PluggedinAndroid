@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 import com.example.alex.pluggedin.R;
 
+import ru.tulupov.alex.pluggedin.activities.MainActivity;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;

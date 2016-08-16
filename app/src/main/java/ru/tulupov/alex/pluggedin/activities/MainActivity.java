@@ -1,4 +1,4 @@
-package ru.tulupov.alex.pluggedin;
+package ru.tulupov.alex.pluggedin.activities;
 
 import android.app.SearchManager;
 import android.content.Intent;

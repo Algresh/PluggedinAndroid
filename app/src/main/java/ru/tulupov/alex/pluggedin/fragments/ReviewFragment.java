@@ -6,7 +6,7 @@ import android.view.View;
 
 import ru.tulupov.alex.pluggedin.API.ReviewAPI;
 import com.example.alex.pluggedin.R;
-import ru.tulupov.alex.pluggedin.ShowReviewActivity;
+import ru.tulupov.alex.pluggedin.activities.ShowReviewActivity;
 import ru.tulupov.alex.pluggedin.adapters.ArticleAdapter;
 
 import retrofit.RestAdapter;

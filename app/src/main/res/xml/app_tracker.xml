@@ -13,13 +13,13 @@
 
     <bool name="ga_reportUncaughtExceptions">true</bool>
 
-    <screenName name="ru.tulupov.alex.pluggedin.MainActivity">Main Activity</screenName>
-    <screenName name="ru.tulupov.alex.pluggedin.ShowReviewActivity">Show Review Activity</screenName>
-    <screenName name="ru.tulupov.alex.pluggedin.ShowArticleActivity">Show Article Activity</screenName>
-    <screenName name="ru.tulupov.alex.pluggedin.SettingActivity">Setting Activity</screenName>
-    <screenName name="ru.tulupov.alex.pluggedin.SearchResultsActivity">Search Results Activity</screenName>
-    <screenName name="ru.tulupov.alex.pluggedin.CommentActivity">Comment Activity</screenName>
-    <screenName name="ru.tulupov.alex.pluggedin.ShowImageActivity">Show Image Activity</screenName>
+    <screenName name="ru.tulupov.alex.pluggedin.activities.MainActivity">Main Activity</screenName>
+    <screenName name="ru.tulupov.alex.pluggedin.activities.ShowReviewActivity">Show Review Activity</screenName>
+    <screenName name="ru.tulupov.alex.pluggedin.activities.ShowArticleActivity">Show Article Activity</screenName>
+    <screenName name="ru.tulupov.alex.pluggedin.activities.SettingActivity">Setting Activity</screenName>
+    <screenName name="ru.tulupov.alex.pluggedin.activities.SearchResultsActivity">Search Results Activity</screenName>
+    <screenName name="ru.tulupov.alex.pluggedin.activities.CommentActivity">Comment Activity</screenName>
+    <screenName name="ru.tulupov.alex.pluggedin.activities.ShowImageActivity">Show Image Activity</screenName>
 
 
     <!--

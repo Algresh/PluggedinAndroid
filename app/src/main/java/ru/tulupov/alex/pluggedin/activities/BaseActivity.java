@@ -1,4 +1,4 @@
-package ru.tulupov.alex.pluggedin;
+package ru.tulupov.alex.pluggedin.activities;
 
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -35,6 +35,10 @@ public class BaseActivity extends AppCompatActivity {
                         break;
                     case R.id.settingsItem:
                         intent = new Intent(BaseActivity.this, SettingActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.calendarItem:
+                        intent = new Intent(BaseActivity.this, CalendarActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.socialNetworksVk:

@@ -1,4 +1,4 @@
-package ru.tulupov.alex.pluggedin;
+package ru.tulupov.alex.pluggedin.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

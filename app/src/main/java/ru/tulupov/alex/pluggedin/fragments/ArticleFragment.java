@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import ru.tulupov.alex.pluggedin.API.ArticleAPI;
 import com.example.alex.pluggedin.R;
-import ru.tulupov.alex.pluggedin.ShowArticleActivity;
+import ru.tulupov.alex.pluggedin.activities.ShowArticleActivity;
 import ru.tulupov.alex.pluggedin.adapters.ArticleAdapter;
 
 import retrofit.RestAdapter;

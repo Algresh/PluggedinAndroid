@@ -1,4 +1,4 @@
-package ru.tulupov.alex.pluggedin;
+package ru.tulupov.alex.pluggedin.activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,7 +8,7 @@ import com.example.alex.pluggedin.R;
 import ru.tulupov.alex.pluggedin.constants.Constants;
 import ru.tulupov.alex.pluggedin.fragments.ShowReviewFragment;
 //import ru.tulupov.alex.pluggedin.constants.Constants;
-import static ru.tulupov.alex.pluggedin.constants.Constants.*;
+
 
 public class ShowReviewActivity extends ShowBaseActivity {
 

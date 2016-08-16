@@ -10,8 +10,8 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.example.alex.pluggedin.R;
-import ru.tulupov.alex.pluggedin.ShowArticleActivity;
-import ru.tulupov.alex.pluggedin.ShowReviewActivity;
+import ru.tulupov.alex.pluggedin.activities.ShowArticleActivity;
+import ru.tulupov.alex.pluggedin.activities.ShowReviewActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

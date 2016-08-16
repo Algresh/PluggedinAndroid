@@ -8,15 +8,22 @@
         />
 
     <item
-        android:title="@string/settings"
+        android:title="@string/calendarItem"
         android:orderInCategory="2"
+        android:id="@+id/calendarItem"
+        android:icon="@drawable/calendar"
+        />
+
+    <item
+        android:title="@string/settings"
+        android:orderInCategory="3"
         android:id="@+id/settingsItem"
         android:icon="@drawable/settings"
         />
 
 
     <item android:title="@string/socialNetworks"
-        android:orderInCategory="2"
+        android:orderInCategory="4"
         >
         <menu>
             <item

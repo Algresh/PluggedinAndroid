@@ -14,10 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alex.pluggedin.R;
-import ru.tulupov.alex.pluggedin.SearchResultsActivity;
-import ru.tulupov.alex.pluggedin.ShowArticleActivity;
-import ru.tulupov.alex.pluggedin.ShowImageActivity;
-import ru.tulupov.alex.pluggedin.ShowReviewActivity;
+import ru.tulupov.alex.pluggedin.activities.SearchResultsActivity;
+import ru.tulupov.alex.pluggedin.activities.ShowArticleActivity;
+import ru.tulupov.alex.pluggedin.activities.ShowImageActivity;
+import ru.tulupov.alex.pluggedin.activities.ShowReviewActivity;
 
 import org.apmem.tools.layouts.FlowLayout;
 import org.json.JSONException;

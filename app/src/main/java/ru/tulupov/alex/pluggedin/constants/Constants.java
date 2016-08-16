@@ -29,11 +29,17 @@ public  class Constants {
     public static final int TAB_ARTICLE = 3;
     public static final int TAB_MEDIA = 4;
 
+    public static final int TAB_FILMS = 0;
+    public static final int TAB_GAMES = 1;
+
     public static final int TYPE_NEWS = 3;
     public static final int TYPE_INTERESTING = 1;
     public static final int TYPE_ARTICLE = 4;
     public static final int TYPE_MEDIA = 2;
     public static final int TYPE_REVIEW = 0;
+
+    public static final int TYPE_FILM = 1;
+    public static final int TYPE_GAME = 2;
 
     public static final String ID = "id";
     public static final String ID_ARTICLE = "idArticle";
