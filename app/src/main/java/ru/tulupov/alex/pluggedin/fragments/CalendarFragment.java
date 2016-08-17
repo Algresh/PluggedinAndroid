@@ -1,6 +1,7 @@
 package ru.tulupov.alex.pluggedin.fragments;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import java.util.List;
 
 
 import ru.tulupov.alex.pluggedin.adapters.CalendarAdapter;
+import ru.tulupov.alex.pluggedin.adapters.decorations.GridSpacingItemDecoration;
 import ru.tulupov.alex.pluggedin.constants.Constants;
 import ru.tulupov.alex.pluggedin.fragments.views.CalendarView;
 import ru.tulupov.alex.pluggedin.models.Calendar;
@@ -85,7 +88,9 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setAdapter(new CalendarAdapter(calendars, this, getContext()));
+
     }
 
     @Override
@@ -131,5 +136,13 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
             return true;
         }
         return false;
+    }
+
+    /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 }
