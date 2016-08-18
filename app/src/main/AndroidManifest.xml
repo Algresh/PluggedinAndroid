@@ -48,14 +48,14 @@
             android:name="ru.tulupov.alex.pluggedin.activities.ShowArticleActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_show_article"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.ShowImageActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AllBlack" />
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.SearchResultsActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.SettingActivity"
             android:launchMode="singleTask"
@@ -63,12 +63,18 @@
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.ShowReviewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.CommentActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="ru.tulupov.alex.pluggedin.activities.CalendarActivity"
+            android:label="@string/title_activity_calendar"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <service android:name="ru.tulupov.alex.pluggedin.services.SaveArticle" />
 
@@ -97,10 +103,7 @@
 
         <service android:name="com.google.android.gms.analytics.CampaignTrackingService" />
 
-        <activity
-            android:name="ru.tulupov.alex.pluggedin.activities.CalendarActivity"
-            android:label="@string/title_activity_calendar"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

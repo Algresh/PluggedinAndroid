@@ -109,6 +109,8 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
         FragmentManager manager = getActivity().getSupportFragmentManager();
         ShowCalendarItemFragment fragment = new ShowCalendarItemFragment();
         fragment.setCalendar(calendar);
+        fragment.setWidthScreen(getWidthScreen());
+//        fragment.onCreateAnimation(R.anim.showing_dialog,true, R.anim.showing_dialog);
         fragment.show(manager, Constants.DIALOG_SHOW_CALENDAR);
     }
 

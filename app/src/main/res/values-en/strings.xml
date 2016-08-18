@@ -43,6 +43,7 @@
     <string name="something_doesnt_work_again"> Something does not work again): </string>
     <string name="no_internet"> No internet access </string>
     <string name="addComment"> Add a comment </string>
+    <string name="findArticles"> find articles </string>
 
     <string name="fontSizeSetUp"> New font size of content was set up </string>
 

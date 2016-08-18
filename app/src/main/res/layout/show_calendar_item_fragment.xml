@@ -7,21 +7,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/showItemCalendarImage"
-        android:scaleType="centerCrop"/>
+        android:scaleType="fitStart"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/showItemCalendarTitle"/>
+        android:id="@+id/showItemCalendarTitle"
+        style="@style/showCalendar.Title"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/showItemCalendarDate"/>
+        android:id="@+id/showItemCalendarDate"
+        style="@style/showCalendar.Date"/>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/showItemCalendarBtn"/>
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:id="@+id/showItemCalendarBtn"
+            android:text="@string/findArticles"
+            style="@style/showCalendarButton.Search"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:id="@+id/showItemCalendarBtnClose"
+            android:text="@string/close"
+            style="@style/showCalendarButton.Close"/>
+    </LinearLayout>
 
 </LinearLayout>

@@ -130,4 +130,46 @@
         <item name="android:textSize"> 12sp </item>
     </style>
 
+    <style name="showCalendar">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <style name="showCalendar.Title" parent="showCalendar">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textSize"> 18sp </item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="showCalendar.Date" parent="showCalendar">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:textSize"> 14sp </item>
+    </style>
+
+    <style name="showCalendarButton">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="showCalendarButton.Search" parent="showCalendarButton">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">4dp</item>
+    </style>
+
+    <style name="showCalendarButton.Close" parent="showCalendarButton">
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <!--<style name="showCalendarTheme">-->
+        <!--<item name="android:popupAnimationStyle">@style/MyAnimation.Window</item>-->
+    <!--</style>-->
+
+    <!--<style name="MyAnimation.Window" parent="@android:style/Animation.Dialog">-->
+        <!--<item name="android:inAnimation">@anim/showing_dialog</item>-->
+        <!--&lt;!&ndash;<item name="android:windowExitAnimation">@anim/hiding_dialog</item>&ndash;&gt;-->
+    <!--</style>-->
+
 </resources>
