@@ -35,6 +35,14 @@ public class CalendarPresenter {
         }
     }
 
+    public void showCalendarByPosition(int position) {
+        if (dataCalendar != null) {
+            if (view != null) {
+                view.showCalendar(dataCalendar.get(position));
+            }
+        }
+    }
+
     public void onDestroy() {
         view = null;
     }

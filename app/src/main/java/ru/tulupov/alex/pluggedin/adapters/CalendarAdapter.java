@@ -1,6 +1,7 @@
 package ru.tulupov.alex.pluggedin.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,17 +22,18 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
     protected List<Calendar> listCalendar;
     protected View.OnClickListener clickListener;
     protected Context context;
+    protected int widthScreen;
 
     public CalendarAdapter(List<Calendar> listCalendar, View.OnClickListener clickListener, Context context) {
         this.listCalendar = listCalendar;
         this.clickListener = clickListener;
         this.context = context;
+        this.widthScreen = 0;
     }
 
     @Override
     public CalendarViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.calendar_item, parent, false);
-        view.setOnClickListener(clickListener);
         return new CalendarViewHolder(view);
     }
 
@@ -41,8 +43,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
 
         String file = item.getFile();
         String title = item.getTitle();
+        String date = item.getDate();
 
         holder.textCalendar.setText(title);
+        holder.dateCalendar.setText(date);
+        holder.cardView.setOnClickListener(clickListener);
 
         Picasso.with(context).load(Constants.URL_IMAGES + file).into(holder.imageCalendar);
     }
@@ -52,15 +57,33 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
         return listCalendar.size();
     }
 
+    public int getWidthScreen() {
+        return widthScreen;
+    }
+
+    public void setWidthScreen(int widthScreen) {
+        this.widthScreen = widthScreen;
+    }
+
+//    private int calculateImageWidth() {
+//        if (widthScreen != 0) {
+////            return widthScreen - 3 * 10 -
+//        }
+//    }
+
     public static class CalendarViewHolder extends RecyclerView.ViewHolder{
 
         TextView textCalendar;
+        TextView dateCalendar;
         ImageView imageCalendar;
+        CardView cardView;
 
         public CalendarViewHolder(View itemView) {
             super(itemView);
             textCalendar = (TextView) itemView.findViewById(R.id.calendarText);
+            dateCalendar = (TextView) itemView.findViewById(R.id.calendarDate);
             imageCalendar = (ImageView) itemView.findViewById(R.id.calendarImage);
+            cardView = (CardView) itemView.findViewById(R.id.cardViewCalendar);
         }
     }
 }

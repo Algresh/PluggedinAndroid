@@ -3,6 +3,8 @@ package ru.tulupov.alex.pluggedin.constants;
 
 public  class Constants {
 
+    public static final int CARD_CALENDAR_ID = -1;
+
     public static final String MY_TAG = "my_tag";
 
     public static final String DOMAIN = "http://pluggedin.ru";
@@ -87,5 +89,7 @@ public  class Constants {
     public static final float SMALL_TITLE = 16;
     public static final float SMALL_AUTHOR = 12;
     public static final float SMALL_TEXT = 12;
+
+    public static final String DIALOG_SHOW_CALENDAR = "showCalendar";
 
 }

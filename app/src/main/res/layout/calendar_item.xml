@@ -11,19 +11,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/calendarImage"
-            android:scaleType="fitCenter"/>
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/calendarText"
-            android:paddingLeft="16dp"/>
+            style="@style/itemCalendar.Text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/calendarDate"
+            style="@style/itemCalendar.Date"/>
+
     </LinearLayout>
 
 

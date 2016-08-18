@@ -2,16 +2,19 @@ package ru.tulupov.alex.pluggedin.fragments;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +41,8 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
 
     protected Button buttonTryAgain;
     protected RecyclerView recyclerView;
+    protected CalendarAdapter calendarAdapter;
+    protected GridLayoutManager layoutManager;
 
     protected CalendarPresenter presenter;
 
@@ -70,6 +75,9 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         if (view.getId() == R.id.buttonTryAgain) {
             presenter.downloadCalendar(typeCalendar);
+        } else if(view.getId() == R.id.cardViewCalendar) {
+            int position = recyclerView.getChildAdapterPosition(view);
+            presenter.showCalendarByPosition(position);
         }
     }
 
@@ -86,16 +94,22 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
         recyclerView.setVisibility(View.VISIBLE);
         buttonTryAgain.setVisibility(View.GONE);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        layoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setAdapter(new CalendarAdapter(calendars, this, getContext()));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(6), true));
+
+        calendarAdapter = new CalendarAdapter(calendars, this, getContext());
+//        calendarAdapter.setWidthScreen(getWidthScreen());
+        recyclerView.setAdapter(calendarAdapter);
 
     }
 
     @Override
     public void showCalendar(Calendar calendar) {
-
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        ShowCalendarItemFragment fragment = new ShowCalendarItemFragment();
+        fragment.setCalendar(calendar);
+        fragment.show(manager, Constants.DIALOG_SHOW_CALENDAR);
     }
 
     @Override
@@ -144,5 +158,13 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    private int getWidthScreen() {
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
+        return size.x;
     }
 }
