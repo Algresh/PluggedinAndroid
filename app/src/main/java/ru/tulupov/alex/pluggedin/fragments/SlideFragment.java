@@ -26,7 +26,7 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
     protected ClickSlideImageListener clickListener;
 
     public interface ClickSlideImageListener {
-        void onClickSlideImage(int position);
+        void onClickSlideImage(String link);
     }
 
     public static SlideFragment getInstance (Slide slide) {
@@ -60,7 +60,7 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        clickListener.onClickSlideImage(dataSlide.getId());
+        clickListener.onClickSlideImage(dataSlide.getLink());
     }
 
     @Override

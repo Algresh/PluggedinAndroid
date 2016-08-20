@@ -96,6 +96,8 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
         latinTitle = latinTitle.replace("%C2%BB", "»");//!
         latinTitle = latinTitle.replace("%22", "\"");//!
         latinTitle = latinTitle.replace("%27", "\'");//!
+        latinTitle = latinTitle.replace("%28", "(");//!
+        latinTitle = latinTitle.replace("%29", ")");//!
         latinTitle = latinTitle.replace("%E2%80%94", "—");//!
         return latinTitle;
 
@@ -164,13 +166,18 @@ public abstract class ShowBaseFragment extends Fragment implements View.OnClickL
             @Override
             public void success(Response response, Response another) {
                 InputStream inputStream;
-                int idArticle;
-                int type;
+                int idArticle = -1;
+                int type = -1;
                 try {
-                    inputStream = response.getBody().in();
-                    Map<String, Integer> map = convertBytesArray(inputStream);
-                    idArticle = map.get(ID_ARTICLE);
-                    type = map.get(TYPE);
+                    try {
+                        inputStream = response.getBody().in();
+                        Map<String, Integer> map = convertBytesArray(inputStream);
+                        idArticle = map.get(ID_ARTICLE);
+                        type = map.get(TYPE);
+                    } catch (NullPointerException e) {
+
+                    }
+
 
                     if(idArticle > 0) {
                         Intent intent;

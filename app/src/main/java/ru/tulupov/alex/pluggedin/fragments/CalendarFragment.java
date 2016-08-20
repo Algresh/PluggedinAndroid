@@ -1,5 +1,6 @@
 package ru.tulupov.alex.pluggedin.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -45,6 +46,11 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
     protected GridLayoutManager layoutManager;
 
     protected CalendarPresenter presenter;
+    private NoConnectable noConnectable;
+
+    public interface NoConnectable {
+        void tryAccessAgain();
+    }
 
     public static CalendarFragment getInstance(int type) {
         CalendarFragment fragment =  new CalendarFragment();
@@ -75,6 +81,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         if (view.getId() == R.id.buttonTryAgain) {
             presenter.downloadCalendar(typeCalendar);
+            noConnectable.tryAccessAgain();
         } else if(view.getId() == R.id.cardViewCalendar) {
             int position = recyclerView.getChildAdapterPosition(view);
             presenter.showCalendarByPosition(position);
@@ -168,5 +175,11 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
         display.getSize(size);
 
         return size.x;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        noConnectable = (NoConnectable) activity;
     }
 }
