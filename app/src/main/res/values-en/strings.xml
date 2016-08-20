@@ -79,5 +79,11 @@
         <item> Large </item>
     </string-array>
 
+    <string-array name="tab_titles_calendar">
+        <item> Films </item>
+        <item> Games </item>
+    </string-array>
+
+
     <string name="title_activity_show_article">ShowArticleActivity</string>
 </resources>

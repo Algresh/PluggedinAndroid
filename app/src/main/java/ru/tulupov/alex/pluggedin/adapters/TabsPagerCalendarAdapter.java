@@ -11,8 +11,11 @@ import ru.tulupov.alex.pluggedin.fragments.CalendarFragment;
 
 public class TabsPagerCalendarAdapter extends FragmentPagerAdapter {
 
-    public TabsPagerCalendarAdapter(FragmentManager fm) {
+    private String tabs[];
+
+    public TabsPagerCalendarAdapter(FragmentManager fm, String[] tabs) {
         super(fm);
+        this.tabs = tabs;
     }
 
     @Override
@@ -30,4 +33,9 @@ public class TabsPagerCalendarAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 2;
     }
+
+//    @Override
+//    public CharSequence getPageTitle(int position) {
+//        return tabs[position];
+//    }
 }

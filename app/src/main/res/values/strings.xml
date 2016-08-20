@@ -79,6 +79,11 @@
         <item> Большой </item>
     </string-array>
 
+    <string-array name="tab_titles_calendar">
+        <item> Кино </item>
+        <item> Игры </item>
+    </string-array>
+
     <string name="title_activity_show_article">ShowArticleActivity</string>
     <string name="title_activity_calendar">CalendarActivity</string>
 </resources>

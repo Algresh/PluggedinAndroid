@@ -163,6 +163,10 @@
         <item name="android:layout_marginRight">16dp</item>
     </style>
 
+    <style name="tabCalendarText">
+        <item name="android:textSize">24sp</item>
+    </style>
+
     <!--<style name="showCalendarTheme">-->
         <!--<item name="android:popupAnimationStyle">@style/MyAnimation.Window</item>-->
     <!--</style>-->
