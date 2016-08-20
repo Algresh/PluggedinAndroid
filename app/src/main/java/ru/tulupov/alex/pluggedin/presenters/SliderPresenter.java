@@ -22,12 +22,12 @@ public class SliderPresenter {
         this.initAPI();
     }
 
-    public void downloadSlide(int numSlide) {
+    public void downloadSlider() {
         if (view != null) {
             if (dataSlider != null) {
-                view.setupSlide(dataSlider.get(numSlide));
+                view.initSlider(dataSlider);
             } else {
-                this.downloadSliderData(numSlide);
+                this.downloadSliderData();
             }
         }
     }
@@ -41,14 +41,14 @@ public class SliderPresenter {
         api = adapter.create(SliderAPI.class);
     }
 
-    protected void downloadSliderData (final int numSlideToShow) {
+    protected void downloadSliderData () {
         api.getSlider(new Callback<List<Slide>>() {
             @Override
             public void success(List<Slide> slides, Response response) {
                 if (view != null){
                     if (slides != null) {
                         dataSlider = slides;
-                        view.setupSlide(dataSlider.get(numSlideToShow));
+                        view.initSlider(slides);
                     } else {
                         view.failDownloading();
                     }

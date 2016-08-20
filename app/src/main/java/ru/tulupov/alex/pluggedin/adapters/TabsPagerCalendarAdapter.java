@@ -31,7 +31,7 @@ public class TabsPagerCalendarAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return tabs.length;
     }
 
 //    @Override
