@@ -25,17 +25,30 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import ru.tulupov.alex.pluggedin.fragments.views.ShowBaseView;
+import ru.tulupov.alex.pluggedin.presenters.ShowBasePresenter;
 
 import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ShowBaseView{
 
+    ShowBasePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        presenter = new ShowBasePresenter(this);
+        try {
+            Intent intent = getIntent();
+            String utl = intent.getData().toString();
+            presenter.showArticleOrReviewByURL(utl);
+        } catch (Exception e) {
+            Log.d(MY_TAG, "main: fail");
+        }
+
 
         String title = getResources().getString(R.string.categories);
         initToolbar(title, R.id.toolbarReview);
@@ -47,7 +60,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(MY_TAG, "onNewIntent");
+        String utl = intent.getData().toString();
+        presenter.showArticleOrReviewByURL(utl);
+        Log.d(MY_TAG, "newIntent");
     }
 
     @Override
@@ -177,4 +192,22 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void showArticle(int id) {
+        Intent intent = new Intent(this, ShowArticleActivity.class);
+        intent.putExtra(ID, id);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showReview(int id) {
+        Intent intent = new Intent(this, ShowReviewActivity.class);
+        intent.putExtra(ID_REVIEW, id);
+        startActivity(intent);
+    }
+
+    @Override
+    public void failShow() {
+
+    }
 }

@@ -1,10 +1,9 @@
 package ru.tulupov.alex.pluggedin.presenters;
 
-
 import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 import retrofit.Callback;
@@ -12,29 +11,25 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import ru.tulupov.alex.pluggedin.API.ArticleAPI;
-import ru.tulupov.alex.pluggedin.API.SliderAPI;
 import ru.tulupov.alex.pluggedin.constants.Constants;
-import ru.tulupov.alex.pluggedin.fragments.views.SliderView;
-import ru.tulupov.alex.pluggedin.models.Slide;
+import ru.tulupov.alex.pluggedin.fragments.views.ShowBaseView;
 
 import static ru.tulupov.alex.pluggedin.constants.Constants.ID_ARTICLE;
 import static ru.tulupov.alex.pluggedin.constants.Constants.MY_TAG;
 import static ru.tulupov.alex.pluggedin.constants.Constants.TYPE;
 import static ru.tulupov.alex.pluggedin.constants.Constants.TYPE_REVIEW;
 
-public class SliderPresenter extends BasePresenter {
+public class ShowBasePresenter extends BasePresenter{
 
-    private SliderAPI api;
     private ArticleAPI apiArticle;
-    private SliderView view;
-    private List<Slide> dataSlider;
+    private ShowBaseView view;
 
-    public SliderPresenter(SliderView view) {
+    public ShowBasePresenter(ShowBaseView view) {
         this.view = view;
         this.initAPI();
     }
 
-    public void clickSlideImage(String url) {
+    public void showArticleOrReviewByURL(String url) {
         String[] arrUrl = url.split("/");
         String latinTitle = arrUrl[arrUrl.length - 1];
         latinTitle = convertHexSubStringsToNormalString(latinTitle);
@@ -78,47 +73,8 @@ public class SliderPresenter extends BasePresenter {
         });
     }
 
-    public void downloadSlider() {
-        if (view != null) {
-            if (dataSlider != null) {
-                view.initSlider(dataSlider);
-            } else {
-                this.downloadSliderData();
-            }
-        }
-    }
-
-    public void onDestroy() {
-        view = null;
-    }
-
     protected void initAPI() {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(Constants.DOMAIN).build();
-        api = adapter.create(SliderAPI.class);
         apiArticle = adapter.create(ArticleAPI.class);
     }
-
-    protected void downloadSliderData () {
-        api.getSlider(new Callback<List<Slide>>() {
-            @Override
-            public void success(List<Slide> slides, Response response) {
-                if (view != null){
-                    if (slides != null) {
-                        dataSlider = slides;
-                        view.initSlider(slides);
-                    } else {
-                        view.failDownloading();
-                    }
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                if (view != null) {
-                    view.failDownloading();
-                }
-            }
-        });
-    }
-
 }
