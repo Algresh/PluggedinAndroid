@@ -7,13 +7,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 
 import ru.tulupov.alex.pluggedin.fragments.ChoiceFontDialogFragment;
 
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 public class SettingActivity extends BaseActivity
         implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
@@ -32,15 +33,15 @@ public class SettingActivity extends BaseActivity
         initToolbar(title, R.id.toolbarSettings);
         initNavigationView();
 
-        sharedPreferences = getSharedPreferences(Constants.APP_PREFERENCES, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE);
         boolean permissionNotify =
-                sharedPreferences.getBoolean(Constants.APP_PREFERENCES_SENT_NOTIFY_PERMISSION, true);
+                sharedPreferences.getBoolean(APP_PREFERENCES_SENT_NOTIFY_PERMISSION, true);
 
         boolean permissionSound =
-                sharedPreferences.getBoolean(Constants.APP_PREFERENCES_SOUND_NOTIFY_PERMISSION, false);
+                sharedPreferences.getBoolean(APP_PREFERENCES_SOUND_NOTIFY_PERMISSION, false);
 
         boolean permissionChromeCustomTabs =
-                sharedPreferences.getBoolean(Constants.APP_PREFERENCES_CHROME_TABS, false);
+                sharedPreferences.getBoolean(APP_PREFERENCES_CHROME_TABS, false);
 
         switchNotifyPermission = (SwitchCompat) findViewById(R.id.switchNotifyPermission);
         if (switchNotifyPermission != null) {
@@ -60,6 +61,9 @@ public class SettingActivity extends BaseActivity
 
         findViewById(R.id.fontSize).setOnClickListener(this);
         findViewById(R.id.emailDevelopers).setOnClickListener(this);
+
+        LinearLayout chromeTxtLay = (LinearLayout) findViewById(R.id.chromeTabTextContainer);
+        chromeTxtLay.getLayoutParams().width = getWidthScreen() / 10 * 7;
 
     }
 
@@ -94,7 +98,7 @@ public class SettingActivity extends BaseActivity
 
     private void setPermissionNotify(boolean permission) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(Constants.APP_PREFERENCES_SENT_NOTIFY_PERMISSION, permission);
+        editor.putBoolean(APP_PREFERENCES_SENT_NOTIFY_PERMISSION, permission);
         editor.apply();
         String str;
         if (permission) {
@@ -107,7 +111,7 @@ public class SettingActivity extends BaseActivity
 
     private void setPermissionSound(boolean permission) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(Constants.APP_PREFERENCES_SOUND_NOTIFY_PERMISSION, permission);
+        editor.putBoolean(APP_PREFERENCES_SOUND_NOTIFY_PERMISSION, permission);
         editor.apply();
         String str;
         if (permission) {
@@ -120,7 +124,7 @@ public class SettingActivity extends BaseActivity
 
     private void setPermissionChromeTabs(boolean permission) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(Constants.APP_PREFERENCES_CHROME_TABS, permission);
+        editor.putBoolean(APP_PREFERENCES_CHROME_TABS, permission);
         editor.apply();
         String str;
         if (permission) {

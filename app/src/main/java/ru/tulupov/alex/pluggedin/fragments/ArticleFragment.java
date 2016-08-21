@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ru.tulupov.alex.pluggedin.API.ArticleAPI;
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 import ru.tulupov.alex.pluggedin.activities.ShowArticleActivity;
 import ru.tulupov.alex.pluggedin.adapters.ArticleAdapter;
 
 import retrofit.RestAdapter;
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 public class ArticleFragment extends BasePageFragment {
 
@@ -33,7 +33,7 @@ public class ArticleFragment extends BasePageFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            type = savedInstanceState.getInt(Constants.TYPE);
+            type = savedInstanceState.getInt(TYPE);
         }
 
         return super.onCreateView(inflater, container, savedInstanceState);
@@ -45,18 +45,18 @@ public class ArticleFragment extends BasePageFragment {
 
     @Override
     protected void initAPI() {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(Constants.DOMAIN).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
         articleAPI = adapter.create(ArticleAPI.class);
     }
 
     @Override
     public void connectNetwork(int page) {
-        if (page == Constants.FIRST_PAGE) {
+        if (page == FIRST_PAGE) {
             articleAPI.getFirstListArticlesByType(type, getCallbackArticle(page));
         } else {
             ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
 
-            if(page == Constants.UPDATE_PAGE) {
+            if(page == UPDATE_PAGE) {
                 int firstID = adapter.getIdFirstItem();
                 articleAPI.getListUpdateArticlesByType(firstID, type, getCallbackArticle(page));
             } else {
@@ -70,7 +70,7 @@ public class ArticleFragment extends BasePageFragment {
     @Override
     public void onRefresh() {
         refreshLayout.setRefreshing(true);
-        connectNetwork(Constants.UPDATE_PAGE);
+        connectNetwork(UPDATE_PAGE);
         linearManager.scrollToPosition(0);
         refreshLayout.setRefreshing(false);
     }
@@ -78,11 +78,11 @@ public class ArticleFragment extends BasePageFragment {
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.buttonTryAgain) {
-            connectNetwork(Constants.FIRST_PAGE);
+            connectNetwork(FIRST_PAGE);
         } else {
             Intent intent = new Intent(getContext(), ShowArticleActivity.class);
             int idArticle = (Integer) v.findViewById(R.id.cardView).getTag();
-            intent.putExtra(Constants.ID, idArticle);
+            intent.putExtra(ID, idArticle);
             getContext().startActivity(intent);
         }
 
@@ -91,6 +91,6 @@ public class ArticleFragment extends BasePageFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(Constants.TYPE, type);
+        outState.putInt(TYPE, type);
     }
 }

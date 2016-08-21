@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.alex.pluggedin">
+    package="ru.tulupov.alex.pluggedin">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -47,10 +47,12 @@
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.ShowArticleActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:resizeableActivity="true"
             android:label="@string/title_activity_show_article"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.ShowImageActivity"
+            android:resizeableActivity="true"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AllBlack" />
         <activity
@@ -58,19 +60,23 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.SettingActivity"
+            android:resizeableActivity="true"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.ShowReviewActivity"
+            android:resizeableActivity="true"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.CommentActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:resizeableActivity="true"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="ru.tulupov.alex.pluggedin.activities.CalendarActivity"
+            android:resizeableActivity="true"
             android:label="@string/title_activity_calendar"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"

@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import android.view.MenuItem;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 
 import ru.tulupov.alex.pluggedin.fragments.ShowArticleFragment;
 import static ru.tulupov.alex.pluggedin.constants.Constants.*;

@@ -91,5 +91,6 @@ public  class Constants {
     public static final float SMALL_TEXT = 12;
 
     public static final String DIALOG_SHOW_CALENDAR = "showCalendar";
+    public static final String DOT_HTML = "&#8226;";
 
 }

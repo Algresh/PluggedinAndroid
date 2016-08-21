@@ -9,18 +9,14 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 import com.squareup.picasso.Picasso;
 
 import ru.tulupov.alex.pluggedin.activities.SearchResultsActivity;
-import ru.tulupov.alex.pluggedin.constants.Constants;
 import ru.tulupov.alex.pluggedin.models.Calendar;
 
 import static ru.tulupov.alex.pluggedin.constants.Constants.SEARCH_QUERY;

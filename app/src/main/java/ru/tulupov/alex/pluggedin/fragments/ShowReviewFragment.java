@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ru.tulupov.alex.pluggedin.API.ReviewAPI;
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 import ru.tulupov.alex.pluggedin.chrome.CustomTabActivityHelper;
 import ru.tulupov.alex.pluggedin.models.Keyword;
 import ru.tulupov.alex.pluggedin.models.Review;

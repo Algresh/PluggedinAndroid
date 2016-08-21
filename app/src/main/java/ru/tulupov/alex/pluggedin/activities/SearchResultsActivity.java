@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import ru.tulupov.alex.pluggedin.API.ArticleAPI;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 
 import ru.tulupov.alex.pluggedin.adapters.ArticleAdapter;
 import ru.tulupov.alex.pluggedin.adapters.fontsizes.ChangeableFontSize;
@@ -29,7 +29,7 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 public class SearchResultsActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -41,12 +41,12 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
-        query = getIntent().getStringExtra(Constants.SEARCH_QUERY);
+        query = getIntent().getStringExtra(SEARCH_QUERY);
         if(query != null) {
-            connectNetworkSearch(Constants.FIRST_PAGE);
+            connectNetworkSearch(FIRST_PAGE);
         } else {
-            query = getIntent().getStringExtra(Constants.KEYWORD_QUERY);
-            connectNetworkKeyword(Constants.FIRST_PAGE);
+            query = getIntent().getStringExtra(KEYWORD_QUERY);
+            connectNetworkKeyword(FIRST_PAGE);
         }
         initToolbar();
     }
@@ -56,11 +56,11 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
         int idArticle = (Integer) v.findViewById(R.id.cardView).getTag();
         if (idArticle > 0) {// если id отрицательное значит это обзор
             Intent intent = new Intent(this, ShowArticleActivity.class);
-            intent.putExtra(Constants.ID, idArticle);
+            intent.putExtra(ID, idArticle);
             startActivity(intent);
         } else if (idArticle < 0) {
             Intent intent = new Intent(this, ShowReviewActivity.class);
-            intent.putExtra(Constants.ID_REVIEW, idArticle * (-1));
+            intent.putExtra(ID_REVIEW, idArticle * (-1));
             startActivity(intent);
         }
     }
@@ -75,13 +75,13 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     }
 
     private void connectNetworkKeyword(int pages) {
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(Constants.DOMAIN).build();
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
         articleAPI = restAdapter.create(ArticleAPI.class);
         articleAPI.getListArticlesByKeyword(query, pages, getCallable());
     }
 
     private void connectNetworkSearch(int pages) {
-        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(Constants.DOMAIN).build();
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
         articleAPI = restAdapter.create(ArticleAPI.class);
         articleAPI.getListArticlesBySearch(query, pages, getCallable());
     }
@@ -135,9 +135,9 @@ public class SearchResultsActivity extends AppCompatActivity implements View.OnC
     }
 
     protected ChangeableFontSize getFontSizeParameter() {
-        SharedPreferences pref = getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
-        float fontSize = pref.getFloat(Constants.APP_PREFERENCES_FONT_SIZE, Constants.FONT_SIZE_NORMAL);
+        float fontSize = pref.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
         return new FontSizesParameter(fontSize);
     }
 

@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import ru.tulupov.alex.pluggedin.fragments.ArticleFragment;
 import ru.tulupov.alex.pluggedin.fragments.ReviewFragment;
 
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
@@ -23,10 +23,10 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     public TabsPagerAdapter(FragmentManager fm, String[] tabsTitle) {
         super(fm);
         reviewFragment = ReviewFragment.getInstance();
-        newsFragment = ArticleFragment.getInstance(Constants.TYPE_NEWS);
-        interestingFragment = ArticleFragment.getInstance(Constants.TYPE_INTERESTING);
-        mediaFragment = ArticleFragment.getInstance(Constants.TYPE_MEDIA);
-        articleFragment = ArticleFragment.getInstance(Constants.TYPE_ARTICLE);
+        newsFragment = ArticleFragment.getInstance(TYPE_NEWS);
+        interestingFragment = ArticleFragment.getInstance(TYPE_INTERESTING);
+        mediaFragment = ArticleFragment.getInstance(TYPE_MEDIA);
+        articleFragment = ArticleFragment.getInstance(TYPE_ARTICLE);
 
         tabs = tabsTitle;
     }
@@ -35,15 +35,15 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 
         switch (position) {
-            case Constants.TAB_REVIEW:
+            case TAB_REVIEW:
                 return reviewFragment;
-            case Constants.TAB_NEWS:
+            case TAB_NEWS:
                 return newsFragment;
-            case Constants.TAB_INTERESTING:
+            case TAB_INTERESTING:
                 return interestingFragment;
-            case Constants.TAB_ARTICLE :
+            case TAB_ARTICLE :
                 return articleFragment;
-            case Constants.TAB_MEDIA:
+            case TAB_MEDIA:
                 return mediaFragment;
 
         }

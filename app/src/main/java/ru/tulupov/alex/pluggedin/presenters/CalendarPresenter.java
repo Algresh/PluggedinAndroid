@@ -8,7 +8,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import ru.tulupov.alex.pluggedin.API.CalendarAPI;
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 import ru.tulupov.alex.pluggedin.fragments.views.CalendarView;
 import ru.tulupov.alex.pluggedin.models.Calendar;
 
@@ -27,9 +27,9 @@ public class CalendarPresenter {
     public void downloadCalendar(int type) {
 
         if (view != null) {
-            if (type == Constants.TYPE_FILM) {
+            if (type == TYPE_FILM) {
                 calendarAPI.getFilms(this.getCallback());
-            } else if(type == Constants.TYPE_GAME) {
+            } else if(type == TYPE_GAME) {
                 calendarAPI.getGames(this.getCallback());
             }
         }
@@ -48,7 +48,7 @@ public class CalendarPresenter {
     }
 
     private void initApi() {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(Constants.DOMAIN).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(DOMAIN).build();
         calendarAPI = adapter.create(CalendarAPI.class);
     }
 

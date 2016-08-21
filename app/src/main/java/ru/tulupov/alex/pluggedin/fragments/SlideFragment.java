@@ -1,19 +1,24 @@
 package ru.tulupov.alex.pluggedin.fragments;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 import com.squareup.picasso.Picasso;
 
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.MY_TAG;
+import static ru.tulupov.alex.pluggedin.constants.Constants.URL_IMAGES;
 import ru.tulupov.alex.pluggedin.models.Slide;
 
 public class SlideFragment extends Fragment implements View.OnClickListener {
@@ -24,6 +29,8 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
     protected TextView slideText;
     protected Slide dataSlide;
     protected ClickSlideImageListener clickListener;
+
+    protected int widthScreen = 0;
 
     public interface ClickSlideImageListener {
         void onClickSlideImage(String link);
@@ -70,9 +77,51 @@ public class SlideFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initViews() {
-        Picasso.with(getContext()).load(Constants.URL_IMAGES + dataSlide.getFile()).into(slideImage);
-        slideText.setText(dataSlide.getText());
+        Picasso.with(getContext()).load(URL_IMAGES + dataSlide.getFile()).into(slideImage);
+        try {
+            String str = dataSlide.getText();
+            int maxWidth = maxLengthSlideText(str);
+            if (maxWidth < str.length()) {
+                str = str.substring(0, maxWidth) + "...";
+            }
+
+            slideText.setText(str);
+        } catch (NullPointerException e) {
+            slideText.setVisibility(View.GONE);
+        }
+
     }
+
+    protected int maxLengthSlideText (String str) {
+        int width = getWidthScreen();
+        width =  pxToDp(((width - 32) / 18) * 2);
+
+        if (str.length() > width) {
+            for (; width >= 0; width--) {
+                if (str.charAt(width) == ' ') break;
+            }
+        }
+
+        return width;
+    }
+
+    protected int getWidthScreen() {
+        if (widthScreen == 0) {
+            Display display = getActivity().getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            widthScreen = size.x;
+        }
+
+        return widthScreen;
+    }
+
+    protected int pxToDp(int px) {
+        DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+        int dp = Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return dp;
+    }
+
 
 
 }

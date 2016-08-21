@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 import ru.tulupov.alex.pluggedin.fragments.CalendarFragment;
 
 
@@ -21,10 +21,10 @@ public class TabsPagerCalendarAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case Constants.TAB_FILMS:
-                return CalendarFragment.getInstance(Constants.TYPE_FILM);
-            case Constants.TAB_GAMES:
-                return CalendarFragment.getInstance(Constants.TYPE_GAME);
+            case TAB_FILMS:
+                return CalendarFragment.getInstance(TYPE_FILM);
+            case TAB_GAMES:
+                return CalendarFragment.getInstance(TYPE_GAME);
         }
         return null;
     }

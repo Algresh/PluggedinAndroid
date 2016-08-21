@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
@@ -22,14 +21,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 
 import java.util.List;
 
 
 import ru.tulupov.alex.pluggedin.adapters.CalendarAdapter;
 import ru.tulupov.alex.pluggedin.adapters.decorations.GridSpacingItemDecoration;
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 import ru.tulupov.alex.pluggedin.fragments.views.CalendarView;
 import ru.tulupov.alex.pluggedin.models.Calendar;
 import ru.tulupov.alex.pluggedin.presenters.CalendarPresenter;
@@ -63,7 +62,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            typeCalendar = savedInstanceState.getInt(Constants.TYPE);
+            typeCalendar = savedInstanceState.getInt(TYPE);
         }
 
         View view = inflater.inflate(LAYOUT, container, false);
@@ -118,7 +117,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
         fragment.setCalendar(calendar);
         fragment.setWidthScreen(getWidthScreen());
 //        fragment.onCreateAnimation(R.anim.showing_dialog,true, R.anim.showing_dialog);
-        fragment.show(manager, Constants.DIALOG_SHOW_CALENDAR);
+        fragment.show(manager, DIALOG_SHOW_CALENDAR);
     }
 
     @Override
@@ -138,7 +137,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(Constants.TYPE, typeCalendar);
+        outState.putInt(TYPE, typeCalendar);
     }
 
     @Override
@@ -161,9 +160,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
         return false;
     }
 
-    /**
-     * Converting dp to pixel
-     */
+
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));

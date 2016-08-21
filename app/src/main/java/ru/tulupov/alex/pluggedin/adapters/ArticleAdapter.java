@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 import ru.tulupov.alex.pluggedin.adapters.fontsizes.ChangeableFontSize;
 import ru.tulupov.alex.pluggedin.models.Article;
 import com.squareup.picasso.Picasso;

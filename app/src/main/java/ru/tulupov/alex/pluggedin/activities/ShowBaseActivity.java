@@ -9,11 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 
 import ru.tulupov.alex.pluggedin.fragments.ShowBaseFragment;
 
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 
 public class ShowBaseActivity extends AppCompatActivity
@@ -33,7 +33,7 @@ public class ShowBaseActivity extends AppCompatActivity
     protected void copyLink(String title, String urlOpen) {
         if (title != null) {
             ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-            clipboardManager.setPrimaryClip(ClipData.newPlainText(Constants.CLIP_LABEL, urlOpen + title));
+            clipboardManager.setPrimaryClip(ClipData.newPlainText(CLIP_LABEL, urlOpen + title));
         }
     }
 
@@ -48,7 +48,7 @@ public class ShowBaseActivity extends AppCompatActivity
     protected void shareLink (String title, String urlOpen) {
         if (title != null) {
             Intent intentShare = new Intent(Intent.ACTION_SEND);
-            intentShare.setType(Constants.TEXT_PLAIN);
+            intentShare.setType(TEXT_PLAIN);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 intentShare.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
@@ -72,7 +72,7 @@ public class ShowBaseActivity extends AppCompatActivity
 
     protected void addComment () {
         Intent intent = new Intent(this, CommentActivity.class);
-        intent.putExtra(Constants.LATIN_TITLE, latinTitle);
+        intent.putExtra(LATIN_TITLE, latinTitle);
         startActivity(intent);
     }
 

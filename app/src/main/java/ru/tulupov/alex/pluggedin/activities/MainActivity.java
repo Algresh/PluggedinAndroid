@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import ru.tulupov.alex.pluggedin.API.FcmAPI;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 
 import ru.tulupov.alex.pluggedin.adapters.TabsPagerAdapter;
 import com.google.android.gms.common.ConnectionResult;

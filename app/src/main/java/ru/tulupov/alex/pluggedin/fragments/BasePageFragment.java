@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 import ru.tulupov.alex.pluggedin.adapters.fontsizes.ChangeableFontSize;
 import ru.tulupov.alex.pluggedin.adapters.fontsizes.FontSizesParameter;
 import ru.tulupov.alex.pluggedin.models.Article;
@@ -29,7 +29,7 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 
 public abstract class BasePageFragment extends Fragment
@@ -43,8 +43,8 @@ public abstract class BasePageFragment extends Fragment
 
     protected RecyclerView recyclerView;
 
-    protected int pages = Constants.FIRST_PAGE;
-    protected int lastDownloadPages = Constants.FIRST_PAGE;
+    protected int pages = FIRST_PAGE;
+    protected int lastDownloadPages = FIRST_PAGE;
 
 
     protected SwipeRefreshLayout refreshLayout;
@@ -66,7 +66,7 @@ public abstract class BasePageFragment extends Fragment
             refreshLayout.setOnRefreshListener(this);
         }
 
-        connectNetwork(Constants.FIRST_PAGE);
+        connectNetwork(FIRST_PAGE);
         addNewItemsByScroll();
         return view;
     }
@@ -115,7 +115,7 @@ public abstract class BasePageFragment extends Fragment
 
     protected void successArticle(final int page, List<Article> reviews) {
         countToast = 0;
-        if (page == Constants.FIRST_PAGE) {
+        if (page == FIRST_PAGE) {
             buttonTryAgain.setVisibility(View.GONE);
             refreshLayout.setVisibility(View.VISIBLE);
 
@@ -127,7 +127,7 @@ public abstract class BasePageFragment extends Fragment
             recyclerView.setAdapter(adapter);
         } else {
             ArticleAdapter adapter = (ArticleAdapter) recyclerView.getAdapter();
-            if (page == Constants.UPDATE_PAGE) {
+            if (page == UPDATE_PAGE) {
                 if (reviews != null && reviews.size() > 0) {
                     adapter.addToTop(reviews);
                 }
@@ -141,7 +141,7 @@ public abstract class BasePageFragment extends Fragment
     }
 
     protected void failureArticle(final int page) {
-        if(page == Constants.FIRST_PAGE) {
+        if(page == FIRST_PAGE) {
             refreshLayout.setVisibility(View.GONE);
             buttonTryAgain.setVisibility(View.VISIBLE);
         } else {
@@ -180,9 +180,9 @@ public abstract class BasePageFragment extends Fragment
 
     protected ChangeableFontSize getFontSizeParameter() {
         SharedPreferences pref =
-                getActivity().getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE);
+                getActivity().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
-        float fontSize = pref.getFloat(Constants.APP_PREFERENCES_FONT_SIZE, Constants.FONT_SIZE_NORMAL);
+        float fontSize = pref.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
         return new FontSizesParameter(fontSize);
     }
 

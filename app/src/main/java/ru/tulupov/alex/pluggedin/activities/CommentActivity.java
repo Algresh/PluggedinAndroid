@@ -7,9 +7,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 public class CommentActivity extends AppCompatActivity {
 
@@ -19,11 +19,11 @@ public class CommentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comment);
 
         Intent intent = getIntent();
-        String latinTitle = intent.getStringExtra(Constants.LATIN_TITLE);
+        String latinTitle = intent.getStringExtra(LATIN_TITLE);
 
         WebView commentWV = (WebView) findViewById(R.id.commentWebView);
         commentWV.getSettings().setJavaScriptEnabled(true);
-        commentWV.loadUrl(Constants.URL_COMMENT + latinTitle);
+        commentWV.loadUrl(URL_COMMENT + latinTitle);
 
         initToolbar();
     }

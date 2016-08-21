@@ -2,7 +2,7 @@ package ru.tulupov.alex.pluggedin;
 
 import android.content.Context;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 

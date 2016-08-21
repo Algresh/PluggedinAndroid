@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 import ru.tulupov.alex.pluggedin.activities.SearchResultsActivity;
 import ru.tulupov.alex.pluggedin.activities.ShowArticleActivity;
 import ru.tulupov.alex.pluggedin.activities.ShowImageActivity;

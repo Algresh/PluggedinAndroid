@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 import ru.tulupov.alex.pluggedin.models.Calendar;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>{
@@ -49,7 +49,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
         holder.dateCalendar.setText(date);
         holder.cardView.setOnClickListener(clickListener);
 
-        Picasso.with(context).load(Constants.URL_IMAGES + file).into(holder.imageCalendar);
+        Picasso.with(context).load(URL_IMAGES + file).resize(320, 240).into(holder.imageCalendar);
     }
 
     @Override

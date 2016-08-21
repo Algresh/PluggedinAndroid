@@ -6,18 +6,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.alex.pluggedin.R;
-import com.squareup.picasso.Picasso;
+import ru.tulupov.alex.pluggedin.R;
 
 import java.util.List;
 
@@ -30,9 +26,7 @@ import ru.tulupov.alex.pluggedin.fragments.views.SliderView;
 import ru.tulupov.alex.pluggedin.models.Slide;
 import ru.tulupov.alex.pluggedin.presenters.SliderPresenter;
 
-import static ru.tulupov.alex.pluggedin.constants.Constants.ID;
-import static ru.tulupov.alex.pluggedin.constants.Constants.ID_REVIEW;
-import static ru.tulupov.alex.pluggedin.constants.Constants.MY_TAG;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 public class CalendarActivity extends BaseActivity implements SliderView,
         SlideFragment.ClickSlideImageListener, CalendarFragment.NoConnectable {
@@ -42,7 +36,7 @@ public class CalendarActivity extends BaseActivity implements SliderView,
     private List<Slide> sliderData;
     private LinearLayout layoutDots;
     private TextView dotActive;
-    private ViewPager viewPager;
+    private ViewPager viewPagerSlider;
 
     private boolean flagSliderIsDownloaded = false;
 
@@ -71,7 +65,10 @@ public class CalendarActivity extends BaseActivity implements SliderView,
         initNavigationView();
         initTabs();
 
-        viewPager = (ViewPager) findViewById(R.id.viewPagerSlider);
+        viewPagerSlider = (ViewPager) findViewById(R.id.viewPagerSlider);
+        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.sliderContainer);
+        relativeLayout.getLayoutParams().height = getWidthScreen() / 2;
+
         layoutDots = (LinearLayout) findViewById(R.id.layoutDots);
         presenter = new SliderPresenter(this);
         presenter.downloadSlider();
@@ -91,18 +88,18 @@ public class CalendarActivity extends BaseActivity implements SliderView,
         this.sliderData = slides;
         flagSliderIsDownloaded = true;
 
-        viewPager.setVisibility(View.VISIBLE);
+        viewPagerSlider.setVisibility(View.VISIBLE);
         layoutDots.setVisibility(View.VISIBLE);
 
         TabsSliderAdapter adapter = new TabsSliderAdapter(getSupportFragmentManager(), slides);
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(pageChangeListener);
+        viewPagerSlider.setAdapter(adapter);
+        viewPagerSlider.addOnPageChangeListener(pageChangeListener);
         addSliderDots(0);
     }
 
     @Override
     public void failDownloading() {
-        viewPager.setVisibility(View.GONE);
+        viewPagerSlider.setVisibility(View.GONE);
         layoutDots.setVisibility(View.GONE);
     }
 
@@ -148,7 +145,7 @@ public class CalendarActivity extends BaseActivity implements SliderView,
 
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(this);
-            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setText(Html.fromHtml(DOT_HTML));
             dots[i].setTextSize(50);
             int color;
             if (currentPage == i) {

@@ -3,7 +3,7 @@ package ru.tulupov.alex.pluggedin.services;
 import android.app.IntentService;
 import android.content.Intent;
 
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 
 public class SaveArticle extends IntentService {
@@ -15,7 +15,7 @@ public class SaveArticle extends IntentService {
     }
 
     public SaveArticle() {
-        super(Constants.DEFAULT_THREAD);
+        super(DEFAULT_THREAD);
     }
 
     @Override

@@ -11,8 +11,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
-import com.example.alex.pluggedin.R;
-import ru.tulupov.alex.pluggedin.constants.Constants;
+import ru.tulupov.alex.pluggedin.R;
+import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 import static ru.tulupov.alex.pluggedin.constants.Constants.APP_PREFERENCES;
 import static ru.tulupov.alex.pluggedin.constants.Constants.APP_PREFERENCES_FONT_SIZE;
@@ -33,7 +33,7 @@ public class ChoiceFontDialogFragment extends DialogFragment implements DialogIn
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         pref = getActivity()
                 .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        float fontSize = pref.getFloat(APP_PREFERENCES_FONT_SIZE, Constants.FONT_SIZE_NORMAL);
+        float fontSize = pref.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
 
         Resources res = getActivity().getResources();
 
@@ -58,13 +58,13 @@ public class ChoiceFontDialogFragment extends DialogFragment implements DialogIn
         SharedPreferences.Editor editor = pref.edit();
         switch (which) {
             case LARGE_FONT_SIZE:
-                editor.putFloat(APP_PREFERENCES_FONT_SIZE, Constants.FONT_SIZE_LARGE);
+                editor.putFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_LARGE);
                 break;
             case NORMAL_FONT_SIZE:
-                editor.putFloat(APP_PREFERENCES_FONT_SIZE, Constants.FONT_SIZE_NORMAL);
+                editor.putFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
                 break;
             case SMALL_FONT_SIZE:
-                editor.putFloat(APP_PREFERENCES_FONT_SIZE, Constants.FONT_SIZE_SMALL);
+                editor.putFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_SMALL);
                 break;
         }
 
@@ -77,11 +77,11 @@ public class ChoiceFontDialogFragment extends DialogFragment implements DialogIn
 
     // по коэффициенту возвращает номер пункта в диалоге
     private int getNumItem(float coefficient) {
-        if (coefficient == Constants.FONT_SIZE_LARGE) {
+        if (coefficient == FONT_SIZE_LARGE) {
             return LARGE_FONT_SIZE;
-        } else if (coefficient == Constants.FONT_SIZE_NORMAL) {
+        } else if (coefficient == FONT_SIZE_NORMAL) {
             return NORMAL_FONT_SIZE;
-        } else if (coefficient == Constants.FONT_SIZE_SMALL) {
+        } else if (coefficient == FONT_SIZE_SMALL) {
             return SMALL_FONT_SIZE;
         }
 
