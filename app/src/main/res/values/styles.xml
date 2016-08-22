@@ -167,6 +167,9 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
+    </style>
     <!--<style name="showCalendarTheme">-->
         <!--<item name="android:popupAnimationStyle">@style/MyAnimation.Window</item>-->
     <!--</style>-->
