@@ -12,6 +12,7 @@ import android.widget.TextView;
 import ru.tulupov.alex.pluggedin.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static ru.tulupov.alex.pluggedin.constants.Constants.*;
@@ -20,15 +21,23 @@ import ru.tulupov.alex.pluggedin.models.Calendar;
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>{
 
     protected List<Calendar> listCalendar;
+    protected List<Calendar> listCalendarUnchanged;
     protected View.OnClickListener clickListener;
     protected Context context;
     protected int widthScreen;
 
+
     public CalendarAdapter(List<Calendar> listCalendar, View.OnClickListener clickListener, Context context) {
-        this.listCalendar = listCalendar;
+        this.listCalendarUnchanged = listCalendar;
         this.clickListener = clickListener;
         this.context = context;
         this.widthScreen = 0;
+
+        this.listCalendar = new ArrayList<>(listCalendar.size());
+
+        for (Calendar c : listCalendar) {
+            this.listCalendar.add(c);
+        }
     }
 
     @Override
@@ -65,11 +74,30 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
         this.widthScreen = widthScreen;
     }
 
-//    private int calculateImageWidth() {
-//        if (widthScreen != 0) {
-////            return widthScreen - 3 * 10 -
-//        }
-//    }
+    public void showItemsByDate(java.util.Calendar date) {
+        int selectDay = date.get(java.util.Calendar.DAY_OF_MONTH);
+        int selectMonth = date.get(java.util.Calendar.MONTH) + 1;
+        int selectYear = date.get(java.util.Calendar.YEAR);
+
+        listCalendar = new ArrayList<>();
+
+        for (int i = 0; i < listCalendarUnchanged.size(); i++) {
+            Calendar note = listCalendarUnchanged.get(i);
+            String[] dates = note.getDate().split("\\.");
+
+            int day = Integer.parseInt(dates[0]);
+            int month = Integer.parseInt(dates[1]);
+            int year = Integer.parseInt(dates[2]);
+
+            if (selectYear < year || ( selectYear == year && ( selectMonth < month ||
+                    ( selectMonth == month && selectDay <= day) ) ) ) {
+                listCalendar.add(note);
+            }
+        }
+
+        notifyDataSetChanged();
+    }
+
 
     public static class CalendarViewHolder extends RecyclerView.ViewHolder{
 

@@ -3,15 +3,15 @@ package ru.tulupov.alex.pluggedin.models;
 
 public class Calendar {
 
-    int id;
+    protected int id;
 
-    int type;
+    protected int type;
 
-    String title;
+    protected String title;
 
-    String date;
+    protected String date;
 
-    String file;
+    protected String file;
 
     public Calendar(int id, int type, String title, String date, String file) {
         this.id = id;

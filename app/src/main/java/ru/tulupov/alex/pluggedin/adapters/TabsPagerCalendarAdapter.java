@@ -13,18 +13,23 @@ public class TabsPagerCalendarAdapter extends FragmentPagerAdapter {
 
     private String tabs[];
 
+    private CalendarFragment filmFragment;
+    private CalendarFragment gamesFragment;
+
     public TabsPagerCalendarAdapter(FragmentManager fm, String[] tabs) {
         super(fm);
         this.tabs = tabs;
+        filmFragment = CalendarFragment.getInstance(TYPE_FILM);
+        gamesFragment = CalendarFragment.getInstance(TYPE_GAME);
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case TAB_FILMS:
-                return CalendarFragment.getInstance(TYPE_FILM);
+                return filmFragment;
             case TAB_GAMES:
-                return CalendarFragment.getInstance(TYPE_GAME);
+                return gamesFragment;
         }
         return null;
     }

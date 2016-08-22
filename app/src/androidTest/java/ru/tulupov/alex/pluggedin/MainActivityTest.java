@@ -6,7 +6,7 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
-import com.example.alex.pluggedin.R;
+import ru.tulupov.alex.pluggedin.R;
 
 import ru.tulupov.alex.pluggedin.activities.MainActivity;
 

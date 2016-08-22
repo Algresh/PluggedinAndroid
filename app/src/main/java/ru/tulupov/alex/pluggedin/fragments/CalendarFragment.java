@@ -105,7 +105,6 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(6), true));
 
         calendarAdapter = new CalendarAdapter(calendars, this, getContext());
-//        calendarAdapter.setWidthScreen(getWidthScreen());
         recyclerView.setAdapter(calendarAdapter);
 
     }
@@ -116,7 +115,6 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
         ShowCalendarItemFragment fragment = new ShowCalendarItemFragment();
         fragment.setCalendar(calendar);
         fragment.setWidthScreen(getWidthScreen());
-//        fragment.onCreateAnimation(R.anim.showing_dialog,true, R.anim.showing_dialog);
         fragment.show(manager, DIALOG_SHOW_CALENDAR);
     }
 
@@ -172,6 +170,13 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
         display.getSize(size);
 
         return size.x;
+    }
+
+    public void onDateSet(java.util.Calendar calendar) {
+        if (recyclerView != null) {
+            CalendarAdapter adapter = (CalendarAdapter) recyclerView.getAdapter();
+            adapter.showItemsByDate(calendar);
+        }
     }
 
     @Override

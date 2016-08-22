@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.util.Log;
@@ -12,15 +13,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ru.tulupov.alex.pluggedin.R;
 
+import java.util.Calendar;
 import java.util.List;
 
 import ru.tulupov.alex.pluggedin.adapters.TabsPagerCalendarAdapter;
 import ru.tulupov.alex.pluggedin.adapters.TabsSliderAdapter;
 import ru.tulupov.alex.pluggedin.constants.Constants;
 import ru.tulupov.alex.pluggedin.fragments.CalendarFragment;
+import ru.tulupov.alex.pluggedin.fragments.DatePickerCalendarFragment;
 import ru.tulupov.alex.pluggedin.fragments.SlideFragment;
 import ru.tulupov.alex.pluggedin.fragments.views.SliderView;
 import ru.tulupov.alex.pluggedin.models.Slide;
@@ -29,7 +33,8 @@ import ru.tulupov.alex.pluggedin.presenters.SliderPresenter;
 import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 public class CalendarActivity extends BaseActivity implements SliderView,
-        SlideFragment.ClickSlideImageListener, CalendarFragment.NoConnectable {
+        SlideFragment.ClickSlideImageListener, CalendarFragment.NoConnectable,
+        DatePickerCalendarFragment.DatePickerListener {
 
     protected SliderPresenter presenter;
     private TextView[] dots;
@@ -37,6 +42,9 @@ public class CalendarActivity extends BaseActivity implements SliderView,
     private LinearLayout layoutDots;
     private TextView dotActive;
     private ViewPager viewPagerSlider;
+    private ViewPager viewPagerCalendars;
+
+    protected TabsPagerCalendarAdapter adapter;
 
     private boolean flagSliderIsDownloaded = false;
 
@@ -77,8 +85,8 @@ public class CalendarActivity extends BaseActivity implements SliderView,
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                DatePickerCalendarFragment fragment = new DatePickerCalendarFragment();
+                fragment.show(getFragmentManager(), DIALOG_DATE_CALENDAR);
             }
         });
     }
@@ -128,14 +136,13 @@ public class CalendarActivity extends BaseActivity implements SliderView,
     }
 
     protected void initTabs() {
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerCalendar);
+        viewPagerCalendars = (ViewPager) findViewById(R.id.viewPagerCalendar);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayoutCalendar);
 
         String[] tabTitles = getResources().getStringArray(R.array.tab_titles_calendar);
-        TabsPagerCalendarAdapter adapter =
-                new TabsPagerCalendarAdapter(getSupportFragmentManager(), tabTitles);
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        adapter = new TabsPagerCalendarAdapter(getSupportFragmentManager(), tabTitles);
+        viewPagerCalendars.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPagerCalendars);
         tabLayout.getTabAt(Constants.TAB_FILMS).setIcon(R.drawable.filmstrip);
         tabLayout.getTabAt(Constants.TAB_GAMES).setIcon(R.drawable.gamepad_variant);
     }
@@ -179,6 +186,18 @@ public class CalendarActivity extends BaseActivity implements SliderView,
     public void tryAccessAgain() {
         if (!flagSliderIsDownloaded ) {
             presenter.downloadSlider();
+        }
+    }
+
+    @Override
+    public void onDatePicked(Calendar date) {
+        try {
+            int item = viewPagerCalendars.getCurrentItem();
+            CalendarFragment fragment = (CalendarFragment) adapter.getItem(item);
+            fragment.onDateSet(date);
+        } catch (ClassCastException e) {
+            String str = getResources().getString(R.string.something_doesnt_work);
+            Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
         }
     }
 }

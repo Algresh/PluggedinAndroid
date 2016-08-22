@@ -93,5 +93,6 @@ public  class Constants {
     public static final String DIALOG_SHOW_CALENDAR = "showCalendar";
     public static final String DOT_HTML = "&#8226;";
     public static final String ACTION_VIEW_STR = "android.intent.action.VIEW";
+    public static final String DIALOG_DATE_CALENDAR = "dialogDateCalendar";
 
 }
