@@ -79,7 +79,7 @@
             android:resizeableActivity="true"
             android:label="@string/title_activity_calendar"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <service android:name="ru.tulupov.alex.pluggedin.services.SaveArticle" />

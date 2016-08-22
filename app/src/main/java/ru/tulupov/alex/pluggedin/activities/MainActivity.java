@@ -33,7 +33,7 @@ import static ru.tulupov.alex.pluggedin.constants.Constants.*;
 
 public class MainActivity extends BaseActivity implements ShowBaseView{
 
-    ShowBasePresenter presenter;
+    protected ShowBasePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,11 @@ public class MainActivity extends BaseActivity implements ShowBaseView{
         presenter = new ShowBasePresenter(this);
         try {
             Intent intent = getIntent();
-            String utl = intent.getData().toString();
-            presenter.showArticleOrReviewByURL(utl);
+            String action = intent.getAction();
+            if ( action != null && action.equals(ACTION_VIEW_STR) ) {
+                String utl = intent.getData().toString();
+                presenter.showArticleOrReviewByURL(utl);
+            }
         } catch (Exception e) {
             Log.d(MY_TAG, "main: fail");
         }
@@ -60,8 +63,15 @@ public class MainActivity extends BaseActivity implements ShowBaseView{
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        String utl = intent.getData().toString();
-        presenter.showArticleOrReviewByURL(utl);
+        try {
+            String action = intent.getAction();
+            if ( action != null && action.equals(ACTION_VIEW_STR) ) {
+                String utl = intent.getData().toString();
+                presenter.showArticleOrReviewByURL(utl);
+            }
+        } catch (NullPointerException e) {
+            Log.d(MY_TAG, "fail newIntent");
+        }
         Log.d(MY_TAG, "newIntent");
     }
 
