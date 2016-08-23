@@ -36,7 +36,7 @@ public class CalendarPresenter {
     }
 
     public void showCalendarByPosition(int position) {
-        if (dataCalendar != null) {
+        if (dataCalendar != null && position >= 0) {
             if (view != null) {
                 view.showCalendar(dataCalendar.get(position));
             }

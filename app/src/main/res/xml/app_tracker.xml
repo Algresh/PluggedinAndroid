@@ -20,6 +20,7 @@
     <screenName name="ru.tulupov.alex.pluggedin.activities.SearchResultsActivity">Search Results Activity</screenName>
     <screenName name="ru.tulupov.alex.pluggedin.activities.CommentActivity">Comment Activity</screenName>
     <screenName name="ru.tulupov.alex.pluggedin.activities.ShowImageActivity">Show Image Activity</screenName>
+    <screenName name="ru.tulupov.alex.pluggedin.activities.CalendarActivity">Calendar Activity</screenName>
 
 
     <!--

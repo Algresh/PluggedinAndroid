@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static ru.tulupov.alex.pluggedin.constants.Constants.*;
+
+import ru.tulupov.alex.pluggedin.adapters.fontsizes.ChangeableFontSizeCalendar;
 import ru.tulupov.alex.pluggedin.models.Calendar;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>{
@@ -25,6 +27,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
     protected View.OnClickListener clickListener;
     protected Context context;
     protected int widthScreen;
+    protected ChangeableFontSizeCalendar fontSizeCalendar;
 
 
     public CalendarAdapter(List<Calendar> listCalendar, View.OnClickListener clickListener, Context context) {
@@ -56,6 +59,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
 
         holder.textCalendar.setText(title);
         holder.dateCalendar.setText(date);
+        this.changeFontSize(holder);
         holder.cardView.setOnClickListener(clickListener);
 
         Picasso.with(context).load(URL_IMAGES + file).resize(320, 240).into(holder.imageCalendar);
@@ -66,12 +70,24 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
         return listCalendar.size();
     }
 
+    public int corectViewPosition(int oldPosition) {
+        return oldPosition + (listCalendarUnchanged.size() - listCalendar.size());
+    }
+
     public int getWidthScreen() {
         return widthScreen;
     }
 
     public void setWidthScreen(int widthScreen) {
         this.widthScreen = widthScreen;
+    }
+
+    public void setFontSizeCalendar(ChangeableFontSizeCalendar fontSizeCalendar) {
+        this.fontSizeCalendar = fontSizeCalendar;
+    }
+
+    protected void changeFontSize(CalendarViewHolder holder) {
+        this.fontSizeCalendar.changeFontSize(holder);
     }
 
     public void showItemsByDate(java.util.Calendar date) {
@@ -113,5 +129,14 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.Calend
             imageCalendar = (ImageView) itemView.findViewById(R.id.calendarImage);
             cardView = (CardView) itemView.findViewById(R.id.cardViewCalendar);
         }
+
+        public TextView getTextCalendar() {
+            return textCalendar;
+        }
+
+        public TextView getDateCalendar() {
+            return dateCalendar;
+        }
+
     }
 }

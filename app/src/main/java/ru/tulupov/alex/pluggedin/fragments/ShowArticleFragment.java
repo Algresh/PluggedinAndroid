@@ -110,14 +110,31 @@ public class ShowArticleFragment extends ShowBaseFragment{
 
     @Override
     protected void changeFontSize(List<TextView> keywords) {
+        float textSizeTitle = NORMAL_TITLE_SHOW;
+        float textSizeAuthor = NORMAL_AUTHOR_SHOW;
+        float textSizeDate = NORMAL_DATE_SHOW;
+        float textSizeKeyword = NORMAL_KEYWORD_SHOW;
+
+        if (fontSize == FONT_SIZE_LARGE) {
+            textSizeTitle = LARGE_TITLE_SHOW;
+            textSizeDate = LARGE_DATE_SHOW;
+            textSizeAuthor = LARGE_AUTHOR_SHOW;
+            textSizeKeyword = LARGE_KEYWORD_SHOW;
+        } else if (fontSize == FONT_SIZE_SMALL) {
+            textSizeTitle = SMALL_TITLE_SHOW;
+            textSizeDate = SMALL_DATE_SHOW;
+            textSizeAuthor = SMALL_AUTHOR_SHOW;
+            textSizeKeyword = SMALL_KEYWORD_SHOW;
+        }
+
         try {
             if(fontSize != FONT_SIZE_NORMAL) {
-                titleTv.setTextSize(titleTv.getTextSize() * fontSize) ;
-                authorTv.setTextSize(authorTv.getTextSize() * fontSize);
-                dateTv.setTextSize(dateTv.getTextSize() * fontSize);
+                titleTv.setTextSize(textSizeTitle) ;
+                authorTv.setTextSize(textSizeDate);
+                dateTv.setTextSize(textSizeAuthor);
 
                 for(TextView tv: keywords) {
-                    tv.setTextSize(tv.getTextSize() * fontSize);
+                    tv.setTextSize(textSizeKeyword);
                 }
             }
         } catch (Exception e) {}

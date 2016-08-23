@@ -2,6 +2,7 @@ package ru.tulupov.alex.pluggedin.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
@@ -29,6 +30,8 @@ import java.util.List;
 import ru.tulupov.alex.pluggedin.adapters.CalendarAdapter;
 import ru.tulupov.alex.pluggedin.adapters.decorations.GridSpacingItemDecoration;
 import static ru.tulupov.alex.pluggedin.constants.Constants.*;
+
+import ru.tulupov.alex.pluggedin.adapters.fontsizes.FontSizeParameterCalendar;
 import ru.tulupov.alex.pluggedin.fragments.views.CalendarView;
 import ru.tulupov.alex.pluggedin.models.Calendar;
 import ru.tulupov.alex.pluggedin.presenters.CalendarPresenter;
@@ -46,6 +49,8 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
 
     protected CalendarPresenter presenter;
     private NoConnectable noConnectable;
+
+    protected float fontSize = FONT_SIZE_NORMAL;
 
     public interface NoConnectable {
         void tryAccessAgain();
@@ -66,6 +71,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
         }
 
         View view = inflater.inflate(LAYOUT, container, false);
+        this.initFontSize();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycleViewCalendar);
         buttonTryAgain = (Button) view.findViewById(R.id.buttonTryAgain);
@@ -83,6 +89,8 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
             noConnectable.tryAccessAgain();
         } else if(view.getId() == R.id.cardViewCalendar) {
             int position = recyclerView.getChildAdapterPosition(view);
+            CalendarAdapter adapter = (CalendarAdapter) recyclerView.getAdapter();
+            position = adapter.corectViewPosition(position);
             presenter.showCalendarByPosition(position);
         }
     }
@@ -105,6 +113,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(6), true));
 
         calendarAdapter = new CalendarAdapter(calendars, this, getContext());
+        calendarAdapter.setFontSizeCalendar(new FontSizeParameterCalendar(fontSize));
         recyclerView.setAdapter(calendarAdapter);
 
     }
@@ -156,6 +165,13 @@ public class CalendarFragment extends Fragment implements View.OnClickListener, 
             return true;
         }
         return false;
+    }
+
+    protected void initFontSize() {
+        SharedPreferences pref = getActivity()
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+        fontSize = pref.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
     }
 
 

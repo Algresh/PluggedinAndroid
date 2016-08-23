@@ -1,7 +1,9 @@
 package ru.tulupov.alex.pluggedin.fragments;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -19,7 +21,19 @@ import com.squareup.picasso.Picasso;
 import ru.tulupov.alex.pluggedin.activities.SearchResultsActivity;
 import ru.tulupov.alex.pluggedin.models.Calendar;
 
+import static ru.tulupov.alex.pluggedin.constants.Constants.APP_PREFERENCES;
+import static ru.tulupov.alex.pluggedin.constants.Constants.APP_PREFERENCES_FONT_SIZE;
+import static ru.tulupov.alex.pluggedin.constants.Constants.FONT_SIZE_LARGE;
+import static ru.tulupov.alex.pluggedin.constants.Constants.FONT_SIZE_NORMAL;
+import static ru.tulupov.alex.pluggedin.constants.Constants.FONT_SIZE_SMALL;
+import static ru.tulupov.alex.pluggedin.constants.Constants.LARGE_DATE_CALENDAR_SHOW;
+import static ru.tulupov.alex.pluggedin.constants.Constants.LARGE_TITLE_CALENDAR_SHOW;
+import static ru.tulupov.alex.pluggedin.constants.Constants.NORMAL_DATE_CALENDAR_SHOW;
+import static ru.tulupov.alex.pluggedin.constants.Constants.NORMAL_TITLE_CALENDAR_SHOW;
 import static ru.tulupov.alex.pluggedin.constants.Constants.SEARCH_QUERY;
+import static ru.tulupov.alex.pluggedin.constants.Constants.SMALL_DATE_CALENDAR_SHOW;
+import static ru.tulupov.alex.pluggedin.constants.Constants.SMALL_TITLE;
+import static ru.tulupov.alex.pluggedin.constants.Constants.SMALL_TITLE_CALENDAR_SHOW;
 import static ru.tulupov.alex.pluggedin.constants.Constants.URL_IMAGES;
 
 
@@ -33,6 +47,7 @@ public class ShowCalendarItemFragment extends DialogFragment implements View.OnC
     private Button btn;
     private Button btnClose;
     private int widthScreen;
+    private float fontSize = FONT_SIZE_NORMAL;
 
     public Calendar getCalendar() {
         return calendar;
@@ -51,6 +66,7 @@ public class ShowCalendarItemFragment extends DialogFragment implements View.OnC
 
         titleTv = (TextView) view.findViewById(R.id.showItemCalendarTitle);
         dateTv = (TextView) view.findViewById(R.id.showItemCalendarDate);
+        this.initFontSize();
         image = (ImageView) view.findViewById(R.id.showItemCalendarImage);
         btn = (Button) view.findViewById(R.id.showItemCalendarBtn);
         btnClose = (Button) view.findViewById(R.id.showItemCalendarBtnClose);
@@ -73,6 +89,9 @@ public class ShowCalendarItemFragment extends DialogFragment implements View.OnC
         }
 
     }
+    public void setWidthScreen(int widthScreen) {
+        this.widthScreen = widthScreen / 10 * 9;
+    }
 
     private void initFields(){
         if (calendar != null) {
@@ -82,7 +101,29 @@ public class ShowCalendarItemFragment extends DialogFragment implements View.OnC
         }
     }
 
-    public void setWidthScreen(int widthScreen) {
-        this.widthScreen = widthScreen / 10 * 9;
+    private void initFontSize() {
+        SharedPreferences pref = getActivity()
+                .getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+        fontSize = pref.getFloat(APP_PREFERENCES_FONT_SIZE, FONT_SIZE_NORMAL);
+
+        if (fontSize == FONT_SIZE_LARGE) {
+            titleTv.setTextSize(LARGE_TITLE_CALENDAR_SHOW);
+            dateTv.setTextSize(LARGE_DATE_CALENDAR_SHOW);
+        }
+
+        if (fontSize == FONT_SIZE_SMALL) {
+            titleTv.setTextSize(SMALL_TITLE_CALENDAR_SHOW);
+            dateTv.setTextSize(SMALL_DATE_CALENDAR_SHOW);
+        }
+
+        if (fontSize == FONT_SIZE_NORMAL) {
+            titleTv.setTextSize(NORMAL_TITLE_CALENDAR_SHOW);
+            dateTv.setTextSize(NORMAL_DATE_CALENDAR_SHOW);
+        }
+
     }
+
+
+
 }

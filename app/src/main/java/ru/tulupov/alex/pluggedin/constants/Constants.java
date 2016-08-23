@@ -90,6 +90,42 @@ public  class Constants {
     public static final float SMALL_AUTHOR = 12;
     public static final float SMALL_TEXT = 12;
 
+
+    public static final float LARGE_DATE_SHOW = 15;
+    public static final float LARGE_TITLE_SHOW = 26;
+    public static final float LARGE_AUTHOR_SHOW = 18;
+    public static final float LARGE_KEYWORD_SHOW = 14;
+
+    public static final float NORMAL_DATE_SHOW = 12;
+    public static final float NORMAL_TITLE_SHOW = 22;
+    public static final float NORMAL_AUTHOR_SHOW = 14;
+    public static final float NORMAL_KEYWORD_SHOW = 12;
+
+    public static final float SMALL_DATE_SHOW = 12;
+    public static final float SMALL_TITLE_SHOW = 18;
+    public static final float SMALL_AUTHOR_SHOW = 12;
+    public static final float SMALL_KEYWORD_SHOW = 10;
+
+
+    public static final float LARGE_DATE_CALENDAR = 15;
+    public static final float LARGE_TITLE_CALENDAR = 18;
+
+    public static final float NORMAL_DATE_CALENDAR = 12;
+    public static final float NORMAL_TITLE_CALENDAR = 15;
+
+    public static final float SMALL_DATE_CALENDAR = 10;
+    public static final float SMALL_TITLE_CALENDAR = 12;
+
+
+    public static final float LARGE_DATE_CALENDAR_SHOW = 18;
+    public static final float LARGE_TITLE_CALENDAR_SHOW = 22;
+
+    public static final float NORMAL_DATE_CALENDAR_SHOW = 14;
+    public static final float NORMAL_TITLE_CALENDAR_SHOW = 18;
+
+    public static final float SMALL_DATE_CALENDAR_SHOW = 12;
+    public static final float SMALL_TITLE_CALENDAR_SHOW = 16;
+
     public static final String DIALOG_SHOW_CALENDAR = "showCalendar";
     public static final String DOT_HTML = "&#8226;";
     public static final String ACTION_VIEW_STR = "android.intent.action.VIEW";
