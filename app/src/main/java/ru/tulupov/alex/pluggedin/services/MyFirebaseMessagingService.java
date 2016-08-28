@@ -63,7 +63,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent
-                .getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+                .getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Builder notificationBuilder = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.message_text)
@@ -81,7 +81,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        NOTIFY_ID = NOTIFY_ID < 1 ? NOTIFY_ID + 1 : 0;
+//        notificationManager.cancel(NOTIFY_ID);
+
         notificationManager.notify(NOTIFY_ID, notificationBuilder.build());
     }
 }

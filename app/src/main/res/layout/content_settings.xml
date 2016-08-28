@@ -124,6 +124,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/estimateApp"
+                    style="@style/settingLabels.estimateApp"
+                    android:text="@string/btnRaterPositive"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/linkToDevelopers"
                     style="@style/settingLabels"
                     android:text="@string/linkToDevelopers"/>

@@ -3,6 +3,7 @@ package ru.tulupov.alex.pluggedin.constants;
 
 public  class Constants {
 
+    public static final String PACKAGE_APP = "ru.tulupov.alex.pluggedin";
     public static final int CARD_CALENDAR_ID = -1;
 
     public static final String MY_TAG = "my_tag";
@@ -69,6 +70,9 @@ public  class Constants {
     public static final String APP_PREFERENCES_SOUND_NOTIFY_PERMISSION = "soundNotifyPermission";
     public static final String APP_PREFERENCES_FONT_SIZE = "fontSize";
     public static final String APP_PREFERENCES_CHROME_TABS = "chromeTabs";
+    public static final String APP_PREFERENCES_NOT_SHOW_RATER = "notshowrater";
+    public static final String APP_PREFERENCES_DATE_RATER= "daterater";
+    public static final String APP_PREFERENCES_COUNT_RATER= "countrater";
 
     public static final float FONT_SIZE_SMALL = 0.85F;
     public static final float FONT_SIZE_NORMAL = 1F;

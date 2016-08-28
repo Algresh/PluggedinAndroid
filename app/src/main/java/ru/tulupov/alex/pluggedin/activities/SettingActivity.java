@@ -2,6 +2,8 @@ package ru.tulupov.alex.pluggedin.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SwitchCompat;
@@ -10,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import ru.tulupov.alex.pluggedin.AppRater;
 import ru.tulupov.alex.pluggedin.R;
 
 import ru.tulupov.alex.pluggedin.fragments.ChoiceFontDialogFragment;
@@ -61,6 +64,7 @@ public class SettingActivity extends BaseActivity
 
         findViewById(R.id.fontSize).setOnClickListener(this);
         findViewById(R.id.emailDevelopers).setOnClickListener(this);
+        findViewById(R.id.estimateApp).setOnClickListener(this);
 
         LinearLayout chromeTxtLay = (LinearLayout) findViewById(R.id.chromeTabTextContainer);
         chromeTxtLay.getLayoutParams().width = getWidthScreen() / 10 * 7;
@@ -92,6 +96,15 @@ public class SettingActivity extends BaseActivity
             if (v.getId() == R.id.emailDevelopers) {
                 String email = getResources().getString(R.string.emailDevelopers);
                 sendEmailToDevelopers(email);
+            }
+
+            if (v.getId() == R.id.estimateApp) {
+                AppRater.dontShowRaterDialogAgain(this);
+
+                Resources res = getResources();
+                Uri uri = Uri.parse(res.getString(R.string.linkToPlayMarket) + PACKAGE_APP);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         }
     }

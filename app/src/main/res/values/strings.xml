@@ -44,6 +44,9 @@
     <string name="no_internet"> Нет подключения к сети </string>
     <string name="addComment"> Добавить комментарий </string>
     <string name="findArticles"> Поиск статей </string>
+    <string name="titleRaterDialog">Оцените пожалуйста наше приложение.</string>
+    <string name="btnRaterPositive"> Оценить приложение </string>
+    <string name="linkToPlayMarket">market://details?id=</string>
 
     <string name="fontSizeSetUp"> Новый размер шрифта контента установлен </string>
 

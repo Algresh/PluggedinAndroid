@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import ru.tulupov.alex.pluggedin.API.FcmAPI;
 
+import ru.tulupov.alex.pluggedin.AppRater;
 import ru.tulupov.alex.pluggedin.R;
 
 import ru.tulupov.alex.pluggedin.adapters.TabsPagerAdapter;
@@ -25,6 +27,7 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import ru.tulupov.alex.pluggedin.fragments.RaterDialogFragment;
 import ru.tulupov.alex.pluggedin.fragments.views.ShowBaseView;
 import ru.tulupov.alex.pluggedin.presenters.ShowBasePresenter;
 
@@ -58,6 +61,12 @@ public class MainActivity extends BaseActivity implements ShowBaseView{
         initNavigationView();
         initTabs();
         initSettings();
+
+        if (AppRater.launchRater(this)) {
+            FragmentManager manager = getSupportFragmentManager();
+            RaterDialogFragment dialog = new RaterDialogFragment();
+            dialog.show(manager, "dialog");
+        }
     }
 
     @Override
