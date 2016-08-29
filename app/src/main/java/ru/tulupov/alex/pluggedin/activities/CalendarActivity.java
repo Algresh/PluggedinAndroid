@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.util.Log;
@@ -156,10 +157,10 @@ public class CalendarActivity extends BaseActivity implements SliderView,
             dots[i].setTextSize(50);
             int color;
             if (currentPage == i) {
-                color = getResources().getColor(R.color.colorPrimary);
+                color = ContextCompat.getColor(this, R.color.colorPrimary);
                 dotActive = dots[i];
             } else {
-                color = getResources().getColor(R.color.white);
+                color = ContextCompat.getColor(this, R.color.white);
             }
 
             dots[i].setTextColor(color);
@@ -168,8 +169,8 @@ public class CalendarActivity extends BaseActivity implements SliderView,
     }
 
     protected void changeActiveDot(int newActiveDotNum) {
-        int colorRed = getResources().getColor(R.color.colorPrimary);
-        int colorWhite = getResources().getColor(R.color.white);
+        int colorRed = ContextCompat.getColor(this, R.color.colorPrimary);
+        int colorWhite = ContextCompat.getColor(this, R.color.white);
 
         this.dotActive.setTextColor(colorWhite);
         dots[newActiveDotNum].setTextColor(colorRed);
